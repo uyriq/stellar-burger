@@ -22,8 +22,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "commit":"git-cz"
   },
+  "config":{
+    "commitizen":{
+     "path":"cz-conventional-changelog"
+    }
+   },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -43,5 +49,12 @@
     ]
   },
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.1"
+  }
 }
