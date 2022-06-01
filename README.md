@@ -1,2 +1,1 @@
-# stellar-burger
-Created with CodeSandbox
+# Проект. Создать CRA-заготовку и создать структуру папок под компоненты
