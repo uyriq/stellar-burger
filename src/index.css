@@ -1,13 +1,7 @@
-@font-face {
-  font-family: 'Suisse';
-  src: url('./fonts/suisse.woff') format('woff');
-}
-
-body {
-  margin: 0;
-  font-family: 'Suisse', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#root {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1280px;
+	margin: 0 auto 0;
 }
