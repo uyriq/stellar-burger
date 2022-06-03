@@ -1,5 +1,10 @@
-.app {
-  display: flex;
+/* https://yandex-praktikum.github.io/react-developer-burger-ui-components/docs/  */
+/* local import */
+@import '../ui/common.css';
 
+.app {
   z-index: 1;
+  display: flex;
+  width: 100vw;
+	justify-content: space-between;
 }

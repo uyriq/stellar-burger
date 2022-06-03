@@ -1,9 +1,8 @@
 import React, { StrictMode }  from 'react';
 import { createRoot } from 'react-dom/client';
-// import './index.css';
-import App from './app';
+import App from './components/app/app';
 import reportWebVitals from './reportWebVitals';
-
+import './index.css'
 const rootElement = document.getElementById("root") as HTMLElement;
 const root = createRoot(rootElement);
 
