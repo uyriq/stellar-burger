@@ -10,7 +10,7 @@ const apiBaseUrl = 'https://norma.nomoreparties.space/api'
 const apiEndpoints = { ingredients: '/ingredients' }
 
 const spinnerColor = document.documentElement.style.getPropertyValue('--text-inactive-color');
-console.log(spinnerColor)
+console.log(`spinnerColor = ${spinnerColor}`)
 
 const App = (props) => {
     
