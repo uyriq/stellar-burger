@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
 import AppHeader from '../app-header/app-header';
 import Styles from './app.module.css';
-import { Logo } from '../ui/react-developer-burger-ui-components'
+
 
 // https://norma.nomoreparties.space/api/ingredients
 
@@ -42,14 +42,17 @@ const App = (props) => {
 
 getIngredients();
     }, []);
-
-return ingredients && (
-    <>
+console.log(!!ingredients)
+return !!ingredients && (
+    <>  
+        <nav>
+            
         <AppHeader />
+            </nav> 
         <main className={Styles.app}>
+        {ingredients.error && <p> Что-то пошло не так, не получены данные </p>}
         </main>
 
-        {ingredients.error && <p> Что-то пошло не так, не получены данные </p>}
         {(!ingredients.success && !ingredients.error) && <ClipLoader color={spinnerColor} loading={!ingredients.success} css={''} size={550} />}
     </>
 

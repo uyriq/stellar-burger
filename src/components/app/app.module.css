@@ -1,10 +1,12 @@
 /* https://yandex-praktikum.github.io/react-developer-burger-ui-components/docs/  */
 /* local import */
+@import url('../ui/box.css');
 @import '../ui/common.css';
+@import '../ui/fonts/fonts.css';
 
 .app {
-  z-index: 1;
-  display: flex;
+/*   z-index: 1;
+  display: flex; */
   width: 100vw;
 	justify-content: space-between;
 }

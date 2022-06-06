@@ -1,6 +1,10 @@
 // lib/things/index.js
 
 import boxcss from './box.css'
+import './box.css';
+import './fonts/fonts.css';
+import './common.css';
+
 import { ArrowDownIcon } from './icons/arrow-down-icon';
 import { ArrowUpIcon } from './icons/arrow-up-icon';
 import { BurgerIcon } from './icons/burger-icon';

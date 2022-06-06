@@ -6,7 +6,7 @@ import headerStyles from './app-header.module.css';
 const AppHeader = () => {
 
     return (
-        <header className={headerStyles.header}>
+        <header className={ [headerStyles.container, headerStyles.header].join(' ')}>
             <nav className={headerStyles.menu}>
                 <ul className={headerStyles.list}>
                     
