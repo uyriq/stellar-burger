@@ -6,8 +6,8 @@ import './box.css';
 const AppHeader = () => {
 
     return (
-        <header className={ [headerStyles.container_header, headerStyles.header].join(' p-2 ml-10 mr-10 ') }>
-            <nav className={ [headerStyles.menu].join(' ') }>
+        <header className={ [headerStyles.header].join(' ').concat(' p-4 ') }>
+            <nav className={ [headerStyles.container_header ].join(' ').concat('  pt-4  ml-20 mr-20 ') }>
               
                         <article className={[headerStyles.left].join(' ').concat(' ')}>
                                                    <a href="#" className=' ml-20 ' >
@@ -17,14 +17,14 @@ const AppHeader = () => {
                                                    </a>
                                                 
                                                  
-                                             <a href="#" className='pl-20'>
+                                             <a href="#" className=' ml-20 mr-10'>
                                                  
                                                         <ListIcon />
                                                         <span className='text text_type_main-default text_color_inactive ml-2 '>Лента заказов</span>
                                              </a>
-                        </article>
+                         
                   
-                        <article className={[headerStyles.middle].join(' ').concat(' ')}>
+                        
                             <Logo /> 
                         </article>
                  

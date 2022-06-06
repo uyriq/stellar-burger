@@ -4,8 +4,13 @@
 @import '../ui/fonts/fonts.css';
 @import '../ui/common.css';
 .app {
-/*   z-index: 1;
-  display: flex; */
-  width: 100vw;
-	justify-content: space-between;
+
+  margin-left: calc(var(--offset-base-variable)*20);
+  margin-right: calc(var(--offset-base-variable)*20);
+  padding-right: calc(var(--offset-base-variable)*10);
+
+}
+
+.empty {
+
 }

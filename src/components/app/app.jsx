@@ -44,16 +44,13 @@ getIngredients();
     }, []);
 console.log(!!ingredients)
 return !!ingredients && (
-    <>  
-        <nav>
-            
+    <>
+        <main className={[Styles.app].join(' ').concat(' p-2 ml-2 mr-2 ')}>
         <AppHeader />
-            </nav> 
-        <main className={Styles.app}>
         {ingredients.error && <p> Что-то пошло не так, не получены данные </p>}
-        </main>
 
         {(!ingredients.success && !ingredients.error) && <ClipLoader color={spinnerColor} loading={!ingredients.success} css={''} size={550} />}
+        </main>
     </>
 
 
