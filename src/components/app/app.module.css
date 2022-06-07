@@ -3,19 +3,44 @@
 
 @import '../ui/fonts/fonts.css';
 @import '../ui/common.css';
+@import '../ui/box.css';
+
 .app {
-
-
-  align-self: flex-start	;
-  justify-content: flex-start;
-  align-items:flex-start;
+    width: 100%;
+    align-self: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* gap между колонками  */
+    transform: translate(120px, 0);
 }
 
-
-.spinner{
+.spinner {
     position: absolute;
     left: 55%;
     top: 50%;
-
     transform: translate(-45%, -50%);
+}
+
+.supper_container {
+    display: flex;
+    min-height: 5vh;
+    flex-direction: column;
+}
+
+.supper_container_inner {
+    display: flex;
+    flex: 1;
+}
+
+/* honey phony */
+@media only screen and(max-width: 600px) {
+    .supper_container {
+        flex-direction: row;
+        flex: 1;
+    }
+
+    .supper_phone_content {
+        flex: 1;
+    }
+
 }

@@ -23,8 +23,10 @@ a :hover::before {
     transform: scaleX(1);
 }
 
-.container_header {
 
+/* это родительский */
+.container_header {
+    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -32,23 +34,18 @@ a :hover::before {
     align-content: flex-start;
     align-items: flex-start;
     background-color: var(--background);
-
-
-
+    transform: translate(-200px, 0);
 }
 
+/* это чайлд контейнер в родительском, вписан с полями по центру */
 .header {
-
+    width: 100%;
     background-color: var(--background-alt);
     align-self: flex-start;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-/* чайлд контейнер в родительском, вписан с полями по центру */
-.header {
-    width: 100%;
-}
 
 .container_header>first-child {
 
@@ -73,32 +70,26 @@ span>svg {
     justify-content: center;
     align-content: flex-end;
     align-items: flex-start;
-
     display: flex;
-
 }
 
 .right {
 
     display: flex;
     z-index: 100;
-
+    transform: translate(400px, 0);
 }
 
 .middle {
     display: flex;
-
     width: auto;
 }
 
 .logo {
     display: flex;
     z-index: -100;
-
-    transform: translate(45%, -115%);
+    transform: translate(30%, -115%);
 }
-
-
 
 /* honey phony */
 
@@ -126,27 +117,14 @@ span>svg {
     .right,
     .left,
     .middle {
-        
-        
         background-color: var(--background-alt);
-
         display: flex;
         break-after: right;
-        
         flex-wrap: wrap;
         white-space: wrap;
         margin: 0 0 0 0 !important;
-        
         align-items: flex-start;
         vertical-align: middle;
-        
-        
-        
-    }
-
-    .right {
-        
-
     }
 
     .midle{
@@ -156,5 +134,4 @@ span>svg {
     .right{
         transform: translate(-40%, 00%);
     }
-
 }

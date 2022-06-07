@@ -1,9 +1,9 @@
 import React, { useEffect, useState} from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
 import AppHeader from '../app-header/app-header';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import Styles from './app.module.css';
-
-
 
 
 // https://norma.nomoreparties.space/api/ingredients
@@ -45,17 +45,39 @@ const App = (props) => {
 getIngredients();
     }, []);
 console.log(!!ingredients)
-return !!ingredients && (
-    <>
-        <main className={[Styles.app].join(' ').concat(' p-2 ml-2 mr-2 ')}>
-        <AppHeader />
-        {ingredients.error && <p className={ [Styles.spinner].join(' ').concat(' text_color_error p-2 ')}> Что-то пошло не так, не получены данные </p>}
+const {success, error, data} = ingredients;
+return !!data && (
+    <> 
+<div className={[Styles.supper_container].join(' ').concat(' ')}>
+    
+            <header className={[Styles.app].join(' ').concat(' mr-30 pr-30 ')}>
+            <AppHeader />
+            {error && <p className={ [Styles.spinner].join(' ').concat(' text_color_error p-2 ')}> Что-то пошло не так, не получены данные </p>}
+    
+            {(!success && !error) && <div className={Styles.spinner}>
+                <ClipLoader color={'#ffff'} loading={!success} size={550} />
+            </div>}
+            </header>
 
-        {(!ingredients.success && !ingredients.error) && <div className={Styles.spinner}>
-            <ClipLoader color={'#ffff'} loading={!ingredients.success} size={550} />
-        </div>}
-        </main>
+            { !!success && !!!error && <div className={[Styles.supper_container_inner].join(' ').concat(' ')}>
+                
+                <main className={[Styles.app].join(' ').concat(' ')}>
+                <BurgerIngredients ingredients={data} /> 
+                </main>
+                
+                <main>
+                <BurgerConstructor ingredients={data} />
+                </main>
+                    
+            </div> 
+            
+            }
+            { !!data && <div className='text p-2 '>неподвижный footer</div> }
+</div>
+
+
     </>
+
 
 
 )

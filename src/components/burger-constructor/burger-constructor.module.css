@@ -1,0 +1,32 @@
+.constructor {
+	width: 600px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.list {
+	width: 100%;
+	height: calc(100vh - (88px + 100px + 80px + 16px + 80px + 40px + 64px + 52px));
+	padding: 0;
+	list-style-type: none;
+	overflow-y: scroll;
+}
+
+.list-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.list-item:last-child {
+	margin-bottom: 0;
+}
+
+.currency {
+	display: flex;
+	align-self: flex-end;
+	align-items: center;
+}
+
+
