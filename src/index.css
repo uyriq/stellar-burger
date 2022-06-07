@@ -3,10 +3,10 @@
 	padding: 0;
 }
 
+/* child centered */
 #root {
 	display: flex;
 	align-self: flex-start	;
 	justify-content: center;
     align-items:flex-start;
 }
-

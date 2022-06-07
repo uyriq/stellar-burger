@@ -1,12 +1,12 @@
 
 
-a   {
+a {
     position: relative;
     text-decoration: none;
     color: var(--text-primary-color);
   }
   
-  a  ::before {
+a  ::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -20,7 +20,7 @@ a   {
     transition: transform .3s ease-in-out;
   }
   
-  a  :hover::before {
+a  :hover::before {
     transform-origin: left;
     transform: scaleX(1);
   }
@@ -65,7 +65,7 @@ span {
 }
 
 span > svg {
-    vertical-align: top;
+    vertical-align: middle;
 }
 .left {
  
@@ -76,7 +76,7 @@ display: contents;
 .right {
      
     display: inline-flex;
-    transform: translate(-0%, 0%);
+
 }
 
 .middle{
@@ -85,19 +85,8 @@ display: contents;
         width: auto;
     }
 
-
-
-
 .logo {
     display: inline-flex;
 
     transform: translate(-5%, -25%);
-}
-
-
-.text {
-    padding-left: 8px;
-    margin: 0 0;
-    padding: 0 0;
-
 }
