@@ -6,37 +6,38 @@ import './box.css';
 const AppHeader = () => {
 
     return (
-        <header className={[headerStyles.header].join(' ').concat(' ')}>
-            <nav className={[headerStyles.container_header].join(' ').concat('  pt-5 mt-1   ')}>
+        <header className={[headerStyles.header].join(' ').concat(' ml-20 pb-2 ')}>
+            <nav className={[headerStyles.container_header].join(' ').concat('   pt-5 pb-5 mt-5  ml-10 ')}>
 
-                <article className={[headerStyles.left].join(' ').concat(' ')}>
-                    <a href="#" className=' ml-10 ' >
+                <article className={[headerStyles.left].join(' ').concat(' ml-20 ')}>
+                    <a href="#" className='  ' >
 
 
-                        <span className=' text text_type_main-default pl-2'><BurgerIcon />Конструктор</span>
+                        <span className=' text text_type_main-default pl-1'><BurgerIcon />Конструктор</span>
                     </a>
 
+                    </article>
 
-                    <a href="#" className=' ml-5 mr-10 '>
+                    <article className={[headerStyles.middle].join(' ').concat(' mr-30  ')}>
+                    <a href="#" className=' '>
 
 
-                        <span className=' text text_type_main-default text_color_inactive  pl-2'><ListIcon />Лента заказов</span>
+                        <span className=' text text_type_main-default text_color_inactive  pl-1'><ListIcon />Лента заказов</span>
                     </a>
 
+                    </article>
 
+                 
 
-                    <span className={headerStyles.logo}>
-                        <Logo />
-                    </span>
-                </article>
-
-                <article className={[headerStyles.right].join(' ').concat('  mr-10 ')}>
-                    <a href="#" className=''><span className=' text text_type_main-default  pl-2'><ProfileIcon />
+                <article className={[headerStyles.right].join(' ').concat(' pl-30 ml-30   ')}>
+                    <a href="#" className=''>
+                        <span className=' text text_type_main-default  pl-1'><ProfileIcon />
                         Личный кабинет</span>
                     </a>
                 </article>
 
             </nav>
+            <span className={[headerStyles.logo].join(' ').concat('    ')}>                        <Logo />                     </span>
         </header>
     )
 }
