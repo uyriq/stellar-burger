@@ -47,7 +47,7 @@ return !!ingredients && (
     <>
         <main className={[Styles.app].join(' ').concat(' p-2 ml-2 mr-2 ')}>
         <AppHeader />
-        {ingredients.error && <p> Что-то пошло не так, не получены данные </p>}
+        {ingredients.error && <p className='text_color_error p-2'> Что-то пошло не так, не получены данные </p>}
 
         {(!ingredients.success && !ingredients.error) && <ClipLoader color={spinnerColor} loading={!ingredients.success} css={''} size={550} />}
         </main>

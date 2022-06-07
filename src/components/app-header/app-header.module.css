@@ -1,60 +1,72 @@
 
 
 a   {
-	position: relative;
-	text-decoration: none;
-	color: var(--text-primary-color);
+    position: relative;
+    text-decoration: none;
+    color: var(--text-primary-color);
   }
   
   a  ::before {
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 1px;
-	border-radius: 4px;
-	background-color: var(--text-primary-color);
-	bottom: 0;
-	left: 0;
-	transform-origin: right;
-	transform: scaleX(0);
-	transition: transform .3s ease-in-out;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    border-radius: 4px;
+    background-color: var(--text-primary-color);
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
   }
   
   a  :hover::before {
-	transform-origin: left;
-	transform: scaleX(1);
+    transform-origin: left;
+    transform: scaleX(1);
   }
   
 .container_header {
     
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: center;
-		align-content: flex-start;
-		align-items: flex-start;
-		background-color: var(--background);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: flex-start;
+        background-color: var(--background);
 
 
 
 }
 
 .header {
-	
-	background-color: var(--background-alt);
-	align-self: center	;
-	justify-content: center;
-    align-items:center;
+    
+    background-color: var(--background-alt);
+    align-self: flex-start	;
+    justify-content: flex-start;
+    align-items:flex-start;
 }
 
+/* чайлд контейнер в родительском, вписан с полями по центру */
 .header {width:100%;}
-.container_header> first-child:not(:last-child):not(.dropdown-toggle) {
+.container_header > first-child {
 
-    width: calc(100% - 42%);
+    width: auto;
 }
 
 
+span {
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: flex-start;
+        margin-right: initial;
+        white-space: nowrap;
+        vertical-align: middle;
+}
 
+span > svg {
+    vertical-align: top;
+}
 .left {
  
 display: contents;
@@ -62,31 +74,30 @@ display: contents;
 }
 
 .right {
-    margin-left: 5vw;
-	display: inline-block;
-	width: auto;
+     
+    display: inline-flex;
+    transform: translate(-0%, 0%);
 }
 
 .middle{
-		display: inline-flex;
-		transform: translate(40%, 0%);
-		width: auto;
-	}
+        display: inline-flex;
+        transform: translate(50%, 0%);
+        width: auto;
+    }
 
 
 
 
 .logo {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    display: inline-flex;
+
+    transform: translate(-5%, -25%);
 }
 
 
 .text {
-	padding-left: 8px;
-	margin: 0 0;
-	padding: 0 0;
+    padding-left: 8px;
+    margin: 0 0;
+    padding: 0 0;
 
 }

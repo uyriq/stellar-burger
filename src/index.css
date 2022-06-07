@@ -5,8 +5,8 @@
 
 #root {
 	display: flex;
-	align-self: center	;
+	align-self: flex-start	;
 	justify-content: center;
-    align-items:center;
+    align-items:flex-start;
 }
 

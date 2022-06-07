@@ -5,11 +5,12 @@
 @import '../ui/common.css';
 .app {
 
-  margin-left: calc(var(--offset-base-variable)*20);
-  margin-right: calc(var(--offset-base-variable)*20);
-  padding-right: calc(var(--offset-base-variable)*10);
 
+  align-self: flex-start	;
+  justify-content: flex-start;
+  align-items:flex-start;
 }
+
 
 .empty {
 

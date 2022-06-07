@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Logo = () => {
     return (
-        <svg
+        <svg className=' '
             xmlns="http://www.w3.org/2000/svg"
             width="290"
             height="50"
