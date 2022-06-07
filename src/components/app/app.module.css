@@ -11,3 +11,11 @@
   align-items:flex-start;
 }
 
+
+.spinner{
+    position: absolute;
+    left: 55%;
+    top: 50%;
+
+    transform: translate(-45%, -50%);
+}

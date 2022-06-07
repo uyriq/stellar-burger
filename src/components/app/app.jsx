@@ -4,13 +4,15 @@ import AppHeader from '../app-header/app-header';
 import Styles from './app.module.css';
 
 
+
+
 // https://norma.nomoreparties.space/api/ingredients
 
 const apiBaseUrl = 'https://norma.nomoreparties.space/api'
 const apiEndpoints = { ingredients: '/ingredients' }
 
-const spinnerColor = document.documentElement.style.getPropertyValue('--text-inactive-color');
-console.log(`spinnerColor = ${spinnerColor}`)
+// const spinnerColor = document.documentElement.style.getPropertyValue('--text-inactive-color');
+// console.log(`spinnerColor = ${spinnerColor}`)
 
 const App = (props) => {
     
@@ -47,9 +49,11 @@ return !!ingredients && (
     <>
         <main className={[Styles.app].join(' ').concat(' p-2 ml-2 mr-2 ')}>
         <AppHeader />
-        {ingredients.error && <p className='text_color_error p-2'> Что-то пошло не так, не получены данные </p>}
+        {ingredients.error && <p className={ [Styles.spinner].join(' ').concat(' text_color_error p-2 ')}> Что-то пошло не так, не получены данные </p>}
 
-        {(!ingredients.success && !ingredients.error) && <ClipLoader color={spinnerColor} loading={!ingredients.success} css={''} size={550} />}
+        {(!ingredients.success && !ingredients.error) && <div className={Styles.spinner}>
+            <ClipLoader color={'#ffff'} loading={!ingredients.success} size={550} />
+        </div>}
         </main>
     </>
 
