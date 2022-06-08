@@ -9,7 +9,7 @@ import Styles from './burger-constructor.module.css';
 
 const ingredientsList = (array) => {
     return array.map(item => (
-            <li key={item._id} className={`${Styles['list-item']} mb-4`}>
+            <li key={item._id} className={`${Styles['list-item']} `}>
                 <DragIcon />
                 <ConstructorElement
                     text={item.name}
@@ -40,8 +40,8 @@ const BurgerConstructor = ({ingredients, openModal}) => {
     const filteredIngredients = ingredients.filter(item => item.type !== 'bun');
 
     return (
-        <section className={`${Styles.constructor} pt-25`}>
-            <div className='ml-6'>
+        <section className={`${Styles.constructor} `}>
+            <div className={` ml-8 `} >
                 <ConstructorElement
                     type='top'
                     isLocked={true}
@@ -50,10 +50,10 @@ const BurgerConstructor = ({ingredients, openModal}) => {
                     thumbnail={ingredients[0].image}
                 />
             </div>
-            <ul className={`${Styles.list} mt-4 mb-4 custom-scroll`}>
+            <ul className={`${Styles.list} `}>
                 {ingredientsList(filteredIngredients)}
             </ul>
-            <div className='ml-6 mb-10'>
+            <div className='  ml-8 pr-20'>
                 <ConstructorElement
                     type='bottom'
                     isLocked={true}
@@ -62,11 +62,11 @@ const BurgerConstructor = ({ingredients, openModal}) => {
                     thumbnail={ingredients[0].image}
                 />
             </div>
-            <div className={`${Styles.currency} mr-4`}>
-                <div className={`${Styles.total} mr-10`}>
-                <span className={`${Styles.currency} text text_type_digits-medium mr-2`}>610 <CurrencyIcon>610</CurrencyIcon> </span>
+            <div className={`${Styles.currency} mr-1 mt-10`}>
+                <div className={`${Styles.total} mr-1`}>
+                <span className={`${Styles.currency} text text_type_digits-medium mr-2`}>610<CurrencyIcon/> </span>
                 </div>
-                <div onClick={openModal}>
+                <div onClick={openModal} className={`${Styles.order_button} `} >
                     <Button type="primary" size="large">Оформить заказ</Button>
                 </div>
             </div>

@@ -26,7 +26,9 @@ a :hover::before {
 
 /* это родительский */
 .container_header {
-    
+    position: absolute;
+    left:-25%;
+    min-width: 1240px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -34,7 +36,7 @@ a :hover::before {
     align-content: flex-start;
     align-items: flex-start;
     background-color: var(--background);
-    transform: translate(-200px, 0);
+
 }
 
 /* это чайлд контейнер в родительском, вписан с полями по центру */
@@ -58,7 +60,7 @@ span {
     align-content: flex-start;
     align-items: flex-start;
     margin-right: initial;
-    white-space: nowrap;
+    white-space: wrap ;
     vertical-align: middle;
 }
 
@@ -86,9 +88,11 @@ span>svg {
 }
 
 .logo {
-    display: flex;
-    z-index: -100;
-    transform: translate(30%, -115%);
+    position: inherit;
+    display: inline-block;
+    transform: translate(400px, 0);
+    max-width: 300px;
+   
 }
 
 /* honey phony */
@@ -111,7 +115,7 @@ span>svg {
     }
 
     .logo {
-        transform: translate(-3%, -290%);
+     display: none;  
     }
 
     .right,

@@ -1,12 +1,9 @@
-* {
-	margin: 0;
-	padding: 0;
-}
+@import './components/ui/box.css';
+@import './components/ui/common.css';
+
 
 /* child centered */
 #root {
 	display: flex;
-	align-self: flex-start	;
-	justify-content: center;
-    align-items:flex-start;
+
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
+import { ViewportProvider } from "./utils/viewport-provider"; //для определения размеров окна - для логики компонента декстоп/мобайл 
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import Styles from './app.module.css';
-
 
 // https://norma.nomoreparties.space/api/ingredients
 
@@ -37,30 +37,30 @@ const App = (props) => {
     console.log(!!ingredients)
     const { success, error, data } = ingredients;
     return !!data && (
+        <ViewportProvider>
         <>
-            <div className={[Styles.supper_container].join(' ').concat(' ')}>
-                <header className={[Styles.app].join(' ').concat(' mr-30 pr-30 ')}>
+            <div className={Styles.supper_container}>
+                <header className={Styles.supper_header}>
                     <AppHeader />
-                    {error && <p className={[Styles.spinner].join(' ').concat(' text_color_error p-2 ')}> Что-то пошло не так, не получены данные </p>}
-                    {(!success && !error) && <div className={Styles.spinner}>
-                        <ClipLoader color={'#ffff'} loading={!success} size={550} />
-                    </div>}
+                    {error && <p className={`${Styles.supper_container_inner} text_color_error p-2 `}> Что-то пошло не так, не получены данные </p>}
+                    {(!success && !error) && <div className={Styles.spinner}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
+                                            </div>}
                 </header>
 
-                {!!success && !!!error && <div className={[Styles.supper_container_inner].join(' ').concat(' ')}>
-                    <main className={[Styles.app].join(' ').concat(' ')}>
+                {!!success && !!!error && <div className={`${Styles.supper_container_inner}`}>
+                    <main className={Styles.super_main}>
                         <BurgerIngredients ingredients={data} />
                     </main>
-                    <main>
+                    <main className={Styles.super_main}>
                         <BurgerConstructor ingredients={data} />
                     </main>
                 </div>
                 }
-                {!!data && <div className='text p-2 '>неподвижный footer</div>}
+                {!!data && <div className={`${Styles.super_main} ${Styles.supper_phone_content}  text p-2 `}>неподвижный footer с дефолтным display:none</div>}
             </div>
 
         </>
-
+        </ViewportProvider>
     )
 }
 
