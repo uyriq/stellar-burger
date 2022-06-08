@@ -30,8 +30,6 @@ const App = (props) => {
             }
             let _ = await res.json()
             setIngredients(ingredients => ({ ...ingredients, success: _.success, data: _.data }))
-
-
         }
 
         getIngredients();
