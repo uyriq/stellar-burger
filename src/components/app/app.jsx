@@ -11,19 +11,13 @@ import Styles from './app.module.css';
 const apiBaseUrl = 'https://norma.nomoreparties.space/api'
 const apiEndpoints = { ingredients: '/ingredients' }
 
-// const spinnerColor = document.documentElement.style.getPropertyValue('--text-inactive-color');
-// console.log(`spinnerColor = ${spinnerColor}`)
-
 const App = (props) => {
-    
     let [ingredients, setIngredients] = useState({
         success: false,
         error: false,
         data: []});
 
-
     useEffect(() => {
-     
         let res
         const getIngredients = async () => {
             try {
@@ -37,7 +31,6 @@ const App = (props) => {
 
 
     }
-
 
 getIngredients();
     }, []);
