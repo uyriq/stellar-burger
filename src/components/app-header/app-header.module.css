@@ -55,16 +55,16 @@ a :hover::before {
 }
 
 
-span {
+.header > span {
     justify-content: flex-start;
     align-content: flex-start;
     align-items: flex-start;
     margin-right: initial;
-    white-space: wrap ;
+    white-space: nowrap;
     vertical-align: middle;
 }
 
-span>svg {
+.header > span > svg {
     vertical-align: middle;
 }
 
@@ -90,7 +90,7 @@ span>svg {
 .logo {
     position: inherit;
     display: inline-block;
-    transform: translate(400px, 0);
+    transform: translate(410px, 0);
     max-width: 300px;
    
 }
@@ -98,11 +98,11 @@ span>svg {
 /* honey phony */
 
 @media only screen and (max-width: 600px) {
-    nav {
+    .header >  nav {
         background-color: var(--background-alt);
     }
 
-    span {
+    .header >  span {
         background-color: var(--background-alt);
     }
 
@@ -114,7 +114,7 @@ span>svg {
         background-color: var(--background-alt);
     }
 
-    .logo {
+    .header >  .logo {
      display: none;  
     }
 

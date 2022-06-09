@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
-import { ViewportProvider } from "./utils/viewport-provider"; //для определения размеров окна - для логики компонента декстоп/мобайл 
+import { ViewportProvider } from "./utils/viewport-provider"; //TODO для определения размеров окна - для логики компонента декстоп/мобайл
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';

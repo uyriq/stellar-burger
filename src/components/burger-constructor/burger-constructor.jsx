@@ -37,7 +37,9 @@ const ingredientPropType = PropTypes.shape({
 });
 
 const BurgerConstructor = ({ingredients, openModal}) => {
-    const filteredIngredients = ingredients.filter(item => item.type !== 'bun');
+    const notbunsIngredients = ingredients.filter(item => item.type !== 'bun');
+    const bunsIngredients = ingredients.filter(item => item.type === 'bun');
+    const randombun=Math.floor(bunsIngredients.length*Math.random())
 
     return (
         <section className={`${Styles.constructor} `}>
@@ -45,21 +47,21 @@ const BurgerConstructor = ({ingredients, openModal}) => {
                 <ConstructorElement
                     type='top'
                     isLocked={true}
-                    text={`${ingredients[0].name} (верх)`}
-                    price={ingredients[0].price}
-                    thumbnail={ingredients[0].image}
+                    text={`${bunsIngredients[randombun].name} (верх)`}
+                    price={bunsIngredients[randombun].price}
+                    thumbnail={bunsIngredients[randombun].image}
                 />
             </div>
             <ul className={`${Styles.list} `}>
-                {ingredientsList(filteredIngredients)}
+                {ingredientsList(notbunsIngredients)}
             </ul>
             <div className='  ml-8 pr-20'>
                 <ConstructorElement
                     type='bottom'
                     isLocked={true}
-                    text={`${ingredients[0].name} (низ)`}
-                    price={ingredients[0].price}
-                    thumbnail={ingredients[0].image}
+                    text={`${bunsIngredients[randombun].name} (низ)`}
+                    price={bunsIngredients[randombun].price}
+                    thumbnail={bunsIngredients[randombun].image}
                 />
             </div>
             <div className={`${Styles.currency} mr-1 mt-10`}>
