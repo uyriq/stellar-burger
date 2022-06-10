@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, Button, CurrencyIcon } from '../ui/react-developer-burger-ui-components';
-import   openModal  from  '../modal/open-modal'
+ 
 import '../ui/box.css';
-import '../ui/common.css';
+import '../ui/common.css'; 
 import Styles from './burger-constructor.module.css';
 
 
@@ -40,7 +40,7 @@ const BurgerConstructor = ({ingredients, openModal}) => {
     const notbunsIngredients = ingredients.filter(item => item.type !== 'bun');
     const bunsIngredients = ingredients.filter(item => item.type === 'bun');
     const randombun=Math.floor(bunsIngredients.length*Math.random())
-
+    
     return (
         <section className={`${Styles.constructor} `}>
             <div className={` ml-8 `} >
@@ -52,10 +52,10 @@ const BurgerConstructor = ({ingredients, openModal}) => {
                     thumbnail={bunsIngredients[randombun].image}
                 />
             </div>
-            <ul className={`${Styles.list} `}>
+            <ul className={`${Styles.list} custom-scroll `}>
                 {ingredientsList(notbunsIngredients)}
             </ul>
-            <div className='  ml-8 pr-20'>
+            <div className='  ml-8 '>
                 <ConstructorElement
                     type='bottom'
                     isLocked={true}

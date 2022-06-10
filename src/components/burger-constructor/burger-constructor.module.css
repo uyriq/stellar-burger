@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     break-after: always;
 	align-items: center;
+    
 }
 
 .list {
@@ -16,6 +17,7 @@
 	list-style-type: none;
 	overflow-y: scroll;
     overflow-x: hidden;
+    
 }
 
 .list-item {
@@ -27,6 +29,10 @@
 }
 
 .list-item:last-child {
+	margin-bottom: 0;
+}
+
+.list-item:first-child {
 	margin-bottom: 0;
 }
 

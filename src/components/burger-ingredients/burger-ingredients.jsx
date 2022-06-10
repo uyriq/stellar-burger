@@ -5,6 +5,7 @@ import Styles from './burger-ingredients.module.css';
 import '../ui/box.css';
 import '../ui/common.css';
 import PropTypes from 'prop-types';
+ 
 
 
 const ingredientPropType = PropTypes.shape({
@@ -24,20 +25,22 @@ const ingredientPropType = PropTypes.shape({
 
 const BurgerIngredients = ({ingredients}) => {
     const [choice, setChoice] = React.useState('buns');
-
     const buns = ingredients.filter(item => item.type === 'bun');
     const sauces = ingredients.filter(item => item.type === 'sauce');
     const main = ingredients.filter(item => item.type === 'main');
+    
     const IngredientsList = (array) => {
         return array.map(item => 
             <BurgerIngredientsItem
                 key={item._id}
                 ingredient={item}
-                
             />);
     }
-    
+
+
+
     return (
+        
         <section className='pt-10'>
             <h1 className='text text_type_main-large mb-5'>Соберите бургер</h1>
             <div className={`${Styles.tabs} mb-10`}>

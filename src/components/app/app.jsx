@@ -4,6 +4,8 @@ import { ViewportProvider } from "./utils/viewport-provider"; //TODO для оп
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import useModal from "../modal/use-modal";
+import Modal from "../modal/modal";
 import Styles from './app.module.css';
 
 // https://norma.nomoreparties.space/api/ingredients
@@ -38,28 +40,28 @@ const App = (props) => {
     const { success, error, data } = ingredients;
     return !!data && (
         <ViewportProvider>
-        <>
-            <div className={Styles.supper_container}>
-                <header className={Styles.supper_header}>
-                    <AppHeader />
-                    {error && <p className={`${Styles.supper_container_inner} text_color_error p-2 `}> Что-то пошло не так, не получены данные </p>}
-                    {(!success && !error) && <div className={Styles.spinner}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
-                                            </div>}
-                </header>
+            <>
+                <div className={Styles.supper_container}>
+                    <header className={Styles.supper_header}>
+                        <AppHeader />
+                        {error && <p className={`${Styles.supper_container_inner} text_color_error `}> Что-то пошло не так, не получены данные </p>}
+                    </header>
 
-                {!!success && !!!error && <div className={`${Styles.supper_container_inner}`}>
-                    <main className={Styles.super_main}>
-                        <BurgerIngredients ingredients={data} />
-                    </main>
-                    <main className={Styles.super_main}>
-                        <BurgerConstructor ingredients={data} />
-                    </main>
+                    {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
+                    </span>}
+                    {!!success && !!!error && <div className={`${Styles.supper_container_inner}`}>
+                        <main className={Styles.super_main}>
+                            <BurgerIngredients ingredients={data} />
+                        </main>
+                        <main className={Styles.super_main}>
+                            <BurgerConstructor ingredients={data} />
+                        </main>
+                    </div>
+                    }
+                    {!!data && <div className={`${Styles.super_main} ${Styles.supper_phone_content}  text p-2 `}>неподвижный footer с дефолтным display:none</div>}
                 </div>
-                }
-                {!!data && <div className={`${Styles.super_main} ${Styles.supper_phone_content}  text p-2 `}>неподвижный footer с дефолтным display:none</div>}
-            </div>
 
-        </>
+            </>
         </ViewportProvider>
     )
 }
