@@ -1,3 +1,5 @@
+
+
 .backdrop {
     background: rgba(0, 0, 0, 0.75);
     height: 100vh;
@@ -63,40 +65,66 @@
 }
 
 .modal_content {
-    background-color: #fff;
-    border-radius: 10px;
-    height: auto;
+    background-color: var(--background-element);
+    background: #1C1C21;
+    border-radius: 40px;
+    border: 1px solid rgba(76, 76, 255, 0.2);
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    height: 538px;
+    width: 720px;
     margin: auto;
-    max-width: 550px;
+    max-width: 80%;
     padding: auto;
     position: relative;
     top: -10%;
     transition: 1ms;
-    width: 80%;
     z-index: 100;
+    
 }
 
 .modal_header {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+align-items: center;
+display: flex;
+flex-direction: row;
+gap: 36px;
+height: 64px;
+justify-content: flex-end;
+left: 40px;
+padding: 0px;
+position: absolute;
+right: 40px;
+top: 40px;
 }
 
 .modal_header h4 {
-    margin-left: 20px;
+
 }
 
 .modal_button_close {
     background: transparent;
     border: none;
-    color: black;
+    color: var(--text-primary-color);
     cursor: pointer;
-    font-size: 25px;
+    font-size: 36px;
     font-weight: 500;
 }
 
 .modal_body {
+    align-items: center;
+    justify-content: flex-end;
     padding: 1rem;
+    display: inline-flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 32px;
+
+position: relative;
+width: 520px;
+height: 118px;
+
+top: 360px;
+
 }
 
 @media (min-width: 768px) {

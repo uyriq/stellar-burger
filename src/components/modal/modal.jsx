@@ -9,7 +9,7 @@ const Modal = ({ isShow, hide, title, ...props }) =>
       <div className={Styles.modal_wrapper}>
         <div className={Styles.modal_content}>
           <div className={Styles.modal_header}>
-            <h4> {title} </h4>
+            <h4 className="text text_type_main-large"> {title} </h4>
             <button
               type="button"
               className={Styles.modal_button_close}
@@ -18,7 +18,7 @@ const Modal = ({ isShow, hide, title, ...props }) =>
               <span> ☒ </span>
             </button>
           </div>
-          <hr />
+          
           <div className={Styles.modal_body}>{props.children}</div>
         </div>
       </div>
@@ -28,7 +28,7 @@ const Modal = ({ isShow, hide, title, ...props }) =>
 Modal.propTypes = {
   isShow: PropTypes.bool.isRequired,
   hide: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string
 };
 
 export default Modal;
