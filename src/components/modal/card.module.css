@@ -1,14 +1,45 @@
 .card {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  flex-wrap: nowrap;
-  white-space: nowrap ;
+    white-space: normal; 
+}
+.data_title p  {
+    flex-wrap: nowrap;
+    white-space: nowrap ;
+  
+    
 }
 
+.data_value p {
+    grid-column-start: 1;
+    align-items: end;
+    white-space: normal ;
+    flex-wrap: wrap;
+    
+}
 .box {
-    display: flex;
-    color: var(--text-primary-color);
-    padding: 1em;
-    text-align: center;
-    background-color:var(--background);
+    position:relative;
+    left:3vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    white-space: wrap ;
+
+  }
+
+  .img_cont {
+display: flex;
+
+  }
+
+  .ingred_name {
+      display: flex;
+
+    white-space: nowrap ;
+    position:relative;
+    left:3vw;
+    align-self: center;
+  }
+
+  .img_cont img {
+    position:relative;
+    left:8vw;
   }

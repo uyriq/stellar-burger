@@ -4,8 +4,7 @@ import { ViewportProvider } from "./utils/viewport-provider"; //TODO для оп
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import useModal from "../modal/use-modal";
-import Modal from "../modal/modal";
+
 import Styles from './app.module.css';
 
 // https://norma.nomoreparties.space/api/ingredients

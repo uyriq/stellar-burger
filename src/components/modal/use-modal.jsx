@@ -3,8 +3,9 @@ import  { useState } from 'react';
 export default function useModal() {
   const [isShow, setShow] = useState(false);
 
-  function toggle() {
+  const toggle = (e) => {
     setShow(!isShow);
+    console.dir(`${isShow} was clicked  ${console.dir(Object(e.target))}  `)
   }
   return {
     isShow,
