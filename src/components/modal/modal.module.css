@@ -51,7 +51,7 @@
 }
 
 .modal_wrapper {
-    align-items: center;
+   
     display: flex;
     height: 100%;
     left: 0;
@@ -83,14 +83,12 @@
 }
 
 .modal_header {
-align-items: center;
+
 display: flex;
 flex-direction: row;
 gap: 36px;
-height: 64px;
-justify-content: flex-end;
-left: 40px;
-padding: 0px;
+
+justify-content: flex-start;
 position: absolute;
 right: 40px;
 top: 40px;
@@ -110,20 +108,19 @@ top: 40px;
 }
 
 .modal_body {
-    align-items: center;
-    justify-content: flex-end;
-    padding: 1rem;
-    display: inline-flex;
-flex-direction: column;
-align-items: center;
-padding: 0px;
-gap: 32px;
+  
+    justify-content: flex-start;
+
+    display: flex;
+
+
+
 
 position: relative;
-width: 520px;
-height: 118px;
+width: 80%;
 
-top: 360px;
+
+top: 10vh;
 
 }
 

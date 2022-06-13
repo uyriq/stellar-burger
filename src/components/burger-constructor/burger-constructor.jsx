@@ -1,23 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, Button, CurrencyIcon } from '../ui/react-developer-burger-ui-components';
- 
+import useModal from '../modal/use-modal';
+import Modal from '../modal/modal';
+import OrderConfirm from '../modal/order-confirm';
 import '../ui/box.css';
-import '../ui/common.css'; 
+import '../ui/common.css';
 import Styles from './burger-constructor.module.css';
 
 
 const ingredientsList = (array) => {
     return array.map(item => (
-            <li key={item._id} className={`${Styles['list-item']} `}>
-                <DragIcon />
-                <ConstructorElement
-                    text={item.name}
-                    price={item.price}
-                    thumbnail={item.image}
-                />
-            </li>
-        )
+        <li key={item._id} className={`${Styles['list-item']} `}>
+            <DragIcon />
+            <ConstructorElement
+                text={item.name}
+                price={item.price}
+                thumbnail={item.image}
+            />
+        </li>
+    )
     );
 }
 
@@ -36,14 +38,21 @@ const ingredientPropType = PropTypes.shape({
     __v: PropTypes.number
 });
 
-const BurgerConstructor = ({ingredients, openModal}) => {
+const BurgerConstructor = ({ ingredients, openModal }) => {
     const notbunsIngredients = ingredients.filter(item => item.type !== 'bun');
     const bunsIngredients = ingredients.filter(item => item.type === 'bun');
-    const randombun=Math.floor(bunsIngredients.length*Math.random())
-    
+    const randombun = Math.floor(bunsIngredients.length * Math.random())
+
+    const { isShow: show, toggle: _toggleOpen } = useModal();
+    const data = `
+           034536
+идентификатор заказа
+Ваш заказ начали готовить
+Дождитесь готовности на орбитальной станции
+`
     return (
         <section className={`${Styles.constructor} `}>
-            <div className={` ml-8 `} >
+            <div className={` `} >
                 <ConstructorElement
                     type='top'
                     isLocked={true}
@@ -55,7 +64,7 @@ const BurgerConstructor = ({ingredients, openModal}) => {
             <ul className={`${Styles.list} custom-scroll `}>
                 {ingredientsList(notbunsIngredients)}
             </ul>
-            <div className='  ml-8 '>
+            <div className='  '>
                 <ConstructorElement
                     type='bottom'
                     isLocked={true}
@@ -64,12 +73,19 @@ const BurgerConstructor = ({ingredients, openModal}) => {
                     thumbnail={bunsIngredients[randombun].image}
                 />
             </div>
-            <div className={`${Styles.currency} mr-1 mt-10`}>
-                <div className={`${Styles.total} mr-1`}>
-                <span className={`${Styles.currency} text text_type_digits-medium mr-2`}>610<CurrencyIcon/> </span>
+            <div className={`${Styles.currency}   mt-10`}>
+                <div className={`${Styles.total}  `}>
+                    <span className={`${Styles.currency} text text_type_digits-medium mr-2`}>610<CurrencyIcon /> </span>
                 </div>
-                <div onClick={openModal} className={`${Styles.order_button} `} >
-                    <Button type="primary" size="large">Оформить заказ</Button>
+                <div className={`${Styles.order_button} `} >
+                    <Button type="primary" size="large" onClick={_toggleOpen}>Оформить заказ</Button>
+                    <Modal
+                        isShow={show}
+                        hide={_toggleOpen}
+                        title=""
+                    >
+                        <OrderConfirm> {data} </OrderConfirm>
+                    </Modal>
                 </div>
             </div>
         </section>

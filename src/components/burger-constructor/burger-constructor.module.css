@@ -6,7 +6,8 @@
     flex-wrap: wrap;
     break-after: always;
 	align-items: center;
-    
+    display: flex;
+    justify-content: center;
 }
 
 .list {
@@ -43,6 +44,8 @@
 }
 
 .order_button {
-    margin: -5% -0% -5% -0%;
+    display: flex;
+    justify-content: center;
+  
 }
 
