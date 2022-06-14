@@ -1,0 +1,20 @@
+.tabs {
+	display: flex;
+}
+
+.ingredients {
+	width: 600px;
+	height: calc(100vh - 236px);
+	overflow-y: scroll;
+}
+
+.ingredients-item {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 24px;
+	list-style-type: none;
+}
+
+.spec_modal {
+    background-color: bisque;
+}

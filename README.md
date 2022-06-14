@@ -1,3 +1,3 @@
-## branch sprint1/step2
+## branch  react-developer-burger-ui-components
 
-### Проект. Создать CRA-заготовку и создать структуру папок под компоненты
+### Проект.  

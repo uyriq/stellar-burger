@@ -3,7 +3,7 @@ import { getIconColor, TIconProps } from './utils';
 
 export const ProfileIcon = ({ type }: TIconProps) => {
     return (
-        <svg
+        <svg className=' pr-1  '
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"

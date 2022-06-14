@@ -1,7 +1,9 @@
+@import './components/ui/box.css';
+@import './components/ui/common.css';
+
+
+/* child centered */
 #root {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	max-width: 1280px;
-	margin: 0 auto 0;
+
 }

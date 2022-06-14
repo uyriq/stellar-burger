@@ -1,0 +1,141 @@
+a {
+    position: relative;
+    text-decoration: none;
+    color: var(--text-primary-color);
+}
+
+a ::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    border-radius: 4px;
+    background-color: var(--text-primary-color);
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
+}
+
+a :hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+
+/* это родительский */
+.container_header {
+    position: absolute;
+    left:-25%;
+    min-width: 1240px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--background);
+
+}
+
+/* это чайлд контейнер в родительском, вписан с полями по центру */
+.header {
+    width: 100%;
+    background-color: var(--background-alt);
+    align-self: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.container_header>first-child {
+
+    width: auto;
+}
+
+
+.header > span {
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin-right: initial;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.header > span > svg {
+    vertical-align: middle;
+}
+
+.left {
+    justify-content: center;
+    align-content: flex-end;
+    align-items: flex-start;
+    display: flex;
+}
+
+.right {
+
+    display: flex;
+    z-index: 100;
+    transform: translate(400px, 0);
+}
+
+.middle {
+    display: flex;
+    width: auto;
+}
+
+.logo {
+    position: inherit;
+    display: inline-block;
+    transform: translate(410px, 0);
+    max-width: 300px;
+   
+}
+
+/* honey phony */
+
+@media only screen and (max-width: 600px) {
+    .header >  nav {
+        background-color: var(--background-alt);
+    }
+
+    .header >  span {
+        background-color: var(--background-alt);
+    }
+
+    .header {
+        background-color: var(--background-alt);
+    }
+
+    .container_header {
+        background-color: var(--background-alt);
+    }
+
+    .header >  .logo {
+     display: none;  
+    }
+
+    .right,
+    .left,
+    .middle {
+        background-color: var(--background-alt);
+        display: flex;
+        break-after: right;
+        flex-wrap: wrap;
+        white-space: wrap;
+        margin: 0 0 0 0 !important;
+        align-items: flex-start;
+        vertical-align: middle;
+    }
+
+    .midle{
+        transform: translate(-20%, 00%);
+    }
+
+    .right{
+        transform: translate(-40%, 00%);
+    }
+}
