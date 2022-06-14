@@ -1,9 +1,7 @@
 import React from 'react';
-import { Counter, CurrencyIcon } from '../ui/react-developer-burger-ui-components';
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import Styles from './burger-ingredients-item.module.css';
-import '../ui/box.css';
-import '../ui/common.css';
 import useModal from '../modal/use-modal';
 import Modal from '../modal/modal';
 import Card from '../modal/card';

@@ -1,5 +1,5 @@
-@import './components/ui/box.css';
-@import './components/ui/common.css';
+@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
 
 
 /* child centered */

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConstructorElement, DragIcon, Button, CurrencyIcon } from '../ui/react-developer-burger-ui-components';
+import { ConstructorElement, DragIcon, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import useModal from '../modal/use-modal';
 import Modal from '../modal/modal';
 import OrderConfirm from '../modal/order-confirm';
-import '../ui/box.css';
-import '../ui/common.css';
 import Styles from './burger-constructor.module.css';
 
 

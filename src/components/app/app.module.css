@@ -1,9 +1,9 @@
 /* https://yandex-praktikum.github.io/react-developer-burger-ui-components/docs/  */
-/* local import */
+/* non local import */
 
-@import '../ui/fonts/fonts.css';
-@import '../ui/common.css';
-@import '../ui/box.css';
+@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/fonts/fonts.css';
+@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 
 .spinner {
     margin: 0 0 0 0;
