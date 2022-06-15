@@ -9,12 +9,22 @@ const data=`
 Дождитесь готовности на орбитальной станции
 `
  */
-const OrderConfirm = props => {
-    console.log(props)
+const OrderConfirm = ({ numero, message }) => {
+
     return ( 
-        <div className={` ${Style.card} `} >
-         {props.children}
-        </div>
+        <section className={` ${Style.card} `} >
+
+            <div className={` ${Style.first} `}>
+                <p className=' text text_type_digits-large '>{numero}</p>
+            </div>
+            <div className={` ${Style.n2} text text_type_main-default  `}   >
+
+                {message[0]}
+
+            </div>
+        </section>
+         
+
     )
 }
 export default OrderConfirm

@@ -1,9 +1,12 @@
 @import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-
+@import-normalize;
 
 
 /* child centered */
-#root {
-	display: flex;
+#root,
+#root_modal_overlay
+{
+	display: flex ;
 
 }
+

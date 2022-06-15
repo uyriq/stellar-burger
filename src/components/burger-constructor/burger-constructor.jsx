@@ -42,12 +42,8 @@ const BurgerConstructor = ({ ingredients, openModal }) => {
     const randombun = Math.floor(bunsIngredients.length * Math.random())
 
     const { isShow: show, toggle: _toggleOpen } = useModal();
-    const data = `
-           034536
-идентификатор заказа
-Ваш заказ начали готовить
-Дождитесь готовности на орбитальной станции
-`
+    /* xaрдкод пока нет ответа от апи*/
+    const data = {numero: '034536', message: ['идентификатор заказа', 'Ваш заказ начали готовить', 'Дождитесь готовности на орбитальной станции']}
     return (
         <section className={`${Styles.constructor} `}>
             <div className={` `} >
@@ -82,7 +78,7 @@ const BurgerConstructor = ({ ingredients, openModal }) => {
                         hide={_toggleOpen}
                         title=""
                     >
-                        <OrderConfirm> {data} </OrderConfirm>
+                        <OrderConfirm numero={data.numero} message={data.message} />
                     </Modal>
                 </div>
             </div>

@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.0.5",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
     "clsx": "^1.1.1",
+    "normalize.css": "^8.0.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
