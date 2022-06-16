@@ -40,7 +40,7 @@ section .card {}
     grid-area: n3;
     display: grid;
     justify-content: center;
-    top:    5.5em;
+    top: 5.5em;
 }
 
 .n4 {
@@ -48,7 +48,7 @@ section .card {}
     grid-area: n4;
     display: grid;
     justify-content: center;
-    top:    5em;
+    top: 5em;
 }
 
 .n5 {

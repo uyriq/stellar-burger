@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
-import { ViewportProvider } from "./utils/viewport-provider"; //TODO для определения размеров окна - для логики компонента декстоп/мобайл
+import { ViewportProvider } from "./utils/viewport-provider"; //TODO для определения размеров окна - для логики компонента декстоп/мобайл (пока не используется)
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
@@ -48,7 +48,7 @@ const App = (props) => {
 
                     {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
                     </span>}
-                    {!!success && !!!error && <div className={`${Styles.supper_container_inner}`}>
+                    {!!success && !error && <div className={`${Styles.supper_container_inner}`}>
                         <main className={Styles.super_main}>
                             <BurgerIngredients ingredients={data} />
                         </main>
@@ -57,7 +57,7 @@ const App = (props) => {
                         </main>
                     </div>
                     }
-                    {!!data && <div className={`${Styles.super_main} ${Styles.supper_phone_content}  text p-2 `}>неподвижный footer с дефолтным display:none</div>}
+
                 </div>
 
             </>

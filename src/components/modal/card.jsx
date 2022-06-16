@@ -10,7 +10,7 @@ const Card = props => {
             <div className={` ${Style.div1} `}>
                 <img alt={props.name} srcSet={`${props.image_large} 2x  ${props.image} 1.5x ${props.image_mobile}`} src={props.image_large} />
             </div>
-            <div className={` ${Style.div2}  `} > 
+            <div className={` ${Style.div2}  `} >
                 <p className=' text_type_main-medium text'>{`${props.name}`}</p>
             </div>
             <div className={` ${Style.div3}   text_color_inactive  `}> Калории, ккал </div>
