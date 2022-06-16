@@ -5,7 +5,7 @@ import Style from './card.module.css'
 
 const Card = props => {
     console.log(props)
-    return ( 
+    return (
         <div className={` ${Style.box} `} >
             <div className={` ${Style.div1} `}>
                 <img alt={props.name} srcSet={`${props.image_large} 2x  ${props.image} 1.5x ${props.image_mobile}`} src={props.image_large} />

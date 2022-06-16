@@ -18,12 +18,18 @@
     white-space: normal;
     width: 720px;
     z-index: 1050;
+    justify-content: center;
 }
 .modal_header {
     display: flex;
     position: absolute;
-    left:9%;
+     
     top:3%;
+}
+
+h4 .modal_header {
+    align-items: center;
+    justify-content: center;
 }
 
 .modal_button_close {

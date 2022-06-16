@@ -13,21 +13,21 @@ const AppHeader = () => {
 
                 <div className={`${Styles.left}  pr-10 `}>
                     <a href="#construct" className='  ' >
-                        <span className=' text text_type_main-default pl-1'><BurgerIcon />
+                        <span className=' text_type_main-default pl-2'><BurgerIcon />
                             Конструктор
                         </span>
                     </a>
                 </div>
                 <div className={`${Styles.middle} pr-20  `}>
                     <a href="#orders" className=' '>
-                        <span className=' text text_type_main-default text_color_inactive  pl-1 '><ListIcon />
+                        <span className=' text_type_main-default text_color_inactive   pl-2    '><ListIcon />
                             Лента заказов
                         </span>
                     </a>
                 </div>
                 <div className={`${Styles.right} ml-30 pl-30 `}>
                     <a href="#profile" className=' '>
-                        <span className=' text text_type_main-default  pl-1'><ProfileIcon />
+                        <span className=' text_type_main-default  pl-2'><ProfileIcon />
                             Личный кабинет
                         </span>
                     </a>
