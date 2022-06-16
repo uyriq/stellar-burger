@@ -1,4 +1,6 @@
 .card {
+    margin: 0;
+    padding: 0;
     white-space: normal;
     display: flex;
     align-items: center;

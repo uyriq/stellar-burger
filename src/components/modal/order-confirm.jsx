@@ -11,18 +11,17 @@ const data=`
  */
 const OrderConfirm = ({ numero, message }) => {
 
-    return ( 
-        <section className={` ${Style.card} `} >
-
-            <div className={` ${Style.first} `}>
-                <p className=' text text_type_digits-large '>{numero}</p>
-            </div>
-            <div className={` ${Style.n2} text text_type_main-default  `}   >
-
-                {message[0]}
-
-            </div>
-        </section>
+    return (<div className=' text  '>
+        
+            <section className={` ${Style.card} `} >
+                <div className={` ${Style.first} `}>
+                    <p className=' text text_type_digits-large '>{numero}</p>
+                </div>
+                <div className={` ${Style.n2} text text_type_main-default  `}   >
+                    {message[0]}
+                </div>
+            </section>
+    </div>
          
 
     )

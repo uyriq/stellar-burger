@@ -1,4 +1,5 @@
 .box_total {
+    
     align-items: center;
     background-color: var(--background-element);
     background: #1C1C21;
@@ -20,6 +21,9 @@
 }
 .modal_header {
     display: flex;
+    position: absolute;
+    left:9%;
+    top:3%;
 }
 
 .modal_button_close {

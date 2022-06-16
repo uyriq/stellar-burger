@@ -3,8 +3,7 @@
     grid-auto-columns: 1fr; 
     grid-auto-rows: 1fr; 
     grid-template-columns: 1fr; 
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
-      
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;  
     align-items: center;
     justify-content: center;
     grid-template-areas: 
@@ -22,9 +21,18 @@
 section .card {
      
 }
-.first { grid-area: first; }
-.n2 { grid-area: n2; }
-.n3 { grid-area: n3; }
-.n4 { grid-area: n4; }
-.n5 { grid-area: n5; }
-.n6 { grid-area: n6; }
+.first { 
+    margin-top: -100px; 
+    grid-area: first;
+    display: flex;
+    justify-content: center; }
+.n2 { grid-area: n2;     display: flex;
+    justify-content: center;}
+.n3 { grid-area: n3;     display: flex;
+    justify-content: center;}
+.n4 { grid-area: n4;     display: flex;
+    justify-content: center;}
+.n5 { grid-area: n5;     display: flex;
+    justify-content: center;}
+.n6 { grid-area: n6;     display: flex;
+    justify-content: center;}
