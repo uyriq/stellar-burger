@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import BurgerIngredientsItem from './burger-ingredients-item';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from './burger-ingredients.module.css';
 
 import PropTypes from 'prop-types';
-
- 
-
 
 const ingredientPropType = PropTypes.shape({
     _id: PropTypes.string.isRequired,
@@ -23,50 +20,74 @@ const ingredientPropType = PropTypes.shape({
     __v: PropTypes.number
 });
 
-const BurgerIngredients = ({ingredients}) => {
+
+const BurgerIngredients = ({ ingredients }) => {
+    const pageRefs = useRef({});
     const [choice, setChoice] = React.useState('buns');
     const buns = ingredients.filter(item => item.type === 'bun');
     const sauces = ingredients.filter(item => item.type === 'sauce');
     const main = ingredients.filter(item => item.type === 'main');
-    
+
     const IngredientsList = (array) => {
-        return array.map(item => 
+        return array.map(item =>
             <BurgerIngredientsItem
                 key={item._id}
                 ingredient={item}
             />);
     }
 
+    function Buns({ pageRefs }) {
+       // setChoice('buns')
+        return (
+            <section className={`${Styles.buns}  `}
+                ref={el => pageRefs.current = { ...pageRefs.current, about: el }}>
+                <h2 className='text text_type_main-medium mb-6' id='bun'>Булки</h2>
+                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>
+                    {IngredientsList(buns)}
+                </ul>
+            </section>
+        )
+    }
 
+    function Sauces({ pageRefs }) {
+      //  setChoice('sauces')
+        return (
+            <section className={`${Styles.sauces}  `}
+                ref={el => pageRefs.current = { ...pageRefs.current, about: el }}>
+                <h2 className='text text_type_main-medium mb-6' id='sauce'>Соусы</h2>
+                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>
+                    {IngredientsList(sauces)}
+                </ul>
+            </section>
+        )
+    }
+
+    function Main({ pageRefs }) {
+    //    setChoice('main')
+        return (
+            <section className={`${Styles.main}  `}
+                ref={el => pageRefs.current = { ...pageRefs.current, about: el }}>
+                <h2 className='text text_type_main-medium mb-6' id='main'>Начинки</h2>
+                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>
+                    {IngredientsList(main)}
+                </ul>
+            </section>
+        )
+    }
 
     return (
-        
         <section className='pt-10'>
             <h1 className='text text_type_main-large mb-5'>Соберите бургер</h1>
             <div className={`${Styles.tabs} mb-10`}>
-                <Tab value='buns' active={choice === 'buns'} onClick={setChoice}>Булки</Tab>
+                <Tab value='buns' active={choice === 'buns'} onClick={Buns}>Булки</Tab>
                 <Tab value='sauces' active={choice === 'sauces'} onClick={setChoice}>Соусы</Tab>
                 <Tab value='main' active={choice === 'main'} onClick={setChoice}>Начинки</Tab>
             </div>
             <div className={`${Styles.ingredients} custom-scroll`}>
-                <section className='mb-10'>
-                    <h2 className='text text_type_main-medium mb-6' id='bun'>Булки</h2>
-                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>
-                        {IngredientsList(buns)}
-                    </ul>
-                </section>
-                <section className='mb-10'>
-                    <h2 className='text text_type_main-medium mb-6' id='sauce'>Соусы</h2>
-                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>
-                        {IngredientsList(sauces)}
-                    </ul>
-                </section>
-                <section className='mb-10'>
-                    <h2 className='text text_type_main-medium mb-6' id='main'>Начинки</h2>
-                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>
-                        {IngredientsList(main)}
-                    </ul>
-                </section>
+                <Buns  pageRefs={pageRefs} />
+                <Sauces  pageRefs={pageRefs} />
+                <Main  pageRefs={pageRefs} />
+
             </div>
         </section>
     )
