@@ -76,7 +76,7 @@ const BurgerConstructor = ({ ingredients, openModal }) => {
                     <Modal
                         isShow={show}
                         hide={_toggleOpen}
-                        title="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"
+                        title=""
                     >
                         <OrderConfirm numero={data.numero} message={data.message} />
                     </Modal>

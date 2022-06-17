@@ -24,6 +24,8 @@
 .modal_header {
     display: flex;
     position: absolute;
+    align-items: center;
+    justify-content: center;
 
     top: 3%;
 }
@@ -31,15 +33,29 @@
 h4 .modal_header {
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .modal_button_close {
+    display: flex;
     background: transparent;
     border: none;
     color: var(--text-primary-color);
     cursor: pointer;
     font-size: 36px;
     font-weight: 500;
+    float: right;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: column;
+    
+}
+
+span .modal_button_close {
+    cursor: pointer;
+    align-items: flex-end;
+    justify-content: flex-end;
+    
 }
 
 .modal_content {

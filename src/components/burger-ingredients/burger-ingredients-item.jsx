@@ -24,7 +24,7 @@ const BurgerIngredientsItem = ({ ingredient }) => {
             <Modal
                 isShow={show}
                 hide={_toggleOpen}
-                title="&#160;&#160;&#160;&#160;&#160;Детали ингредиента &#160;&#160;&#160;"
+                title="&#160;Детали ингредиента&#160;"
             >
                 <Card {...ingredient} />
             </Modal>
