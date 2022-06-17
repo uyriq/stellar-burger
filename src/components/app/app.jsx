@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
-import { ViewportProvider } from "./utils/viewport-provider"; //TODO для определения размеров окна - для логики компонента декстоп/мобайл (пока не используется)
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 
 import Styles from './app.module.css';
-
-// https://norma.nomoreparties.space/api/ingredients
 
 const apiBaseUrl = 'https://norma.nomoreparties.space/api'
 const apiEndpoints = { ingredients: '/ingredients' }
@@ -38,7 +35,7 @@ const App = (props) => {
     console.log(!!ingredients)
     const { success, error, data } = ingredients;
     return !!data && (
-        <ViewportProvider>
+ 
             <>
                 <div className={Styles.supper_container}>
                     <header className={Styles.supper_header}>
@@ -61,7 +58,6 @@ const App = (props) => {
                 </div>
 
             </>
-        </ViewportProvider>
     )
 }
 
