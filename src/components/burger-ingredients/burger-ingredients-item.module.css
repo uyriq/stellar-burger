@@ -1,13 +1,13 @@
 .item {
-	width: 272px;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	box-sizing: border-box;
+    width: 272px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .currency {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }

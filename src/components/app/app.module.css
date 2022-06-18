@@ -16,9 +16,9 @@
 }
 
 .supper_container {
-    left: 300px; 
-    right: auto; 
-    top:  0px;
+    left: 300px;
+    right: auto;
+    top: 0px;
     position: absolute;
     display: flex;
     /* чтобы показать неподвижный футер */
@@ -30,23 +30,23 @@
     position: absolute;
     display: flex;
     flex-direction: row;
-    
+
 }
 
-.super_header{
-    left:10%;
-    right:auto;
-    top:auto;
+.super_header {
+    left: 10%;
+    right: auto;
+    top: auto;
     width: 100%;
     position: relative;
     align-self: flex-start;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
- 
+
 }
 
-.super_main{
+.super_main {
     align-self: flex-start;
     justify-content: flex-start;
     align-items: flex-start;
@@ -54,17 +54,17 @@
 }
 
 .supper_phone_content {
-display:none;
+    display: none;
 }
 
 
 /* honey phony */
 @media only screen and(max-width: 600px) {
+
     .supper_container,
     .supper_container_inner,
     .super_main,
-    .super_header
-     {
+    .super_header {
         display: flex;
         break-after: always;
         flex-wrap: wrap;

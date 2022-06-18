@@ -43,7 +43,7 @@ const BurgerConstructor = ({ ingredients, openModal }) => {
 
     const { isShow: show, toggle: _toggleOpen } = useModal();
     /* xaрдкод пока нет ответа от апи*/
-    const data = {numero: '034536', message: ['идентификатор заказа', 'Ваш заказ начали готовить', 'Дождитесь готовности на орбитальной станции']}
+    const data = { numero: '034536', message: ['идентификатор заказа', 'Ваш заказ начали готовить', 'Дождитесь готовности на орбитальной станции'] }
     return (
         <section className={`${Styles.constructor} `}>
             <div className={` `} >

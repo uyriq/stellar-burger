@@ -27,7 +27,7 @@ a :hover::before {
 /* это родительский */
 .container_header {
     position: absolute;
-    left:-25%;
+    left: -25%;
     min-width: 1240px;
     display: flex;
     flex-direction: row;
@@ -55,7 +55,7 @@ a :hover::before {
 }
 
 
-.header > span {
+.header>span {
     justify-content: flex-start;
     align-content: flex-start;
     align-items: flex-start;
@@ -64,7 +64,7 @@ a :hover::before {
     vertical-align: middle;
 }
 
-.header > span > svg {
+.header>span>svg {
     vertical-align: middle;
 }
 
@@ -92,17 +92,17 @@ a :hover::before {
     display: inline-block;
     transform: translate(410px, 0);
     max-width: 300px;
-   
+
 }
 
 /* honey phony */
 
 @media only screen and (max-width: 600px) {
-    .header >  nav {
+    .header>nav {
         background-color: var(--background-alt);
     }
 
-    .header >  span {
+    .header>span {
         background-color: var(--background-alt);
     }
 
@@ -114,8 +114,8 @@ a :hover::before {
         background-color: var(--background-alt);
     }
 
-    .header >  .logo {
-     display: none;  
+    .header>.logo {
+        display: none;
     }
 
     .right,
@@ -131,11 +131,11 @@ a :hover::before {
         vertical-align: middle;
     }
 
-    .midle{
+    .midle {
         transform: translate(-20%, 00%);
     }
 
-    .right{
+    .right {
         transform: translate(-40%, 00%);
     }
 }

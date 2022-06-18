@@ -46,14 +46,14 @@ h4 .modal_header {
     font-weight: 500;
     align-items: flex-end;
     justify-content: flex-end;
-    
+
 }
 
 span .modal_button_close {
     cursor: pointer;
     align-items: flex-end;
     justify-content: flex-end;
-    
+
 }
 
 .modal_content {

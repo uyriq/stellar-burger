@@ -1,32 +1,32 @@
 .tabs {
-	display: flex;
+    display: flex;
 }
 
 .ingredients {
-	width: 600px;
-	height: calc(100vh - 236px);
-	overflow-y: scroll;
+    width: 600px;
+    height: calc(100vh - 236px);
+    overflow-y: scroll;
 }
 
 .ingredients-item {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 24px;
-	list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    list-style-type: none;
 }
 
 .spec_modal {
-    background-color: bisque;
+    background-color: var(--background-alt);
 }
 
-.buns{
-    background-color: crimson;
+.buns {
+    background-color: var(--background-alt);
 }
 
-.sauces{
-    background-color: lemonchiffon;
+.sauces {
+    background-color: var(--background-alt);
 }
 
-.main{
-    background-color: cornflowerblue;
+.main {
+    background-color: var(--background-alt);
 }
