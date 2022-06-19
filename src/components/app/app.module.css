@@ -9,47 +9,46 @@
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     display: flex;
-    position: absolute;
+     
+    justify-content: center;
+    align-items: center;
     left: 0;
     top: 0;
-    transform: translate(70%, 30%);
+   /*  transform: translate(70%, 30%); */
+}
+
+.page {
+ 
+    max-width: 1280px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .supper_container {
-    left: 300px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
     right: auto;
-    top: 0px;
-    position: absolute;
+    position: relative;
     display: flex;
-    /* чтобы показать неподвижный футер */
+   
 }
 
 .supper_container_inner {
-    left: 0px;
-    top: 100%;
-    position: absolute;
+   
+    position: relative;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
 
 }
 
-.super_header {
-    left: 10%;
-    right: auto;
-    top: auto;
-    width: 100%;
-    position: relative;
+.supper_column {
     align-self: flex-start;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-
-}
-
-.super_main {
-    align-self: flex-start;
-    justify-content: flex-start;
-    align-items: flex-start;
+    width: 50%;
 
 }
 
@@ -63,8 +62,7 @@
 
     .supper_container,
     .supper_container_inner,
-    .super_main,
-    .super_header {
+    .supper_column  {
         display: flex;
         break-after: always;
         flex-wrap: wrap;

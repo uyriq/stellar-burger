@@ -27,15 +27,27 @@ a :hover::before {
 /* это родительский */
 .container_header {
     position: absolute;
-    left: -25%;
-    min-width: 1240px;
     display: flex;
-    flex-direction: row;
+     
     flex-wrap: wrap;
     justify-content: flex-start;
     align-content: flex-start;
     align-items: flex-start;
     background-color: var(--background);
+
+}
+
+
+.supper_header {
+
+    right: auto;
+    top: auto;
+    width: 100%;
+    position: relative;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
 }
 
@@ -79,7 +91,7 @@ a :hover::before {
 
     display: flex;
     z-index: 100;
-    transform: translate(400px, 0);
+   
 }
 
 .middle {
@@ -90,7 +102,7 @@ a :hover::before {
 .logo {
     position: inherit;
     display: inline-block;
-    transform: translate(410px, 0);
+    /* transform: translate(410px, 0); */
     max-width: 300px;
 
 }
@@ -132,10 +144,10 @@ a :hover::before {
     }
 
     .midle {
-        transform: translate(-20%, 00%);
+      /*   transform: translate(-20%, 00%); */
     }
 
     .right {
-        transform: translate(-40%, 00%);
+      /*   transform: translate(-40%, 00%); */
     }
 }

@@ -37,29 +37,24 @@ const App = (props) => {
     console.log(!!ingredients)
     const { success, error, data } = ingredients;
     return !!data && (
-
-        <>
-            <div className={Styles.supper_container}>
-                <header className={Styles.supper_header}>
+            <div className={Styles.page}>
+                <div className={Styles.supper_container}>
                     <AppHeader />
                     {error && <p className={`${Styles.supper_container_inner} text_color_error `}> Что-то пошло не так, не получены данные </p>}
-                </header>
-
-                {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
-                </span>}
-                {!!success && !error && <div className={`${Styles.supper_container_inner}`}>
-                    <main className={Styles.super_main}>
-                        <BurgerIngredients ingredients={data} />
-                    </main>
-                    <main className={Styles.super_main}>
-                        <BurgerConstructor ingredients={data} />
-                    </main>
+                    {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
+                    </span>}
+                    {!!success && !error && <div className={`${Styles.supper_container_inner}`}>
+                        <div className={Styles.supper_column}>
+                            <BurgerIngredients ingredients={data} />
+                        </div>
+                        <div className={Styles.supper_column}>
+                            <BurgerConstructor ingredients={data} />
+                        </div>
+                    </div>
+                    }
                 </div>
-                }
-
             </div>
 
-        </>
     )
 }
 

@@ -3,10 +3,3 @@
 
 
 /* child centered */
-#root,
-#root_modal_overlay
-{
-	display: flex ;
-
-}
-
