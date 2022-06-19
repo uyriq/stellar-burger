@@ -26,6 +26,8 @@ a :hover::before {
 
 /* это родительский */
 .container_header {
+    flex-shrink: 0;
+    flex-grow: 0;
     position: absolute;
     display: flex;
      
@@ -39,7 +41,8 @@ a :hover::before {
 
 
 .supper_header {
-
+    flex-shrink: 0;
+    flex-grow: 0;
     right: auto;
     top: auto;
     width: 100%;
