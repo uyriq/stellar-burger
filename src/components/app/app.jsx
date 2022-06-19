@@ -10,7 +10,7 @@ const apiBaseUrl = 'https://norma.nomoreparties.space/api'
 const apiEndpoints = { ingredients: '/ingredients' }
 
 const App = (props) => {
-    let [ingredients, setIngredients] = useState({
+    const [ingredients, setIngredients] = useState({
         success: false,
         error: false,
         data: []
@@ -22,12 +22,14 @@ const App = (props) => {
             try {
                 res = await fetch(`${apiBaseUrl}${apiEndpoints.ingredients}`)
                 if (!res.ok) throw new Error('fetch trouble')
+                if (res.ok) {
+                    let apidata = await res.json()
+                    setIngredients(ingredients => ({ ...ingredients, success: apidata.success, data: apidata.data }))
+                }
             } catch (e) {
                 console.info(`облом - ${e.message}`);
                 setIngredients(ingredients => ({ ...ingredients, error: true }))
             }
-            let _ = await res.json()
-            setIngredients(ingredients => ({ ...ingredients, success: _.success, data: _.data }))
         }
 
         getIngredients();
