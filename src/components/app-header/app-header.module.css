@@ -1,3 +1,4 @@
+/* выделение ссылок по ховеру */
 a {
     position: relative;
     text-decoration: none;
@@ -22,135 +23,88 @@ a :hover::before {
     transform-origin: left;
     transform: scaleX(1);
 }
-
-
-/* это родительский */
-.container_header {
-    flex-shrink: 0;
-    flex-grow: 0;
-    position: absolute;
-    display: flex;
-     
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
-    background-color: var(--background);
-
+/* основные */
+div,
+h2,
+p
+ {
+  margin: 0;
+  padding: 0;
 }
 
-
-.supper_header {
-    flex-shrink: 0;
-    flex-grow: 0;
-    right: auto;
-    top: auto;
-    width: 100%;
-    position: relative;
-    align-self: center;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-}
-
-/* это чайлд контейнер в родительском, вписан с полями по центру */
 .header {
-    width: 100%;
-    background-color: var(--background-alt);
-    align-self: flex-start;
-    justify-content: flex-start;
-    align-items: flex-start;
+  background: var(--background);
+  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04); 
+  
+  text-align: left;
 }
 
-
-.container_header>first-child {
-
-    width: auto;
-}
+ 
 
 
-.header>span {
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-right: initial;
-    white-space: nowrap;
-    vertical-align: middle;
-}
-
-.header>span>svg {
-    vertical-align: middle;
-}
-
-.left {
-    justify-content: center;
-    align-content: flex-end;
-    align-items: flex-start;
-    display: flex;
-}
-
-.right {
-
-    display: flex;
-    z-index: 100;
+.main {
+  margin: 0 auto;
    
+  max-width: 1280px;
 }
 
-.middle {
-    display: flex;
-    width: auto;
+ 
+
+.header__article {
+  background: var(--background);
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-basis: auto;
+  margin: 10px 0 10px;
+ 
 }
+
+.last__article {
+  background: var(--background);
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-basis: auto;
+  margin: 10px 0 10px;
+ 
+}
+
+
 
 .logo {
-    position: inherit;
-    display: inline-block;
-    /* transform: translate(410px, 0); */
-    max-width: 300px;
+  justify-content: center ;
+  flex:0.5;
+  order: -1;
+} 
 
-}
 
-/* honey phony */
+@media screen and (min-width: 1000px) {
+  .first__article, .header__article {
+    flex-direction: row;
+  }
 
-@media only screen and (max-width: 600px) {
-    .header>nav {
-        background-color: var(--background-alt);
-    }
+  .first__article   {
+    flex: 1;
+  }
 
-    .header>span {
-        background-color: var(--background-alt);
-    }
+  .art1{
+    padding-left: calc(10.75%);
+  }
+ 
+  .art2{
+    margin-left: calc(-14%);
+  }
+  
+  .art3{
+    margin-left: calc(-5%);
+    order: initial;
+  }
 
-    .header {
-        background-color: var(--background-alt);
-    }
-
-    .container_header {
-        background-color: var(--background-alt);
-    }
-
-    .header>.logo {
-        display: none;
-    }
-
-    .right,
-    .left,
-    .middle {
-        background-color: var(--background-alt);
-        display: flex;
-        break-after: right;
-        flex-wrap: wrap;
-        white-space: wrap;
-        margin: 0 0 0 0 !important;
-        align-items: flex-start;
-        vertical-align: middle;
-    }
-
-    .midle {
-      /*   transform: translate(-20%, 00%); */
-    }
-
-    .right {
-      /*   transform: translate(-40%, 00%); */
-    }
+  .art4{
+    margin-right: calc(-18%);
+  }
+  
 }

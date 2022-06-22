@@ -1,5 +1,27 @@
-@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-@import-normalize;
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    /* box-sizing: border-box; */
+}
+
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-width: 150px;
+  overflow:hidden;
+}
+
+body {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
 
 
-/* child centered */
+div,
+p
+ {
+  margin: 0;
+  padding: 0;
+}

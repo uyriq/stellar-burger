@@ -3,7 +3,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-
+import BurgerOrder from '../burger-order/burger-order'
 import Styles from './app.module.css';
 
 const apiBaseUrl = 'https://norma.nomoreparties.space/api'
@@ -37,23 +37,35 @@ const App = (props) => {
     console.log(!!ingredients)
     const { success, error, data } = ingredients;
     return !!data && (
-            <div className={Styles.page}>
-                <div className={Styles.supper_container}>
-                    <AppHeader />
-                    {error && <p className={`${Styles.supper_container_inner} text_color_error `}> Что-то пошло не так, не получены данные </p>}
-                    {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
-                    </span>}
-                    {!!success && !error && <div className={`${Styles.supper_container_inner}`}>
-                        <div className={Styles.supper_column}>
+        <div className={Styles.page}>
+
+            <AppHeader />
+
+            {error && <p className={`${Styles.page} text_color_error `}> Что-то пошло не так, не получены данные </p>}
+            {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
+            </span>}
+            {!!success && !error && <div className={`${Styles.container} `}>
+
+                <div className={`${Styles.middle} ${Styles.main} text text_type_main-medium    `}><h2>Соберите бургер!</h2></div>
+                <main className={`${Styles.main} ${Styles.columns}`} >
+                    <section className={`${Styles.column} ${Styles.columns}`} >
+
+                        <div className={`${Styles.article} ${Styles.first__article}`}  >
                             <BurgerIngredients ingredients={data} />
                         </div>
-                        <div className={Styles.supper_column}>
+                    </section>
+
+                    <section className={`${Styles.column} ${Styles.columns}`}>
+                        <div className={`${Styles.article} ${Styles.first__article}`}>
                             <BurgerConstructor ingredients={data} />
                         </div>
-                    </div>
-                    }
-                </div>
+                        <div className={`${Styles.middle} ${Styles.main}  `}><BurgerOrder /></div>
+                    </section>
+                </main>
             </div>
+            }
+
+        </div>
 
     )
 }

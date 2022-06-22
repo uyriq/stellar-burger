@@ -1,85 +1,111 @@
 /* https://yandex-praktikum.github.io/react-developer-burger-ui-components/docs/  */
-/* non local import */
+/* селекторы расположены в порядке использования в app.jsx */
 
 @import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/fonts/fonts.css';
-@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
-@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-
-.spinner {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    display: flex;
-     
-    justify-content: center;
-    align-items: center;
-    left: 0;
-    top: 0;
-   /*  transform: translate(70%, 30%); */
-}
 
 .page {
-    flex-shrink: 0;
-    flex-grow: 0;
-    max-width: 1280px;
-    justify-content: center;
-    align-items: center;
+  margin: 0 auto;
+  max-width: 3840px;
+  /* max-width: 1280px; */
+}
+
+.spinner {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  /*  transform: translate(70%, 30%); */
+}
+
+.container {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+
+}
+
+.main {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.middle {
+  padding-left: 1%;
+}
+
+.column {
+  flex: 1;
+  flex-direction: column;
+}
+
+div,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  padding: 0;
+  text-align: center;
+}
+
+
+
+
+.header__article {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-basis: auto;
+  margin: 10px 0 0 0;
+}
+
+.article {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-basis: auto;
+  margin: 10px;
+}
+
+.article__body {
+  display: flex;
+  flex: 1;
+  flex-basis: auto;
+  flex-direction: column;
+}
+
+.article__content {
+  flex: 1;
+  flex-basis: auto;
+
+}
+
+@media screen and (min-width: 800px) {
+
+  .columns,
+  .column {
     display: flex;
-    flex-wrap: wrap;
-    flex-basis: 320px;
+  }
 }
 
-.supper_container {
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    right: auto;
-    position: relative;
-    display: flex;
-   
-}
+@media screen and (min-width: 1000px) {
 
-.supper_container_inner {
+  .first__article,
+  .header__article {
+    flex-direction: row;
+    margin-bottom: 1%;
+  }
 
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
+  .first__article .article__body {
+    flex: 1;
+  }
 
-}
-
-.supper_column {
-    display: flex;
-    align-self: flex-start;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 50%;
-    flex: 2 1;
-
-}
-
-.supper_phone_content {
-    display: none;
-}
-
-
-/* honey phony */
-@media only screen and(max-width: 600px) {
-
-    .supper_container,
-    .supper_container_inner,
-    .supper_column  {
-        display: flex;
-        break-after: always;
-        flex-wrap: wrap;
-        white-space: wrap;
-        margin: 0 !important;
-        flex-direction: flex-flow;
-        flex: 1;
-    }
-
-    .supper_phone_content {
-        flex: 1;
-
-    }
+  .main__column {
+    flex: 1.5;
+  }
 
 }
