@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import useModal from '../modal/use-modal';
+ 
 import Modal from '../modal/modal';
 import OrderConfirm from '../modal/order-confirm';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from '../burger-ingredients/burger-ingredients.module.css';
-
-/* data && BurgerOrder.defaultProps xaрдкод пока нет ответа от апи  */
+import { useState } from 'react';
+/* BurgerOrder.defaultProps xaрдкод пока нет ответа от апи  */
 
 const OrderPropType = {
     data: PropTypes.shape({
@@ -15,29 +15,25 @@ const OrderPropType = {
     })
 };
 
-const data = {
-    total: '610', numero: '034536', message: ['идентификатор заказа', 'Ваш заказ начали готовить', 'Дождитесь готовности на орбитальной станции']
-}
 
-const BurgerOrder = (data) => {
+const BurgerOrder = props => {
     BurgerOrder.defaultProps = {
         numero: '034536', message: ['идентификатор заказа', 'Ваш заказ начали готовить', 'Дождитесь готовности на орбитальной станции'],
-        total: '610'
-    }
-    const { isShow: show, toggle: _toggleOpen } = useModal();
+        total: '610.2'
+    } 
+    const { numero = '034536', total = '610.1', message, ...restProps } = props;
+   
+    const [show, setShow] = useState(false);
 
     return (
         <div className={`${Styles.currency}  `}>
 
             <div className={`${Styles.order_button} `} >
-                <span className={`${Styles.currency} text text_type_digits-medium `}>{data.total}<CurrencyIcon /> </span> <Button type="primary" size="large" onClick={_toggleOpen}>Оформить заказ</Button>
-                <Modal
-                    isShow={show}
-                    hide={_toggleOpen}
-                    title=""
-                >
-                    <OrderConfirm numero={data.numero} message={data.message} />
-                </Modal>
+                <span className={`${Styles.currency} text text_type_digits-medium `}>{total}<CurrencyIcon /></span>
+                <Button type="primary" size="large" onClick={() => setShow(true)}>Оформить заказ</Button>
+                {show && <Modal title="&nbsp;" onClose={() => setShow(false)} >
+                    <OrderConfirm numero={numero} message={message} />
+                </Modal>}
             </div>
         </div>
     );

@@ -1,6 +1,20 @@
-.box_total {
+.total {
+  /* background-color: rgba(133, 59, 59, 0.9); */
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: flex-start;
+  left: 0%;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0%;
+  width: 100vw;
+  z-index: 1040;  
+}
 
-    align-items: center;
+.box_total {
+    
     background-color: var(--background-element);
     background: #1C1C21;
     border-radius: 40px;
@@ -16,45 +30,30 @@
     padding: 0;
     position: absolute;
     white-space: normal;
-    width: 720px;
+    min-width: 620px;
+    max-width: 800px;
     z-index: 1050;
-    justify-content: center;
+    justify-content:flex-start;
 }
 
 .modal_header {
     display: flex;
-    position: absolute;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-
-    top: 3%;
+    margin-left: 1%;
+    white-space: nowrap;
+    margin-top: 3%;
 }
 
-h4 .modal_header {
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
 
 .modal_button_close {
-    display: flex;
-    background: transparent;
-    border: none;
-    color: var(--text-primary-color);
+    position: absolute;
+    top:5%;
+    right:7%;
+    order:5;
     cursor: pointer;
-    font-size: 36px;
-    font-weight: 500;
-    align-items: flex-end;
-    justify-content: flex-end;
-
 }
 
-span .modal_button_close {
-    cursor: pointer;
-    align-items: flex-end;
-    justify-content: flex-end;
-
-}
 
 .modal_content {
     display: flex;
@@ -66,8 +65,7 @@ span .modal_button_close {
 }
 
 .modal_content img {
-    /* киянка */
-    margin-left: 2.5rem;
+    margin-left: 1rem;
 }
 
 @media screen and (max-width: 767px) {

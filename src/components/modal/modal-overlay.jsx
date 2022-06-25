@@ -3,11 +3,11 @@ import ReactDom from "react-dom";
 import PropTypes from "prop-types";
 import Styles from "./modal-overlay.module.css";
 
-const ModalOverlay = ({ ...props }) => {
+const ModalOverlay = props  => {
    
     return ReactDom.createPortal(
         <>
-            <div className={Styles.modal_overlay}>{props.children}</div>
+            <div className={Styles.modal_overlay} onClick={props.onClose}>{props.children}</div>
         </>,
         document.getElementById("root_modal_overlay")
     );

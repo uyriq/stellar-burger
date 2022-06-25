@@ -46,7 +46,7 @@ const App = (props) => {
             </span>}
             {!!success && !error && <div className={`${Styles.container} `}>
 
-                <div className={`${Styles.middle} ${Styles.main} text text_type_main-medium    `}><h2>Соберите бургер!</h2></div>
+                <div className={`${Styles.middle} ${Styles.main} text text_type_main-medium    `}><h2>Соберите бургер</h2></div>
                 <main className={`${Styles.main} ${Styles.columns}`} >
                     <section className={`${Styles.column} ${Styles.columns}`} >
 

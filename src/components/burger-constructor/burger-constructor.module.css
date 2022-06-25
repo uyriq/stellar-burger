@@ -8,20 +8,16 @@
     display: flex;
     justify-content: center;
     flex: 1;
-    
 }
 
 
 
 .constructor>.list>* {
     flex: 0 auto;
-    
-    
 }
 
 .constructor  span {
     margin-right: 0 ;
-    
 }
 
 .list {   
@@ -33,11 +29,9 @@
     max-height: 54vh;
     overflow-y: scroll;
     overflow-x: hidden;
-    
 }
  
 .list-item {
-    
     flex-grow: 0;
     flex-shrink: 0;
     display: flex;
@@ -53,12 +47,10 @@
 
 .list-item:last-child {
     margin-bottom: 0.5%;
-  
 }
 
 .list-item:first-child {
     margin-top: 0.5%;
-  
 }
 
 .currency {
