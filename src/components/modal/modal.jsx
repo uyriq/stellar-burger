@@ -5,11 +5,20 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import Styles from "./modal.module.css";
 
+const ModalPropTypes={
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired,
+    onClose: PropTypes.func.isRequired,
+    title: PropTypes.string
+}
+
 const Modal = props => {
     const ref = useRef({})
 
     const closeOnEscapeKeyDown = e => {
-        console.log('1')
+        
         if ((e.charCode || e.keyCode) === 27) {
             props.onClose();
         }
@@ -19,8 +28,6 @@ const Modal = props => {
     useEffect(() => {
         const handler = (event) => {
             const { current: target } = ref;
-            console.log(outsideclick)
-            console.dir(target); //div.modal_total__UpXrq
             if ( !target.contains(event.target)) { 
             outsideclick+=1;
         }
@@ -38,23 +45,22 @@ const Modal = props => {
         };
     }, []);
 
-    Modal.propTypes = {
-    };
-
+    Modal.propTypes = ModalPropTypes;
+    const {onClose, title='', children} = props
     return (
             <div ref={ref} className={Styles.total} >
         <ModalOverlay >
                 <div className={Styles.box_total} onClick={e => e.stopPropagation()}>
                     <div className={`${Styles.modal_header} text `}>
                         <div className={` ${Styles.modal_button_close} `}>
-                            <CloseIcon type="button" onClick={props.onClose}></CloseIcon>
+                            <CloseIcon type="button" onClick={onClose}></CloseIcon>
                         </div>
-                        <h4 className="text text_type_main-large"> {props.title}
+                        <h4 className="text text_type_main-large"> {title}
 
                         </h4>
                     </div>
                     <div className={Styles.modal_content}>
-                        {props.children}
+                        {children}
                     </div>
                 </div>
         </ModalOverlay>

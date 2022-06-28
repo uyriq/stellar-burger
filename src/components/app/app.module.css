@@ -1,11 +1,11 @@
 /* https://yandex-praktikum.github.io/react-developer-burger-ui-components/docs/  */
-/* селекторы расположены в порядке использования в app.jsx */
+ 
 
 @import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/fonts/fonts.css';
 
 .page {
   margin: 0 auto;
-  max-width: 3840px;
+  max-width: 4000px;
   /* max-width: 1280px; */
 }
 
@@ -26,7 +26,8 @@
 }
 
 .main {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 1280px;
 }
 
@@ -40,7 +41,7 @@
   flex-direction: column;
 }
 
-div,
+div,h2,
 p {
   margin: 0;
   padding: 0;
@@ -50,9 +51,6 @@ p {
   padding: 0;
   text-align: center;
 }
-
-
-
 
 .header__article {
   display: flex;
@@ -67,13 +65,11 @@ p {
   flex: 1;
   flex-direction: column;
   flex-basis: auto;
-  margin: 10px;
+  justify-items: center;
+  margin: 10px 0 0 0;
 }
 
-
-
 @media screen and (min-width: 800px) {
-
   .columns,
   .column {
     display: flex;
@@ -81,11 +77,19 @@ p {
 }
 
 @media screen and (min-width: 1000px) {
+  .main {
+    width: 4096px;
+  }
 
+  .main section:last-child {
+    margin-top: .1%;
+  }
   .first__article,
   .header__article {
     flex-direction: row;
     margin-bottom: 1%;
+    justify-items: center;
+    margin: 10px 0 0 0;
   }
 
   .first__article   {

@@ -24,7 +24,7 @@ const BurgerIngredients = ({ ingredients }) => {
     function scrollIntoView(type) {
         // решение  https://stackoverflow.com/questions/64188338/scrolling-components-into-view-with-react-with-useref
         // также два действия на OnСlick без промежуточной функции по https://stackoverflow.com/questions/26069238/call-multiple-functions-onclick-reactjs
-        console.dir(pageRefs.current)
+          
         pageRefs.current[type].scrollIntoView({ behavior: "smooth" });
     }
 

@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import Styles from "./modal-overlay.module.css";
 
 const ModalOverlay = props  => {
-   
+   const {children} = props
     return ReactDom.createPortal(
         <>
-            <div className={Styles.modal_overlay} onClick={props.onClose}>{props.children}</div>
+            <div className={Styles.modal_overlay} >{children}</div>
         </>,
         document.getElementById("root_modal_overlay")
     );

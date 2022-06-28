@@ -1,30 +1,32 @@
 import PropTypes from 'prop-types';
- 
 import Modal from '../modal/modal';
 import OrderConfirm from '../modal/order-confirm';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from '../burger-ingredients/burger-ingredients.module.css';
 import { useState } from 'react';
+
 /* BurgerOrder.defaultProps xaрдкод пока нет ответа от апи  */
 
-const OrderPropType = {
-    data: PropTypes.shape({
+export const OrderPropType =  PropTypes.shape({
         total: PropTypes.string.isRequired,
         numero: PropTypes.string.isRequired,
         message: PropTypes.array.isRequired
-    })
-};
+    }).isRequired;
 
 
 const BurgerOrder = props => {
     BurgerOrder.defaultProps = {
-        numero: '034536', message: ['идентификатор заказа', 'Ваш заказ начали готовить', 'Дождитесь готовности на орбитальной станции'],
+        numero: '034536',
+        message: ['идентификатор заказа', 
+        'Ваш заказ начали готовить', 
+        'Дождитесь готовности на орбитальной станции'],
         total: '610.2'
     } 
-    const { numero = '034536', total = '610.1', message, ...restProps } = props;
+    const { numero , total , message } = props;
    
     const [show, setShow] = useState(false);
-
+    
+    BurgerOrder.propTypes = OrderPropType
     return (
         <div className={`${Styles.currency}  `}>
 
@@ -38,7 +40,4 @@ const BurgerOrder = props => {
         </div>
     );
 }
-
-BurgerOrder.propTypes = OrderPropType
-
 export default BurgerOrder

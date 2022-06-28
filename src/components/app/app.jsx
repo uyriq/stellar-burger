@@ -5,11 +5,10 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerOrder from '../burger-order/burger-order'
 import Styles from './app.module.css';
-
 const apiBaseUrl = 'https://norma.nomoreparties.space/api'
 const apiEndpoints = { ingredients: '/ingredients' }
 
-const App = (props) => {
+const App = () => {
     const [ingredients, setIngredients] = useState({
         success: false,
         error: false,
@@ -34,7 +33,7 @@ const App = (props) => {
 
         getIngredients();
     }, []);
-    console.log(!!ingredients)
+    
     const { success, error, data } = ingredients;
     return !!data && (
         <div className={Styles.page}>

@@ -1,10 +1,24 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import Style from './card.module.css'
+
 
 //"proteins":44,"fat":26,"carbohydrates":85,"calories":643,
 
+export const CardPropTypes = PropTypes.shape({
+        image: PropTypes.string.isRequired,
+        image_mobile: PropTypes.string,
+        image_large: PropTypes.string,
+        name:  PropTypes.string.isRequired,
+        calories: PropTypes.string.isRequired,
+        proteins: PropTypes.string.isRequired,
+        fat: PropTypes.string.isRequired,
+        carbohydrates: PropTypes.string.isRequired,
+    });
+
+
 const Card = props => {
-    console.log(props)
+    Card.propTypes =  CardPropTypes
     return (
         <div className={` ${Style.box} `} >
             <div className={` ${Style.div1} `}>
@@ -13,7 +27,7 @@ const Card = props => {
             <div className={` ${Style.div2}  `} >
                 <p className=' text_type_main-medium text'>{`${props.name}`}</p>
             </div>
-            <div className={` ${Style.div3} text  text_color_inactive text_type_main-small  `}> Калории, ккал </div>
+            <div className={` ${Style.div3}   text  text_color_inactive text_type_main-small  `}> Калории, ккал </div>
             <div className={` ${Style.div4}   text_type_digits-default text_color_inactive  `}> {`${props.calories}`} </div>
             <div className={` ${Style.div5}   text_color_inactive text_type_main-small  `}> Белки, г </div>
             <div className={` ${Style.div6}   text_type_digits-default text_color_inactive  `}> {`${props.proteins}`} </div>
@@ -24,4 +38,5 @@ const Card = props => {
         </div>
     )
 }
+
 export default Card

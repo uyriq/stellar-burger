@@ -3,7 +3,7 @@
 }
 
 .ingredients {
-    width: 600px;
+     
     height: calc(100vh - 236px);
     overflow-y: scroll;
 }
