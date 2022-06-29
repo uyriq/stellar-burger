@@ -4,6 +4,7 @@ import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerOrder from '../burger-order/burger-order'
+import useWindowDimensions from '../utils/use-windowdimensions';
 import Styles from './app.module.css';
 const apiBaseUrl = 'https://norma.nomoreparties.space/api'
 const apiEndpoints = { ingredients: '/ingredients' }
@@ -14,12 +15,12 @@ const App = () => {
         error: false,
         data: []
     });
-
+    const { width } = useWindowDimensions();
     useEffect(() => {
-        
+
         const getIngredients = async () => {
             try {
-               const res = await fetch(`${apiBaseUrl}${apiEndpoints.ingredients}`)
+                const res = await fetch(`${apiBaseUrl}${apiEndpoints.ingredients}`)
                 if (!res.ok) throw new Error('fetch trouble')
                 if (res.ok) {
                     const apidata = await res.json()
@@ -33,21 +34,23 @@ const App = () => {
 
         getIngredients();
     }, []);
-    
+
     const { success, error, data } = ingredients;
     return !!data && (
         <div className={Styles.page}>
-
-            <AppHeader />
-
             {error && <p className={`${Styles.page} text_color_error `}> Что-то пошло не так, не получены данные </p>}
             {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
             </span>}
             {!!success && !error && <div className={`${Styles.container} `}>
-
-                <div className={`${Styles.middle} ${Styles.main} text text_type_main-medium    `}><h2>Соберите бургер</h2></div>
-                <main className={`${Styles.main} ${Styles.columns}`} >
+                <AppHeader />
+                <main className={`${Styles.main} ${Styles.columns}`}
+                    style={{
+                        left: 0,
+                        transform: `translateX(${(32 - width / 128) * (width > 1279)}px)`,
+                    }}//  смещение 0  если < 1279 (меньше - это смарт экраны)
+                >
                     <section className={`${Styles.column} ${Styles.columns}`} >
+                        <h2 className='text text_type_main-large'>Соберите бургер</h2>
 
                         <div className={`${Styles.article} ${Styles.first__article}`}  >
                             <BurgerIngredients ingredients={data} />
@@ -58,14 +61,12 @@ const App = () => {
                         <div className={`${Styles.article} ${Styles.first__article}`}>
                             <BurgerConstructor ingredients={data} />
                         </div>
-                        <div className={`${Styles.middle} ${Styles.main}  `}><BurgerOrder /></div>
+                        <div className={`${Styles.middle}  ${Styles.article}  `}><BurgerOrder /></div>
                     </section>
                 </main>
             </div>
             }
-
         </div>
-
     )
 }
 

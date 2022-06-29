@@ -1,12 +1,16 @@
 /* https://yandex-praktikum.github.io/react-developer-burger-ui-components/docs/  */
- 
+
 
 @import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/fonts/fonts.css';
 
 .page {
   margin: 0 auto;
-  max-width: 4000px;
-  /* max-width: 1280px; */
+  max-width: 12800px;
+}
+
+.main .columns section {
+  margin-right: 40px;
+  /*гап между колонками*/
 }
 
 .spinner {
@@ -23,17 +27,21 @@
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.4;
+  justify-content: center;
+
 }
 
 .main {
   margin-left: auto;
   margin-right: auto;
   max-width: 1280px;
+
 }
 
 .middle {
-  padding-left: 1%;
+  align-self: center;
   margin-top: 1vh;
+
 }
 
 .column {
@@ -41,7 +49,8 @@
   flex-direction: column;
 }
 
-div,h2,
+div,
+h2,
 p {
   margin: 0;
   padding: 0;
@@ -70,6 +79,7 @@ p {
 }
 
 @media screen and (min-width: 800px) {
+
   .columns,
   .column {
     display: flex;
@@ -84,6 +94,7 @@ p {
   .main section:last-child {
     margin-top: .1%;
   }
+
   .first__article,
   .header__article {
     flex-direction: row;
@@ -92,7 +103,7 @@ p {
     margin: 10px 0 0 0;
   }
 
-  .first__article   {
+  .first__article {
     flex: 1;
   }
 
