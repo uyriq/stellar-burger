@@ -16,13 +16,13 @@ const App = () => {
     });
 
     useEffect(() => {
-        let res
+        
         const getIngredients = async () => {
             try {
-                res = await fetch(`${apiBaseUrl}${apiEndpoints.ingredients}`)
+               const res = await fetch(`${apiBaseUrl}${apiEndpoints.ingredients}`)
                 if (!res.ok) throw new Error('fetch trouble')
                 if (res.ok) {
-                    let apidata = await res.json()
+                    const apidata = await res.json()
                     setIngredients(ingredients => ({ ...ingredients, success: apidata.success, data: apidata.data }))
                 }
             } catch (e) {
