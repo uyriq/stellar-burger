@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ingredientPropType } from '../utils/prop-types'
-import { ConstructorElement, DragIcon, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, DragIcon,} from '@ya.praktikum/react-developer-burger-ui-components';
 import Styles from './burger-constructor.module.css';
 
 const ingredientsList = (array) => {
@@ -17,7 +16,6 @@ const ingredientsList = (array) => {
     )
     );
 }
-
 
 const BurgerConstructor = ({ ingredients }) => {
     const notbunsIngredients = ingredients.filter(item => item.type !== 'bun');
@@ -51,8 +49,6 @@ const BurgerConstructor = ({ ingredients }) => {
     );
 }
 
-BurgerConstructor.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
-}
+BurgerConstructor.propTypes = { ingredientPropType }.isRequired
 
 export default BurgerConstructor;

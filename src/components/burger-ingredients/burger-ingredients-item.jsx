@@ -3,7 +3,6 @@ import Styles from './burger-ingredients-item.module.css';
 import Modal from '../modal/modal';
 import Card from '../modal/card';
 import { useState } from "react";
-import PropTypes from 'prop-types';
 import { ingredientPropType } from '../utils/prop-types'
 
 const BurgerIngredientsItem = ({ ingredient }) => {
@@ -31,7 +30,7 @@ const BurgerIngredientsItem = ({ ingredient }) => {
     )
 }
 
-BurgerIngredientsItem.propTypes =  PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
-
-
+ 
+BurgerIngredientsItem.propTypes =  {ingredientPropType}.isRequired
+ 
 export default BurgerIngredientsItem;

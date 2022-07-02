@@ -1,24 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types';
 import Style from './card.module.css'
-
-
-//"proteins":44,"fat":26,"carbohydrates":85,"calories":643,
-
-export const CardPropTypes = PropTypes.shape({
-        image: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string,
-        image_large: PropTypes.string,
-        name:  PropTypes.string.isRequired,
-        calories: PropTypes.string.isRequired,
-        proteins: PropTypes.string.isRequired,
-        fat: PropTypes.string.isRequired,
-        carbohydrates: PropTypes.string.isRequired,
-    });
+import { ingredientPropType } from '../utils/prop-types'
 
 
 const Card = props => {
-    Card.propTypes =  CardPropTypes
     return (
         <div className={` ${Style.box} `} >
             <div className={` ${Style.div1} `}>
@@ -39,4 +24,6 @@ const Card = props => {
     )
 }
 
+Card.propTypes =  {ingredientPropType}.isRequired
+ 
 export default Card

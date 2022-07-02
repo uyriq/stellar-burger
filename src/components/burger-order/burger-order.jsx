@@ -7,13 +7,6 @@ import { useState } from 'react';
 
 /* BurgerOrder.defaultProps xaрдкод пока нет ответа от апи  */
 
-export const OrderPropType =  PropTypes.shape({
-        total: PropTypes.string.isRequired,
-        numero: PropTypes.string.isRequired,
-        message: PropTypes.array.isRequired
-    }).isRequired;
-
-
 const BurgerOrder = props => {
     BurgerOrder.defaultProps = {
         numero: '034536',
@@ -26,7 +19,6 @@ const BurgerOrder = props => {
    
     const [show, setShow] = useState(false);
     
-    BurgerOrder.propTypes = OrderPropType
     return (
         <div className={`${Styles.currency}  `}>
 
@@ -40,4 +32,12 @@ const BurgerOrder = props => {
         </div>
     );
 }
+
+const OrderPropType =  PropTypes.shape({
+    total: PropTypes.string.isRequired,
+    numero: PropTypes.string.isRequired,
+    message: PropTypes.array.isRequired
+}).isRequired;
+
+BurgerOrder.propTypes = {OrderPropType}.isRequired
 export default BurgerOrder

@@ -2,11 +2,9 @@ import React from 'react';
 import useWindowDimensions from '../utils/use-windowdimensions'
 import { Logo, BurgerIcon, ListIcon, ProfileIcon, } from "@ya.praktikum/react-developer-burger-ui-components"
 import Styles from './app-header.module.css';
-import { getParseTreeNode } from 'typescript';
 
 const AppHeader = () => {
     const { width } = useWindowDimensions();
-    console.log(width)
     return (
         <header className={`${Styles.header}  `}
         >

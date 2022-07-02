@@ -2,7 +2,6 @@ import React, { useMemo, useRef } from 'react';
 import BurgerIngredientsItem from './burger-ingredients-item';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from './burger-ingredients.module.css';
-import PropTypes from 'prop-types';
 import { ingredientPropType } from '../utils/prop-types'
 
 
@@ -83,8 +82,6 @@ const BurgerIngredients = ({ ingredients }) => {
     )
 }
 
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
-}
+BurgerIngredients.propTypes =  {ingredientPropType}.isRequired
 
 export default BurgerIngredients;

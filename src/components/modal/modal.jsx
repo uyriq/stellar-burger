@@ -5,15 +5,6 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import Styles from "./modal.module.css";
 
-const ModalPropTypes={
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]).isRequired,
-    onClose: PropTypes.func.isRequired,
-    title: PropTypes.string
-}
-
 const Modal = props => {
     const ref = useRef({})
 
@@ -67,5 +58,16 @@ const Modal = props => {
             </div>
     )
 }
+
+const ModalPropTypes={
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired,
+    onClose: PropTypes.func.isRequired,
+    title: PropTypes.string
+}
+
+Modal.propTypes={ModalPropTypes}.isRequired
 
 export default Modal;

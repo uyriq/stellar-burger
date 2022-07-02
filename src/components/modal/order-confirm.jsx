@@ -2,13 +2,11 @@ import React from 'react'
 import Style from './order-confirm.module.css'
 import { ReactComponent as DoneLogo } from '../../images/done.svg'
 import PropTypes from 'prop-types';
-import OrderPropType from '../burger-order/burger-order'
 
 const OrderConfirm = props => {
-    const OrderConfirmPropTypes = {...{onClose: PropTypes.func.isRequired}, ...OrderPropType}
-     
+
     const { numero,  message, onClose  } = props;
-    OrderConfirm.propTypes = OrderConfirmPropTypes
+
     return (
          
             <div className={` ${Style.order_card} `} onClick={onClose} >
@@ -26,5 +24,14 @@ const OrderConfirm = props => {
     )
 
 }
+
+const OrderPropType =  PropTypes.shape({
+    total: PropTypes.string.isRequired,
+    numero: PropTypes.string.isRequired,
+    message: PropTypes.array.isRequired
+}).isRequired;
+
+const OrderConfirmPropTypes = {...{onClose: PropTypes.func.isRequired}, ...OrderPropType}
+OrderConfirm.propTypes = {OrderConfirmPropTypes}.isRequired
 
 export default OrderConfirm
