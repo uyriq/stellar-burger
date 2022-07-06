@@ -1,4 +1,5 @@
-import React, {  useEffect, useRef  } from "react"; 
+import React, { useEffect } from "react";
+import ReactDom from "react-dom";
 import ModalOverlay from "./modal-overlay";
 import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -6,28 +7,14 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./modal.module.css";
 
 const Modal = props => {
-    const ref = useRef({})
+    const portal = document.getElementById("root_modal_overlay")
 
     const closeOnEscapeKeyDown = e => {
-        
-        if (e.key === 'Escape') {  
+
+        if (e.key === 'Escape') {
             props.onClose();
         }
     };
-    
-    let outsideclick=0;
-    useEffect(() => {
-        const handler = (event) => {
-            const { current: target } = ref;
-            if ( !target.contains(event.target)) { 
-            outsideclick+=1;
-        }
-            if (outsideclick>1)  props.onClose();
-        };
-        document.addEventListener('click', handler);
-        return () => document.removeEventListener('click', handler);
-    }, [ref]);
-
 
     useEffect(() => {
         document.body.addEventListener("keydown", closeOnEscapeKeyDown);
@@ -36,30 +23,41 @@ const Modal = props => {
         };
     }, []);
 
-    Modal.propTypes = ModalPropTypes;
-    const {onClose, title='', children} = props
-    return (
-            <div ref={ref} className={Styles.total} >
-        <ModalOverlay >
-                <div className={Styles.box_total} onClick={e => e.stopPropagation()}>
-                    <div className={`${Styles.modal_header} text `}>
-                        <div className={` ${Styles.modal_button_close} `}>
-                            <CloseIcon type="button" onClick={onClose}></CloseIcon>
-                        </div>
-                        <h4 className="text text_type_main-large"> {title}
 
-                        </h4>
+    const { onClose, title = '', children } = props
+
+    const onOverlayClose = (e) => {
+        if (e.target === e.currentTarget) { onClose() }
+    }
+
+    return (
+
+        ReactDom.createPortal(
+
+            <div className={Styles.total} >
+                <ModalOverlay onClick={onOverlayClose}>
+                    <div className={Styles.box_total} onClick={e => e.stopPropagation()}>
+                        <div className={`${Styles.modal_header} text `}>
+                            <div className={` ${Styles.modal_button_close} `}>
+                                <CloseIcon type="button" onClick={onClose}></CloseIcon>
+                            </div>
+                            <h4 className="text text_type_main-large"> {title}
+                            </h4>
+                        </div>
+                        <div className={Styles.modal_content}>
+                            {children}
+                        </div>
                     </div>
-                    <div className={Styles.modal_content}>
-                        {children}
-                    </div>
-                </div>
-        </ModalOverlay>
-            </div>
+                </ModalOverlay>
+            </div>,
+            portal
+        )
+
     )
+
 }
 
-const ModalPropTypes={
+const ModalPropTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
@@ -68,6 +66,6 @@ const ModalPropTypes={
     title: PropTypes.string
 }
 
-Modal.propTypes={ModalPropTypes}.isRequired
+Modal.propTypes = { ModalPropTypes }.isRequired
 
 export default Modal;

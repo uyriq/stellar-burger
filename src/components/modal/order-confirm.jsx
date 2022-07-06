@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 const OrderConfirm = props => {
 
-    const { numero,  message, onClose  } = props;
+    const { numero,  message   } = props;
 
     return (
          
-            <div className={` ${Style.order_card} `} onClick={onClose} >
+            <div className={` ${Style.order_card} `}  >
               
                 <div className={` ${Style.first} `}>
                     <p className=' text text_type_digits-large '>{numero}</p>

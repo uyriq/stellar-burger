@@ -4,8 +4,9 @@ import { ingredientPropType } from '../utils/prop-types'
 
 
 const Card = props => {
+    
     return (
-        <div className={` ${Style.box} `} >
+        <div className={` ${Style.box} `}  >
             <div className={` ${Style.div1} `}>
                 <img alt={props.name} srcSet={`${props.image_large} 2x  ${props.image} 1.5x ${props.image_mobile} 1x `} src={props.image_large} />
             </div>

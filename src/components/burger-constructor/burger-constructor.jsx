@@ -23,7 +23,7 @@ const BurgerConstructor = ({ ingredients }) => {
     const randombun = Math.floor(bunsIngredients.length * Math.random())
 
     return (
-        <section className={`${Styles.constructor} `}>
+        <section className={`${Styles.constructor} `} >
             <>
                 <ConstructorElement
                     type='top'
@@ -31,7 +31,11 @@ const BurgerConstructor = ({ ingredients }) => {
                     text={`${bunsIngredients[randombun].name} (верх)`}
                     price={bunsIngredients[randombun].price}
                     thumbnail={bunsIngredients[randombun].image}
-                />
+                    style={{
+                        backgroundColor: "green"
+                    }}
+               
+               />
             </>
             <ul className={`${Styles.list} custom-scroll `}>
                 {ingredientsList(notbunsIngredients)}
