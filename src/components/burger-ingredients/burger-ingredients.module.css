@@ -1,0 +1,32 @@
+.tabs {
+    display: flex;
+}
+
+.ingredients {
+     
+    height: calc(100vh - 236px);
+    overflow-y: scroll;
+}
+
+.ingredients-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    list-style-type: none;
+}
+
+.spec_modal {
+    background-color: var(--background-alt);
+}
+
+.buns {
+    background-color: var(--background-alt);
+}
+
+.sauces {
+    background-color: var(--background-alt);
+}
+
+.main {
+    background-color: var(--background-alt);
+}

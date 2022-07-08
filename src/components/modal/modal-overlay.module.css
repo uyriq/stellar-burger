@@ -1,0 +1,14 @@
+.modal_overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0%;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0%;
+  width: 100vw;
+  z-index: 1040;
+}

@@ -1,0 +1,63 @@
+
+.order_card {
+    margin-top: -20%;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    margin-top:-12%;
+    grid-template-areas:
+        "first"
+        "n2"
+        "n3"
+        "n4"
+        "n5"
+        "n6";
+}
+
+.first {
+    margin-top: auto;
+    margin-bottom: -8em;
+    grid-area: first;
+    display: grid;
+    justify-content: center;
+}
+
+.n2 {
+    grid-area: n2;
+    display: grid;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: -4em;
+    grid-area: n2;
+}
+
+.n3 {
+    position: relative;
+    grid-area: n3;
+    display: grid;
+    justify-content: center;
+    top: 5.5em;
+}
+
+.n4 {
+    position: relative;
+    grid-area: n4;
+    display: grid;
+    justify-content: center;
+    top: 5em;
+}
+
+.n5 {
+    grid-area: n5;
+    display: grid;
+    justify-content: center;
+}
+
+.n6 {
+    grid-area: n6;
+    display: grid;
+    justify-content: center;
+}

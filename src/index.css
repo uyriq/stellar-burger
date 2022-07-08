@@ -1,13 +1,27 @@
-@font-face {
-  font-family: 'Suisse';
-  src: url('./fonts/suisse.woff') format('woff');
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    /* box-sizing: border-box; */
+}
+
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-width: 150px;
+  overflow:hidden;
 }
 
 body {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+
+div,
+p
+ {
   margin: 0;
-  font-family: 'Suisse', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
