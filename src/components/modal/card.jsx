@@ -4,11 +4,11 @@ import { ingredientPropType } from '../utils/prop-types'
 
 
 const Card = props => {
-    
+
     return (
         <div className={` ${Style.box} `}  >
             <div className={` ${Style.div1} `}>
-                <img alt={props.name} srcSet={`${props.image_large} 2x  ${props.image} 1.5x ${props.image_mobile} 1x `} src={props.image_large} />
+                <img srcSet={` ${props.image_mobile} .2x,  ${props.image} 0.5x, ${props.image_large} 1x `} alt={props.name} src={props.image_large} />
             </div>
             <div className={` ${Style.div2}  `} >
                 <p className=' text_type_main-medium text'>{`${props.name}`}</p>
@@ -25,6 +25,6 @@ const Card = props => {
     )
 }
 
-Card.propTypes =  {ingredientPropType}.isRequired
- 
+Card.propTypes = { ingredientPropType }.isRequired
+
 export default Card

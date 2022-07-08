@@ -26,12 +26,11 @@ const OrderConfirm = props => {
 }
 
 const OrderPropType =  PropTypes.shape({
-    total: PropTypes.string.isRequired,
     numero: PropTypes.string.isRequired,
     message: PropTypes.array.isRequired
 }).isRequired;
 
-const OrderConfirmPropTypes = {...{onClose: PropTypes.func.isRequired}, ...OrderPropType}
-OrderConfirm.propTypes = {OrderConfirmPropTypes}.isRequired
+
+OrderConfirm.propTypes = {OrderPropType}.isRequired
 
 export default OrderConfirm
