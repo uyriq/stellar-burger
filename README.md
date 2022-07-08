@@ -1,3 +1,3 @@
-## branch  react-developer-burger-ui-components
+## branch  main
 
 ### Проект.  
