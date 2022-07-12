@@ -5,6 +5,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerOrder from '../burger-order/burger-order'
 import useWindowDimensions from '../utils/use-windowdimensions';
+import { TotalPriceContext, OrderContext } from "../../services/appContext";
 import Styles from './app.module.css';
 const apiBaseUrl = 'https://norma.nomoreparties.space/api'
 const apiEndpoints = { ingredients: '/ingredients' }
@@ -15,6 +16,10 @@ const App = () => {
         error: false,
         data: []
     });
+
+    const [totalPrice, setTotalPrice] = useState([])
+    const [orderData, setOrderData] = useState([]);
+
     const { width } = useWindowDimensions();
     useEffect(() => {
 
@@ -38,6 +43,7 @@ const App = () => {
     const { success, error, data } = ingredients;
     return !!data && (
         <div className={Styles.page}>
+
             {error && <p className={`${Styles.page} text_color_error `}> Что-то пошло не так, не получены данные </p>}
             {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
             </span>}
@@ -51,18 +57,22 @@ const App = () => {
                 >
                     <section className={`${Styles.column} ${Styles.columns}`} >
                         <h2 className='text text_type_main-large'>Соберите бургер</h2>
-
                         <div className={`${Styles.article} ${Styles.first__article}`}  >
                             <BurgerIngredients ingredients={data} />
                         </div>
                     </section>
-
-                    <section className={`${Styles.column} ${Styles.columns}`}>
-                        <div className={`${Styles.article} ${Styles.first__article}`}>
-                            <BurgerConstructor ingredients={data} />
-                        </div>
-                        <div className={`${Styles.middle}  ${Styles.article}  `}><BurgerOrder /></div>
-                    </section>
+                    <div>
+                        <TotalPriceContext.Provider value={{ totalPrice, setTotalPrice }}>
+                            <OrderContext.Provider value={{ orderData, setOrderData }}>
+                                <section className={`${Styles.column} ${Styles.columns}`}>
+                                    <div className={`${Styles.article} ${Styles.first__article}`}>
+                                        <BurgerConstructor ingredients={data} />
+                                    </div>
+                                    <div className={`${Styles.middle}  ${Styles.article}  `}><BurgerOrder /></div>
+                                </section>
+                            </OrderContext.Provider>
+                        </TotalPriceContext.Provider>
+                    </div>
                 </main>
             </div>
             }
