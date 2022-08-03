@@ -2,19 +2,22 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { ingredientPropType } from '../utils/prop-types'
 import { TotalPriceContext, OrderContext } from '../../services/appContext';
 import { ConstructorElement, DragIcon, } from '@ya.praktikum/react-developer-burger-ui-components';
+import { DataContext } from "../../services/appContext";
 import Styles from './burger-constructor.module.css';
 
 // React component names must start with an uppercase letter
 
-const ingredientsList = (array) => {
+const ingredientsList = ( array ) => {
+    let newarr=Array.from(array)
 
-    let list_between_buns = array.map(item => (
+    let list_between_buns = newarr.map(item => (
         <li key={item._id} className={`${Styles['list-item']} `}>
             <DragIcon />
             <ConstructorElement
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}
+
             />
         </li>
     )
@@ -58,14 +61,14 @@ let buns = createBunIterator();
 let initialState = buns.next();
 let onebun;
 
-const BurgerConstructor = ({ ingredients }) => {
+const BurgerConstructor = ( ) => {
     const { setOrderData, orderData } = useContext(OrderContext);
     const { setTotalPrice, totalPrice } = useContext(TotalPriceContext);
-    const notbunsIngredients = ingredients.filter(item => item.type !== 'bun');
-    const bunsIngredients = ingredients.filter(item => item.type === 'bun');
-    const list_between_buns = ingredientsList(notbunsIngredients)
+    const { data, dataDispatcher } =  useContext(DataContext);
+    const notbunsIngredients = data.filter(item => item.type !== 'bun');
+    const bunsIngredients = data.filter(item => item.type === 'bun');
+    // const list_between_buns = ingredientsList(notbunsIngredients)
     const [bunState, setBunState] = useState(initialState);
-
     function resetBunSwitch() {
         buns = createBunIterator(bunsIngredients);
         setBunState(initialState);
@@ -93,11 +96,11 @@ const BurgerConstructor = ({ ingredients }) => {
         let newarr = array.filter(item => { return !bunsIngredients.includes(item) })
         newarr.unshift(bun);
         newarr.push(bun);
-        let data = newarr.map((item) => item._id);
+        let ddata = newarr.map((item) => item._id);
         let result = (newarr.reduce(function (acc, orderdata) { return acc + orderdata.price; }, 0));
-        console.log('\x1b[33m  почему цена при первичном рендере считается неправильно? \x1b[0m')
+        console.log('\x1b[33m  OK \x1b[0m')
         console.log(`цена \n ${result}`);
-        return [{ "ingredients": data }, result]
+        return [{ "ingredients": ddata }, result]
     }
     , [])
 
@@ -111,12 +114,18 @@ const BurgerConstructor = ({ ingredients }) => {
         // Код выполнится только при первичном монтировании
         console.log('Привет! Я примонтировался');
 
-        const [data, cost] = makeOrderData(notbunsIngredients, onebun)
+        const [ddata, cost] = makeOrderData(notbunsIngredients, onebun)
         setTotalPrice(cost);
-        setOrderData(data);
-        console.log(`- ${data.ingredients} - , \n ${cost}`);
+        setOrderData(ddata);
+        console.log(`- ${ddata.ingredients} - , \n ${cost}`);
         return
     }, [bunState])
+
+    const handleClose =(item, state=data) => () => {
+        console.log(`will handle close on - ${item._id}` )
+        dataDispatcher({state: state, type: "DELETE", payload: item });
+      };
+
 
     return (
         <section className={`${Styles.constructor} `}>
@@ -130,7 +139,19 @@ const BurgerConstructor = ({ ingredients }) => {
                 />
             </div>
             <ul className={`${Styles.list} custom-scroll `}>
-                {list_between_buns}
+            {data.filter((item) => item.type !== "bun")
+            .map((item) => (
+              <li key={item._id} className={`${Styles['list-item']} `} >
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={item.name}
+                  thumbnail={item.image}
+                  price={item.price}
+                  isLocked={false}
+                  handleClose={handleClose(item)}
+                />
+              </li>
+            ))}
             </ul>
             <>
                 <ConstructorElement
