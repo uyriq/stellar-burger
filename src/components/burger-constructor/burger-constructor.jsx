@@ -7,23 +7,6 @@ import Styles from './burger-constructor.module.css';
 
 // React component names must start with an uppercase letter
 
-const ingredientsList = ( array ) => {
-    let newarr=Array.from(array)
-
-    let list_between_buns = newarr.map(item => (
-        <li key={item._id} className={`${Styles['list-item']} `}>
-            <DragIcon />
-            <ConstructorElement
-                text={item.name}
-                price={item.price}
-                thumbnail={item.image}
-
-            />
-        </li>
-    )
-    );
-    return list_between_buns;
-}
 
 function* createBunIterator(buns = [{
     "_id": "60d3b41abdacab0026a733c6",
@@ -64,10 +47,10 @@ let onebun;
 const BurgerConstructor = ( ) => {
     const { setOrderData, orderData } = useContext(OrderContext);
     const { setTotalPrice, totalPrice } = useContext(TotalPriceContext);
-    const { data, dataDispatcher } =  useContext(DataContext);
-    const notbunsIngredients = data.filter(item => item.type !== 'bun');
-    const bunsIngredients = data.filter(item => item.type === 'bun');
-    // const list_between_buns = ingredientsList(notbunsIngredients)
+    const { dataState, dataDispatch } =  useContext(DataContext);
+    const notbunsIngredients = dataState.data.filter(item => item.type !== 'bun');
+    const bunsIngredients = dataState.data.filter(item => item.type === 'bun');
+
     const [bunState, setBunState] = useState(initialState);
     function resetBunSwitch() {
         buns = createBunIterator(bunsIngredients);
@@ -96,11 +79,11 @@ const BurgerConstructor = ( ) => {
         let newarr = array.filter(item => { return !bunsIngredients.includes(item) })
         newarr.unshift(bun);
         newarr.push(bun);
-        let ddata = newarr.map((item) => item._id);
+        let zdata = newarr.map((item) => item._id);
         let result = (newarr.reduce(function (acc, orderdata) { return acc + orderdata.price; }, 0));
         console.log('\x1b[33m  OK \x1b[0m')
         console.log(`цена \n ${result}`);
-        return [{ "ingredients": ddata }, result]
+        return [{ "ingredients": zdata }, result]
     }
     , [])
 
@@ -114,16 +97,16 @@ const BurgerConstructor = ( ) => {
         // Код выполнится только при первичном монтировании
         console.log('Привет! Я примонтировался');
 
-        const [ddata, cost] = makeOrderData(notbunsIngredients, onebun)
+        const [zdata, cost] = makeOrderData(notbunsIngredients, onebun)
         setTotalPrice(cost);
-        setOrderData(ddata);
-        console.log(`- ${ddata.ingredients} - , \n ${cost}`);
+        setOrderData(zdata);
+        console.log(`- ${zdata.ingredients} - , \n ${cost}`);
         return
     }, [bunState])
 
-    const handleClose =(item, state=data) => () => {
+    const handleClose =(item) => () => {
         console.log(`will handle close on - ${item._id}` )
-        dataDispatcher({state: state, type: "DELETE", payload: item });
+        dataDispatch({type: "DELETE", payload: item });
       };
 
 
@@ -139,7 +122,7 @@ const BurgerConstructor = ( ) => {
                 />
             </div>
             <ul className={`${Styles.list} custom-scroll `}>
-            {data.filter((item) => item.type !== "bun")
+            {dataState.data.filter((item) => item.type !== "bun")
             .map((item) => (
               <li key={item._id} className={`${Styles['list-item']} `} >
                 <DragIcon type="primary" />

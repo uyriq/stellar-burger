@@ -1,62 +1,80 @@
-import React, { useEffect, useState, useReducer, useContext } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerOrder from '../burger-order/burger-order'
+import { getIngredients } from '../../services/api'
 import useWindowDimensions from '../utils/use-windowdimensions';
 import { TotalPriceContext, OrderContext, DataContext } from "../../services/appContext";
 import Styles from './app.module.css';
-const apiBaseUrl = 'https://norma.nomoreparties.space/api'
-const apiEndpoints = { ingredients: '/ingredients' }
+
+//dataReducer
+
+const initialState = { data: [] };
+
+const dataReducer = (state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case "DELETE":
+            return {
+                ...state,
+                data: state.data.filter((item) => item._id !== payload._id),
+            };
+        case "INIT":
+            return {
+                ...state,
+                data: action.payload,
+            };
+        default:
+            throw new Error(`Wrong type of action: ${type}`);
+    }
+};
+
+
 
 const App = () => {
-    const [ingredients, setIngredients] = useState({
-        success: false,
-        error: false,
-        data: []
-    });
-
-
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
     const [totalPrice, setTotalPrice] = useState([]);
     const [orderData, setOrderData] = useState([]);
-    const [dataInitialState, setDataInitial] = useState([]);
-
     const { width } = useWindowDimensions();
+    const [dataState, dataDispatch] = useReducer(
+        dataReducer,
+        initialState,
+        undefined
+    );
+
+    //init
     useEffect(() => {
-        const getIngredients = async () => {
-            try {
-                const res = await fetch(`${apiBaseUrl}${apiEndpoints.ingredients}`)
-                if (!res.ok) throw new Error('fetch trouble')
-                if (res.ok) {
-                    const apidata = await res.json()
-                    setIngredients(ingredients => ({ ...ingredients, success: apidata.success, data: apidata.data }))
-                    setDataInitial(() => ({ data: apidata.data }))
-                }
-            } catch (e) {
-                console.info(`облом - ${e.message}`);
-                setIngredients(ingredients => ({ ...ingredients, error: true }))
-            }
+        const getData = async () => {
+            setIsLoading(true)
+            const { data, isloading, iserror } = getIngredients()
+            setIsLoading(isloading)
+            setIsError(iserror)
+            console.log(JSON.stringify(data))
+
         }
 
-        getIngredients();
+        getData();
+        return () => {
+            // отписка от событий, закрытие соединений
+        }
     }, []);
 
-    const { success, error, data: ings } = ingredients;
+    //  if (undefined!==data.data) { dataDispatch({ type: 'INIT', state: ( data ) }); }
 
+    console.log(`--- ${dataState} `)
 
-
-    const { data, dataDispatcher } =  useContext(DataContext);
-
-
-    return !!ings && (
+    return (
         <div className={Styles.page}>
 
-            {error && <p className={`${Styles.page} text_color_error `}> Что-то пошло не так, не получены данные </p>}
-            {(!success && !error) && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={!success} size={550} />
+            {isError && <p className={`${Styles.page} text_color_error `}> Что-то пошло не так, не получены данные </p>}
+            {isLoading && <span className={`${Styles.spinner} `}> <ClipLoader color={'#ffff'} loading={isLoading} size={550} />
             </span>}
-            {!!success && !error && <div className={`${Styles.container} `}>
-                <DataContext.Provider value={{ data: ings, dataDispatcher }}>
+            {!isLoading && !isError && <div className={`${Styles.container} `}>
+                <DataContext.Provider value={{ dataState, dataDispatch }}>
                     <AppHeader />
                     <main className={`${Styles.main} ${Styles.columns}`}
                         style={{
@@ -67,7 +85,7 @@ const App = () => {
                         <section className={`${Styles.column} ${Styles.columns}`} >
                             <h2 className='text text_type_main-large'>Соберите бургер</h2>
                             <div className={`${Styles.article} ${Styles.first__article}`}  >
-                                <BurgerIngredients ingredients={ings} />
+                                <BurgerIngredients ingredients={dataState.data} />
                             </div>
                         </section>
                         <div>
@@ -75,7 +93,7 @@ const App = () => {
                                 <OrderContext.Provider value={{ orderData, setOrderData }}>
                                     <section className={`${Styles.column} ${Styles.columns}`}>
                                         <div className={`${Styles.article} ${Styles.first__article}`}>
-                                            <BurgerConstructor ingredients={ings} />
+                                            <BurgerConstructor ingredients={dataState.data} />
                                         </div>
                                         <div className={`${Styles.middle}  ${Styles.article}  `}><BurgerOrder /></div>
                                     </section>
