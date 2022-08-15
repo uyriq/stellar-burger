@@ -1,8 +1,7 @@
 import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { ingredientPropType } from '../utils/prop-types'
-import { TotalPriceContext, OrderContext } from '../../services/appContext';
+import { TotalPriceContext, OrderContext, DataContext  } from '../../services/appContext';
 import { ConstructorElement, DragIcon, } from '@ya.praktikum/react-developer-burger-ui-components';
-import { DataContext } from "../../services/appContext";
 import Styles from './burger-constructor.module.css';
 
 // React component names must start with an uppercase letter

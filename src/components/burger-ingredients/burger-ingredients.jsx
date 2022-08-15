@@ -1,14 +1,18 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useContext} from 'react';
+import { DataContext } from "../../services/appContext";
 import BurgerIngredientsItem from './burger-ingredients-item';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from './burger-ingredients.module.css';
 import { ingredientPropType } from '../utils/prop-types'
 
 
-const BurgerIngredients = ({ ingredients }) => {
+const BurgerIngredients = (  ) => {
     const pageRefs = useRef({});
+    const { dataState, dataDispatch } =  useContext(DataContext);
+    const {data:ingredients} = dataState;
+    console.log(ingredients)
     const [choice, setChoice] = React.useState('buns');
-    const buns = ingredients.filter(item => item.type === 'bun');
+    const buns = dataState.data.filter(item => item.type === 'bun');
     const sauces = ingredients.filter(item => item.type === 'sauce');
     const main = ingredients.filter(item => item.type === 'main');
 
@@ -23,7 +27,7 @@ const BurgerIngredients = ({ ingredients }) => {
     function scrollIntoView(type) {
         // решение  https://stackoverflow.com/questions/64188338/scrolling-components-into-view-with-react-with-useref
         // также два действия на OnСlick без промежуточной функции по https://stackoverflow.com/questions/26069238/call-multiple-functions-onclick-reactjs
-          
+
         pageRefs.current[type].scrollIntoView({ behavior: "smooth" });
     }
 
@@ -82,6 +86,6 @@ const BurgerIngredients = ({ ingredients }) => {
     )
 }
 
-BurgerIngredients.propTypes =  {ingredientPropType}.isRequired
+BurgerIngredients.propTypes =  {ingredientPropType}
 
 export default BurgerIngredients;
