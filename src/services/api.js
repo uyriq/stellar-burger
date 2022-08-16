@@ -1,4 +1,5 @@
 import { BURGER_API_URL, HEADERS } from '../components/utils/constants';
+import PropTypes from 'prop-types';
 
 const checkReponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
@@ -24,3 +25,12 @@ export const getOrderNumber = async (ingredients) => {
       return Promise.reject(data);
     });
 };
+
+const ingredients = {
+  ingredients: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+    })).isRequired,
+}
+
+getOrderNumber.propTypes = { ingredients }.isRequired

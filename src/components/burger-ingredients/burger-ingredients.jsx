@@ -86,6 +86,6 @@ const BurgerIngredients = (  ) => {
     )
 }
 
-BurgerIngredients.propTypes =  {ingredientPropType}
+// BurgerIngredients.propTypes =  {ingredientPropType}
 
 export default BurgerIngredients;

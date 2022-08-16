@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect  } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../modal/modal';
 import OrderConfirm from '../modal/order-confirm';
@@ -54,11 +54,11 @@ const BurgerOrder = () => {
     );
 }
 
-const OrderPropType = PropTypes.shape({
+/* const OrderPropType = PropTypes.shape({
     totalPrice: PropTypes.number,
     numero: PropTypes.string,
     message: PropTypes.array
 });
 
-BurgerOrder.propTypes = { OrderPropType }
+BurgerOrder.propTypes = { OrderPropType } */
 export default BurgerOrder

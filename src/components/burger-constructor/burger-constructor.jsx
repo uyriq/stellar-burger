@@ -4,7 +4,7 @@ import { TotalPriceContext, OrderContext, DataContext  } from '../../services/ap
 import { ConstructorElement, DragIcon, } from '@ya.praktikum/react-developer-burger-ui-components';
 import Styles from './burger-constructor.module.css';
 
-// React component names must start with an uppercase letter
+// ингредиенты удаляются по клику, булки по клику меняются по кругу генератором (из двух булок)
 
 
 function* createBunIterator(buns = [{
