@@ -93,15 +93,13 @@ const BurgerConstructor = ( ) => {
     }, [])
 
     useEffect(() => {
-        // Код выполнится только при первичном монтировании
         console.log('Привет! Я примонтировался');
-
         const [zdata, cost] = makeOrderData(notbunsIngredients, onebun)
         setTotalPrice(cost);
         setOrderData(zdata);
         console.log(`- ${zdata.ingredients} - , \n ${cost}`);
         return
-    }, [bunState])
+    }, [bunState, dataState])
 
     const handleClose =(item) => () => {
         console.log(`will handle close on - ${item._id}` )
