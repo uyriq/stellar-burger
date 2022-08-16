@@ -59,7 +59,7 @@ const BurgerConstructor = ( ) => {
     const switchBun = () => {
         buns.next()
         if (bunState.value === undefined) {
-            //похоже сюда даже  и не попадает проход кода
+            //похоже сюда  не попадает проход кода never
             resetBunSwitch()
         }
         if (bunState.value) setBunState(buns.next());

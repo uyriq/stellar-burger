@@ -10,9 +10,9 @@ const BurgerIngredients = (  ) => {
     const pageRefs = useRef({});
     const { dataState, dataDispatch } =  useContext(DataContext);
     const {data:ingredients} = dataState;
-    console.log(ingredients)
+   // console.log(ingredients)
     const [choice, setChoice] = React.useState('buns');
-    const buns = dataState.data.filter(item => item.type === 'bun');
+    const buns = ingredients.filter(item => item.type === 'bun');
     const sauces = ingredients.filter(item => item.type === 'sauce');
     const main = ingredients.filter(item => item.type === 'main');
 

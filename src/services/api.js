@@ -4,7 +4,7 @@ const checkReponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 export const getIngredients = async () => {
-  return await fetch(`${BURGER_API_URL}/ingredients`, {headers: HEADERS})
+  return await fetch(`${BURGER_API_URL}/ingredients`, { headers: HEADERS })
     .then(checkReponse)
     .then((data) => {
       if (data?.success) return data.data;
@@ -12,3 +12,15 @@ export const getIngredients = async () => {
     });
 };
 
+export const getOrderNumber = async (ingredients) => {
+  return await fetch(`${BURGER_API_URL}/orders`, {
+    method: 'POST',
+    headers: HEADERS,
+    body: JSON.stringify(ingredients)
+  })
+    .then(checkReponse)
+    .then((data) => {
+      if (data?.success) return data
+      return Promise.reject(data);
+    });
+};
