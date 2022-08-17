@@ -36,7 +36,7 @@ const App = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(null)
     const [data, setData] = useState(null)
-    const [totalPrice, setTotalPrice] = useState([])
+    const [totalPrice, setTotalPrice] = useState(0)
     const [orderData, setOrderData] = useState([])
     const { width } = useWindowDimensions()
     const [dataState, dataDispatch] = useReducer(
@@ -91,7 +91,9 @@ const App = () => {
 
             {Boolean(dataState?.data.length) && (
                 <div className={`${Styles.container} `}>
-                    <DataContext.Provider value={{ dataState, dataDispatch }}>
+                    <DataContext.Provider
+                        value={{ dataState, dataDispatch, data, setData }}
+                    >
                         <AppHeader />
                         <main
                             className={`${Styles.main} ${Styles.columns}`}
