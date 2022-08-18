@@ -1,9 +1,10 @@
 import React, { useMemo, useRef, useContext } from 'react'
-import { DataContext } from '../../services/appContext'
-import BurgerIngredientsItem from './burger-ingredients-item'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import BurgerIngredientsItem from './burger-ingredients-item'
+import Modal from '../modal/modal'
+import Card from '../modal/card'
+import { DataContext } from '../../services/appContext'
 import Styles from './burger-ingredients.module.css'
-import { ingredientPropType } from '../utils/prop-types'
 
 const BurgerIngredients = () => {
     const pageRefs = useRef({})
@@ -15,9 +16,24 @@ const BurgerIngredients = () => {
     const sauces = data.filter((item) => item.type === 'sauce')
     const main = data.filter((item) => item.type === 'main')
 
+    // issue #27
+    const ingredientClick = (details) => {
+        console.log(`ingredientClick ${JSON.stringify(details)}`)
+        // {show && null}
+        return (
+            <Modal title="Детали ингредиента">
+                <Card {...details} />
+            </Modal>
+        )
+    }
     const IngredientsList = (array) => {
         return array.map((item) => (
-            <BurgerIngredientsItem key={item._id} ingredient={item} />
+            // issue #27
+            <BurgerIngredientsItem
+                key={item._id}
+                ingredient={item}
+                onClick={ingredientClick}
+            />
         ))
     }
 
