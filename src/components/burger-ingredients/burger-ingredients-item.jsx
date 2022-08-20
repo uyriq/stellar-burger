@@ -3,14 +3,11 @@ import {
     CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import Styles from './burger-ingredients-item.module.css'
-import Modal from '../modal/modal'
-import Card from '../modal/card'
-import { useState } from 'react'
+
 import { ingredientPropType } from '../utils/prop-types'
 
 const BurgerIngredientsItem = (props) => {
-    const [show, setShow] = useState(false)
-    const { ingredient, onClick } = props
+    const { ingredient, onClick, onClose, show } = props
     const { name, image, price } = ingredient
 
     return (
@@ -18,7 +15,6 @@ const BurgerIngredientsItem = (props) => {
             <div
                 onClick={() => {
                     onClick(ingredient)
-                    setShow(true)
                 }}
             >
                 <Counter count={1} size="default" />

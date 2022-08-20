@@ -1,4 +1,11 @@
-import React, { useMemo, useRef, useContext } from 'react'
+import React, {
+    useMemo,
+    memo,
+    useRef,
+    useContext,
+    useState,
+    useEffect,
+} from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsItem from './burger-ingredients-item'
 import Modal from '../modal/modal'
@@ -8,33 +15,44 @@ import Styles from './burger-ingredients.module.css'
 
 const BurgerIngredients = () => {
     const pageRefs = useRef({})
+    const isInitialMount = useRef(true)
     const { setData, data } = useContext(DataContext)
     // console.log(ingredients)
+    const [show, setShow] = useState(false)
     const [choice, setChoice] = React.useState('buns')
 
     const buns = data.filter((item) => item.type === 'bun')
     const sauces = data.filter((item) => item.type === 'sauce')
     const main = data.filter((item) => item.type === 'main')
 
-    // issue #27
-    const ingredientClick = (details) => {
-        console.log(`ingredientClick ${JSON.stringify(details)}`)
-        // {show && null}
-        return (
-            <Modal title="Детали ингредиента">
-                <Card {...details} />
-            </Modal>
-        )
-    }
+    useEffect(() => {
+        setShow(false)
+    }, [])
+
     const IngredientsList = (array) => {
         return array.map((item) => (
             // issue #27
             <BurgerIngredientsItem
                 key={item._id}
                 ingredient={item}
-                onClick={ingredientClick}
+                onClick={IngredientClick}
+                onClose={() => setShow(false)}
             />
         ))
+    }
+
+    // issue #27
+
+    const IngredientClick = ({ details }) => {
+        if (show) {
+            return
+        }
+        // setShow(true)
+        return (
+            <Modal title="Детали ингредиента" onClose={() => setShow(false)}>
+                <Card {...details} />
+            </Modal>
+        )
     }
 
     function scrollIntoView(type) {
@@ -102,45 +120,48 @@ const BurgerIngredients = () => {
     }
 
     return (
-        <section className="">
-            <div className={`${Styles.tabs} mb-10`}>
-                <Tab
-                    value="buns"
-                    active={choice === 'buns'}
-                    onClick={() => {
-                        setChoice('buns')
-                        scrollIntoView('buns')
-                    }}
-                >
-                    Булки
-                </Tab>
-                <Tab
-                    value="sauces"
-                    active={choice === 'sauces'}
-                    onClick={() => {
-                        setChoice('sauces')
-                        scrollIntoView('sauces')
-                    }}
-                >
-                    Соусы
-                </Tab>
-                <Tab
-                    value="main"
-                    active={choice === 'main'}
-                    onClick={() => {
-                        setChoice('main')
-                        scrollIntoView('main')
-                    }}
-                >
-                    Начинки
-                </Tab>
-            </div>
-            <div className={`${Styles.ingredients} custom-scroll`}>
-                <Buns pageRefs={pageRefs} />
-                <Sauces pageRefs={pageRefs} />
-                <Main pageRefs={pageRefs} />
-            </div>
-        </section>
+        <>
+            <section className="">
+                <div className={`${Styles.tabs} mb-10`}>
+                    <Tab
+                        value="buns"
+                        active={choice === 'buns'}
+                        onClick={() => {
+                            setChoice('buns')
+                            scrollIntoView('buns')
+                        }}
+                    >
+                        Булки
+                    </Tab>
+                    <Tab
+                        value="sauces"
+                        active={choice === 'sauces'}
+                        onClick={() => {
+                            setChoice('sauces')
+                            scrollIntoView('sauces')
+                        }}
+                    >
+                        Соусы
+                    </Tab>
+                    <Tab
+                        value="main"
+                        active={choice === 'main'}
+                        onClick={() => {
+                            setChoice('main')
+                            scrollIntoView('main')
+                        }}
+                    >
+                        Начинки
+                    </Tab>
+                </div>
+                <div className={`${Styles.ingredients} custom-scroll`}>
+                    <Buns pageRefs={pageRefs} />
+                    <Sauces pageRefs={pageRefs} />
+                    <Main pageRefs={pageRefs} />
+                </div>
+            </section>
+            {Boolean(show) && <IngredientClick />}
+        </>
     )
 }
 
