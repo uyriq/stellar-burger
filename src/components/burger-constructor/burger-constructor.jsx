@@ -84,8 +84,8 @@ const BurgerConstructor = () => {
         }
         if (bunState.value) setBunState(buns.next())
 
-        console.dir(bunState)
-        console.log('click!')
+        // console.dir(bunState)
+        // console.log('click!')
         return
     }
     //  console.dir(bunState.value)
@@ -103,23 +103,23 @@ const BurgerConstructor = () => {
         let result = newarr.reduce(function (acc, orderdata) {
             return acc + orderdata.price
         }, 0)
-        console.log('\x1b[33m  OK \x1b[0m')
-        console.log(`цена \n ${result}`)
+        // console.log('\x1b[33m  OK \x1b[0m')
+        // console.log(`цена \n ${result}`)
         return [{ ingredients: zdata }, result]
     }, [])
 
     useEffect(() => {
         resetBunSwitch()
-        console.log('init bun #0')
+        // console.log('init bun #0')
         return
     }, [])
 
     useEffect(() => {
-        console.log('Привет! Я примонтировался')
+        //  console.log('Привет! Я примонтировался')
         const [zdata, cost] = makeOrderData(notbunsIngredients, onebun)
         setTotalPrice(cost)
         setOrderData(zdata)
-        console.log(`- ${zdata.ingredients} - , \n ${cost}`)
+        // console.log(`- ${zdata.ingredients} - , \n ${cost}`)
         return
     }, [bunState, dataState])
 

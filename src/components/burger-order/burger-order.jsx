@@ -20,9 +20,9 @@ const BurgerOrder = () => {
     const [message, setMessage] = useState('')
 
     useEffect(() => {
-        console.log('Привет, ORDER! Я примонтировался')
+        // console.log('Привет, ORDER! Я примонтировался')
         if (showorder) {
-            console.log(`- ${JSON.stringify(orderData)} - , \n ${totalPrice}`)
+            //  console.log(`- ${JSON.stringify(orderData)} - , \n ${totalPrice}`)
             getOrderNumber(orderData)
                 .then((data) => {
                     setOrderNumber(data)

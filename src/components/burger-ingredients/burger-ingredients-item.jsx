@@ -3,7 +3,7 @@ import {
     CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import Styles from './burger-ingredients-item.module.css'
-
+import { PropTypes } from 'prop-types'
 import { ingredientPropType } from '../utils/prop-types'
 
 const BurgerIngredientsItem = (props) => {
@@ -35,6 +35,10 @@ const BurgerIngredientsItem = (props) => {
     )
 }
 
-BurgerIngredientsItem.propTypes = { ingredientPropType }.isRequired
+BurgerIngredientsItem.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
+    ingredient: PropTypes.shape({ ingredientPropType }).isRequired,
+}
 
 export default BurgerIngredientsItem
