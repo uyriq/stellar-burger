@@ -1,9 +1,9 @@
-import React from "react";
-import Style from "./order-confirm.module.css";
-import { ReactComponent as DoneLogo } from "../../images/done.svg";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Style from './order-confirm.module.css';
+import { ReactComponent as DoneLogo } from '../../images/done.svg';
 
-const OrderConfirm = ({ numero: Number, message }) => {
+function OrderConfirm({ numero: Number, message }) {
     const messageArr = message.split(/\r?\n/);
     // console.log(messageArr)
     return (
@@ -32,7 +32,7 @@ const OrderConfirm = ({ numero: Number, message }) => {
             </div>
         </div>
     );
-};
+}
 
 const OrderPropType = {
     numero: PropTypes.string.isRequired,

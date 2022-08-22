@@ -1,15 +1,17 @@
-import React, { useContext, useCallback, useEffect, useState } from 'react'
-import { ingredientPropType } from '../utils/prop-types'
+import React, {
+    useContext, useCallback, useEffect, useState,
+} from 'react';
+import {
+    ConstructorElement,
+    DragIcon,
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientPropType } from '../utils/prop-types';
 import {
     TotalPriceContext,
     OrderContext,
     DataContext,
-} from '../../services/appContext'
-import {
-    ConstructorElement,
-    DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import Styles from './burger-constructor.module.css'
+} from '../../services/appContext';
+import Styles from './burger-constructor.module.css';
 
 // ингредиенты удаляются по клику, булки по клику меняются по кругу генератором (из двух булок)
 
@@ -47,96 +49,92 @@ function* createBunIterator(
                 'https://code.s3.yandex.net/react/code/bun-01-large.png',
             __v: 0,
         },
-    ]
+    ],
 ) {
-    let i = 0
+    let i = 0;
     while (i < buns.length) {
-        const bun = buns[i]
-        i++
-        yield bun
+        const bun = buns[i];
+        i++;
+        yield bun;
     }
 }
 
-let buns = createBunIterator()
-let initialState = buns.next()
-let onebun
+let Buns = createBunIterator();
+const initialState = Buns.next();
+let OneBun;
 
-const BurgerConstructor = () => {
-    const { setOrderData, orderData } = useContext(OrderContext)
-    const { setTotalPrice, totalPrice } = useContext(TotalPriceContext)
-    const { dataState, dataDispatch } = useContext(DataContext)
+function BurgerConstructor() {
+    const { setOrderData, orderData } = useContext(OrderContext);
+    const { setTotalPrice, totalPrice } = useContext(TotalPriceContext);
+    const { dataState, dataDispatch } = useContext(DataContext);
     const notbunsIngredients = dataState.data.filter(
-        (item) => item.type !== 'bun'
-    )
-    const bunsIngredients = dataState.data.filter((item) => item.type === 'bun')
+        (item) => item.type !== 'bun',
+    );
+    const bunsIngredients = dataState.data.filter((item) => item.type === 'bun');
 
-    const [bunState, setBunState] = useState(initialState)
+    const [bunState, setBunState] = useState(initialState);
     function resetBunSwitch() {
-        buns = createBunIterator(bunsIngredients)
-        setBunState(initialState)
+        Buns = createBunIterator(bunsIngredients);
+        setBunState(initialState);
     }
 
     const switchBun = () => {
-        buns.next()
+        Buns.next();
         if (bunState.value === undefined) {
-            //похоже сюда  не попадает проход кода never
-            resetBunSwitch()
+            // похоже сюда  не попадает проход кода never
+            resetBunSwitch();
         }
-        if (bunState.value) setBunState(buns.next())
+        if (bunState.value) setBunState(Buns.next());
 
         // console.dir(bunState)
         // console.log('click!')
-        return
-    }
+    };
     //  console.dir(bunState.value)
-    if (bunState.value === undefined) resetBunSwitch()
-    if (bunState.value) onebun = bunState.value
+    if (bunState.value === undefined) resetBunSwitch();
+    if (bunState.value) OneBun = bunState.value;
     // console.dir(`булка - ${JSON.stringify(onebun)}`);
 
     const makeOrderData = useCallback((array, bun) => {
-        let newarr = array.filter((item) => {
-            return !bunsIngredients.includes(item)
-        })
-        newarr.unshift(bun)
-        newarr.push(bun)
-        let zdata = newarr.map((item) => item._id)
-        let result = newarr.reduce(function (acc, orderdata) {
-            return acc + orderdata.price
-        }, 0)
+        const newarr = array.filter((item) => !bunsIngredients.includes(item));
+        newarr.unshift(bun);
+        newarr.push(bun);
+        const zdata = newarr.map((item) => item._id);
+        const result = newarr.reduce(
+            (acc, orderdata) => acc + orderdata.price,
+            0,
+        );
         // console.log('\x1b[33m  OK \x1b[0m')
         // console.log(`цена \n ${result}`)
-        return [{ ingredients: zdata }, result]
-    }, [])
+        return [{ ingredients: zdata }, result];
+    }, []);
 
     useEffect(() => {
-        resetBunSwitch()
+        resetBunSwitch();
         // console.log('init bun #0')
-        return
-    }, [])
+    }, []);
 
     useEffect(() => {
         //  console.log('Привет! Я примонтировался')
-        const [zdata, cost] = makeOrderData(notbunsIngredients, onebun)
-        setTotalPrice(cost)
-        setOrderData(zdata)
+        const [zdata, cost] = makeOrderData(notbunsIngredients, OneBun);
+        setTotalPrice(cost);
+        setOrderData(zdata);
         // console.log(`- ${zdata.ingredients} - , \n ${cost}`)
-        return
-    }, [bunState, dataState])
+    }, [bunState, dataState]);
 
     const handleClose = (item) => () => {
         // console.log(`will handle close on - ${item._id}`)
-        dataDispatch({ type: 'DELETE', payload: item })
-    }
+        dataDispatch({ type: 'DELETE', payload: item });
+    };
 
     return (
         <section className={`${Styles.constructor} `}>
             <div onClick={switchBun}>
                 <ConstructorElement
                     type="top"
-                    isLocked={true}
-                    text={`${onebun.name} (верх)`}
-                    price={onebun.price}
-                    thumbnail={onebun.image}
+                    isLocked
+                    text={`${OneBun.name} (верх)`}
+                    price={OneBun.price}
+                    thumbnail={OneBun.image}
                 />
             </div>
             <ul className={`${Styles.list} custom-scroll `}>
@@ -158,19 +156,17 @@ const BurgerConstructor = () => {
                         </li>
                     ))}
             </ul>
-            <>
-                <ConstructorElement
-                    type="bottom"
-                    isLocked={true}
-                    text={`${onebun.name} (низ)`}
-                    price={onebun.price}
-                    thumbnail={onebun.image}
-                />
-            </>
+            <ConstructorElement
+                type="bottom"
+                isLocked
+                text={`${OneBun.name} (низ)`}
+                price={OneBun.price}
+                thumbnail={OneBun.image}
+            />
         </section>
-    )
+    );
 }
 
 /* BurgerConstructor.propTypes = { ingredientPropType }.isRequired */
 
-export default BurgerConstructor
+export default BurgerConstructor;

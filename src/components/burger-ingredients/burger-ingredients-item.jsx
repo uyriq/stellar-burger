@@ -1,23 +1,23 @@
 import {
     Counter,
     CurrencyIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import Styles from './burger-ingredients-item.module.css'
-import { PropTypes } from 'prop-types'
-import { ingredientPropType } from '../utils/prop-types'
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import { PropTypes } from 'prop-types';
+import Styles from './burger-ingredients-item.module.css';
+import { ingredientPropType } from '../utils/prop-types';
 
-const BurgerIngredientsItem = (props) => {
-    const { ingredient, onClick, onClose } = props
-    const { name, image, price } = ingredient
+function BurgerIngredientsItem(props) {
+    const { ingredient, onClick, onClose } = props;
+    const { name, image, price } = ingredient;
 
     return (
         <li className={`${Styles.item} mb-8 `}>
             <div
                 onClick={() => {
-                    onClick(ingredient)
+                    onClick(ingredient);
                 }}
                 onClose={() => {
-                    onClose()
+                    onClose();
                 }}
             >
                 <Counter count={1} size="default" />
@@ -32,13 +32,13 @@ const BurgerIngredientsItem = (props) => {
                 <span className="text text_type_main-small ">{name}</span>
             </div>
         </li>
-    )
+    );
 }
 
 BurgerIngredientsItem.propTypes = {
     onClose: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     ingredient: PropTypes.shape({ ingredientPropType }).isRequired,
-}
+};
 
-export default BurgerIngredientsItem
+export default BurgerIngredientsItem;

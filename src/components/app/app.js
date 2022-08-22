@@ -15,7 +15,7 @@ import {
 } from '../../services/appContext'
 import Styles from './app.module.css'
 
-//dataReducer
+// TODO исправить ошибки Eslint
 
 const dataReducer = (state, { type, payload }) => {
     switch (type) {
@@ -34,7 +34,7 @@ const dataReducer = (state, { type, payload }) => {
     }
 }
 
-const App = () => {
+function App() {
     const [isLoading, setIsLoading] = useState(true)
     const [show, setShow] = useState(false)
     const [details, setDetails] = useState()
@@ -49,7 +49,7 @@ const App = () => {
         undefined
     )
 
-    //init
+    // init
     useEffect(() => {
         getIngredients()
             .then((data) => {
@@ -63,11 +63,7 @@ const App = () => {
     }, [])
 
     const dispatchdata = useCallback(() => {
-        if (
-            undefined !== data &&
-            null !== data &&
-            !Boolean(dataState?.data.length)
-        ) {
+        if (undefined !== data && data !== null && !dataState?.data.length) {
             dataDispatch({ type: 'DATAFETCH', payload: data })
             setIsLoading(false)
         }
@@ -83,11 +79,7 @@ const App = () => {
             )}
             {isLoading && (
                 <span className={`${Styles.spinner} `}>
-                    <ClipLoader
-                        color={'#ffff'}
-                        loading={isLoading}
-                        size={550}
-                    />
+                    <ClipLoader color="#ffff" loading={isLoading} size={550} />
                 </span>
             )}
 
@@ -114,7 +106,7 @@ const App = () => {
                                 transform: `translateX(${
                                     (32 - width / 128) * (width > 1279)
                                 }px)`,
-                            }} //  смещение 0  если < 1279 (меньше - это смарт экраны)
+                            }}
                         >
                             <section
                                 className={`${Styles.column} ${Styles.columns}`}

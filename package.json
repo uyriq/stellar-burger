@@ -1,65 +1,69 @@
 {
-  "name": "stellar-burger",
-  "version": "0.2.1",
-  "private": true,
-  "main": "src/index.tsx",
-  "dependencies": {
-    "@types/node": "^18.7.5",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
-    "dedupe": "^3.0.3",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "react-spinners": "^0.13.4",
-    "typescript": "^4.7.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "commit": "git-cz"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
+    "name": "stellar-burger",
+    "version": "0.2.1",
+    "private": true,
+    "main": "src/index.tsx",
+    "dependencies": {
+        "@types/node": "^18.7.5",
+        "@types/react": "^18.0.17",
+        "@types/react-dom": "^18.0.6",
+        "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
+        "dedupe": "^3.0.3",
+        "prop-types": "^15.8.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "react-spinners": "^0.13.4",
+        "typescript": "^4.7.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "commit": "git-cz",
+        "lint": "eslint --fix --ext .js,.jsx ."
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
         }
-      }
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "keywords": [],
-  "description": "",
-  "devDependencies": {
-    "commitizen": "^4.2.5",
-    "cz-conventional-changelog": "^3.3.0"
-  }
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ],
+        "overrides": [
+            {
+                "files": [
+                    "**/*.stories.*"
+                ],
+                "rules": {
+                    "import/no-anonymous-default-export": "off"
+                }
+            }
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "keywords": [],
+    "description": "",
+    "devDependencies": {
+        "commitizen": "^4.2.5",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^8.22.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-plugin-react": "^7.30.1"
+    }
 }

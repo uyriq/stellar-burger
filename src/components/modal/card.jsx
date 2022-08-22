@@ -1,8 +1,8 @@
-import React from 'react'
-import Style from './card.module.css'
-import { ingredientPropType } from '../utils/prop-types'
+import React from 'react';
+import Style from './card.module.css';
+import { ingredientPropType } from '../utils/prop-types';
 
-const Card = (props) => {
+function Card(props) {
     return (
         <div className={` ${Style.box} `}>
             <div className={` ${Style.div1} `}>
@@ -19,54 +19,62 @@ const Card = (props) => {
                 className={` ${Style.div3}   text  text_color_inactive text_type_main-small  `}
             >
                 {' '}
-                Калории, ккал{' '}
+                Калории, ккал
+                {' '}
             </div>
             <div
                 className={` ${Style.div4}   text_type_digits-default text_color_inactive  `}
             >
                 {' '}
-                {`${props.calories}`}{' '}
+                {`${props.calories}`}
+                {' '}
             </div>
             <div
                 className={` ${Style.div5}   text_color_inactive text_type_main-small  `}
             >
                 {' '}
-                Белки, г{' '}
+                Белки, г
+                {' '}
             </div>
             <div
                 className={` ${Style.div6}   text_type_digits-default text_color_inactive  `}
             >
                 {' '}
-                {`${props.proteins}`}{' '}
+                {`${props.proteins}`}
+                {' '}
             </div>
             <div
                 className={` ${Style.div7}   text_color_inactive text_type_main-small  `}
             >
                 {' '}
-                Жиры, г{' '}
+                Жиры, г
+                {' '}
             </div>
             <div
                 className={` ${Style.div8}   text_type_digits-default text_color_inactive `}
             >
                 {' '}
-                {`${props.fat}`}{' '}
+                {`${props.fat}`}
+                {' '}
             </div>
             <div
                 className={` ${Style.div9}   text_color_inactive text_type_main-small  `}
             >
                 {' '}
-                Углеводы, г{' '}
+                Углеводы, г
+                {' '}
             </div>
             <div
                 className={` ${Style.div10}  text_type_digits-default text_color_inactive `}
             >
                 {' '}
-                {`${props.carbohydrates}`}{' '}
+                {`${props.carbohydrates}`}
+                {' '}
             </div>
         </div>
-    )
+    );
 }
 
-Card.propTypes = ingredientPropType.isRequired
+Card.propTypes = ingredientPropType.isRequired;
 
-export default Card
+export default Card;
