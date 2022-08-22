@@ -1,24 +1,13 @@
-import React, {
-    useMemo,
-    memo,
-    useRef,
-    useContext,
-    useState,
-    useEffect,
-} from 'react'
+import React, { useMemo, useRef, useContext, useEffect } from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsItem from './burger-ingredients-item'
-import Modal from '../modal/modal'
-import Card from '../modal/card'
 import { DataContext } from '../../services/appContext'
 import Styles from './burger-ingredients.module.css'
 
 const BurgerIngredients = () => {
     const pageRefs = useRef({})
-    const isInitialMount = useRef(true)
-    const { setData, data } = useContext(DataContext)
-    // console.log(ingredients)
-    const [show, setShow] = useState(false)
+    const { data, setData, details, setDetails, show, setShow } =
+        useContext(DataContext)
     const [choice, setChoice] = React.useState('buns')
 
     const buns = data.filter((item) => item.type === 'bun')
@@ -35,7 +24,7 @@ const BurgerIngredients = () => {
             <BurgerIngredientsItem
                 key={item._id}
                 ingredient={item}
-                onClick={IngredientClick}
+                onClick={() => ingredientClick(item)}
                 onClose={() => setShow(false)}
             />
         ))
@@ -43,16 +32,14 @@ const BurgerIngredients = () => {
 
     // issue #27
 
-    const IngredientClick = ({ details }) => {
+    const ingredientClick = (details) => {
+        // console.log('ingredientClick')
         if (show) {
             return
         }
-        // setShow(true)
-        return (
-            <Modal title="Детали ингредиента" onClose={() => setShow(false)}>
-                <Card {...details} />
-            </Modal>
-        )
+        setShow(true)
+        // console.log(details)
+        setDetails(details)
     }
 
     function scrollIntoView(type) {
@@ -160,7 +147,6 @@ const BurgerIngredients = () => {
                     <Main pageRefs={pageRefs} />
                 </div>
             </section>
-            {Boolean(show) && <IngredientClick />}
         </>
     )
 }

@@ -7,7 +7,7 @@ import Styles from './burger-ingredients-item.module.css'
 import { ingredientPropType } from '../utils/prop-types'
 
 const BurgerIngredientsItem = (props) => {
-    const { ingredient, onClick, onClose, show } = props
+    const { ingredient, onClick, onClose } = props
     const { name, image, price } = ingredient
 
     return (
@@ -15,6 +15,9 @@ const BurgerIngredientsItem = (props) => {
             <div
                 onClick={() => {
                     onClick(ingredient)
+                }}
+                onClose={() => {
+                    onClose()
                 }}
             >
                 <Counter count={1} size="default" />

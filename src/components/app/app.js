@@ -1,6 +1,8 @@
 import React, { useState, useReducer, useEffect, useCallback } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import AppHeader from '../app-header/app-header'
+import Modal from '../modal/modal'
+import Card from '../modal/card'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerOrder from '../burger-order/burger-order'
@@ -34,6 +36,8 @@ const dataReducer = (state, { type, payload }) => {
 
 const App = () => {
     const [isLoading, setIsLoading] = useState(true)
+    const [show, setShow] = useState(false)
+    const [details, setDetails] = useState()
     const [isError, setIsError] = useState(null)
     const [data, setData] = useState(null)
     const [totalPrice, setTotalPrice] = useState(0)
@@ -57,7 +61,7 @@ const App = () => {
             .finally(console.log('data api - ok!'))
         return () => {}
     }, [])
-    // if (Boolean(dataState?.data.length)) {setIsLoading(false)}
+
     const dispatchdata = useCallback(() => {
         if (
             undefined !== data &&
@@ -69,8 +73,6 @@ const App = () => {
         }
     })
     dispatchdata()
-
-    // console.log(`--- ${JSON.stringify(dataState)} `)
 
     return (
         <div className={Styles.page}>
@@ -92,9 +94,19 @@ const App = () => {
             {Boolean(dataState?.data.length) && (
                 <div className={`${Styles.container} `}>
                     <DataContext.Provider
-                        value={{ dataState, dataDispatch, data, setData }}
+                        value={{
+                            dataState,
+                            dataDispatch,
+                            data,
+                            setData,
+                            details,
+                            setDetails,
+                            show,
+                            setShow,
+                        }}
                     >
                         <AppHeader />
+
                         <main
                             className={`${Styles.main} ${Styles.columns}`}
                             style={{
@@ -110,6 +122,16 @@ const App = () => {
                                 <h2 className="text text_type_main-large">
                                     Соберите бургер
                                 </h2>
+                                {show && (
+                                    <div>
+                                        <Modal
+                                            title="Детали ингредиента"
+                                            onClose={() => setShow(false)}
+                                        >
+                                            <Card {...details} />
+                                        </Modal>
+                                    </div>
+                                )}
                                 <div
                                     className={`${Styles.article} ${Styles.first__article}`}
                                 >
