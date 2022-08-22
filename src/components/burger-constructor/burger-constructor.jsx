@@ -23,6 +23,7 @@ function BurgerConstructor() {
     const notbunsIngredients = dataState.data.filter(
         (item) => item.type !== 'bun'
     )
+
     const bunsIngredients = dataState.data.filter((item) => item.type === 'bun')
 
     const [bunState, setBunState] = useState(initialState)
