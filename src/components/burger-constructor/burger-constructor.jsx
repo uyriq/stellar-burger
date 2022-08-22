@@ -124,7 +124,7 @@ const BurgerConstructor = () => {
     }, [bunState, dataState])
 
     const handleClose = (item) => () => {
-        console.log(`will handle close on - ${item._id}`)
+        // console.log(`will handle close on - ${item._id}`)
         dataDispatch({ type: 'DELETE', payload: item })
     }
 
