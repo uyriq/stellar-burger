@@ -1,12 +1,10 @@
-import React from 'react';
-import {
-    Logo, BurgerIcon, ListIcon, ProfileIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import useWindowDimensions from '../utils/use-windowdimensions';
-import Styles from './app-header.module.css';
+import React from 'react'
+import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import useWindowDimensions from '../utils/use-windowdimensions'
+import Styles from './app-header.module.css'
 
 function AppHeader() {
-    const { width } = useWindowDimensions();
+    const { width } = useWindowDimensions()
     return (
         <header className={`${Styles.header}  `}>
             <div
@@ -20,17 +18,13 @@ function AppHeader() {
                 <div className={`${Styles.first__article} pl-4 `}>
                     <a href="#construct">
                         <BurgerIcon />
-                        <span className="   text_type_main-default  pl-2  ">
-                            Конструктор
-                        </span>
+                        <span className="   text_type_main-default  pl-2  ">Конструктор</span>
                     </a>
                 </div>
                 <div className={`${Styles.second__article}  `}>
                     <a href="#orders">
                         <ListIcon />
-                        <span className=" text_type_main-default text_color_inactive   pl-2     ">
-                            Лента заказов
-                        </span>
+                        <span className=" text_type_main-default text_color_inactive   pl-2     ">Лента заказов</span>
                     </a>
                 </div>
                 <div className={` ${Styles.logo}  `}>
@@ -39,14 +33,12 @@ function AppHeader() {
                 <div className={`${Styles.last__article}  `}>
                     <a href="#profile">
                         <ProfileIcon />
-                        <span className=" text_type_main-default  text_color_inactive   pl-2  ">
-                            Личный кабинет
-                        </span>
+                        <span className=" text_type_main-default  text_color_inactive   pl-2  ">Личный кабинет</span>
                     </a>
                 </div>
             </div>
         </header>
-    );
+    )
 }
 
-export default AppHeader;
+export default AppHeader

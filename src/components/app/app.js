@@ -8,11 +8,7 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerOrder from '../burger-order/burger-order'
 import { getIngredients } from '../../services/api'
 import useWindowDimensions from '../utils/use-windowdimensions'
-import {
-    TotalPriceContext,
-    OrderContext,
-    DataContext,
-} from '../../services/appContext'
+import { TotalPriceContext, OrderContext, DataContext } from '../../services/appContext'
 import Styles from './app.module.css'
 
 // TODO исправить ошибки Eslint
@@ -43,11 +39,7 @@ function App() {
     const [totalPrice, setTotalPrice] = useState(0)
     const [orderData, setOrderData] = useState([])
     const { width } = useWindowDimensions()
-    const [dataState, dataDispatch] = useReducer(
-        dataReducer,
-        { data: [] },
-        undefined
-    )
+    const [dataState, dataDispatch] = useReducer(dataReducer, { data: [] }, undefined)
 
     // init
     useEffect(() => {
@@ -65,11 +57,7 @@ function App() {
 
     useEffect(() => {
         const dispatchData = () => {
-            if (
-                undefined !== data &&
-                data !== null &&
-                !dataState?.data.length
-            ) {
+            if (undefined !== data && data !== null && !dataState?.data.length) {
                 dataDispatch({ type: 'DATAFETCH', payload: data })
                 setIsLoading(false)
             }
@@ -111,51 +99,30 @@ function App() {
                             className={`${Styles.main} ${Styles.columns}`}
                             style={{
                                 left: 0,
-                                transform: `translateX(${
-                                    (32 - width / 128) * (width > 1279)
-                                }px)`,
+                                transform: `translateX(${(32 - width / 128) * (width > 1279)}px)`,
                             }}
                         >
-                            <section
-                                className={`${Styles.column} ${Styles.columns}`}
-                            >
-                                <h2 className="text text_type_main-large">
-                                    Соберите бургер
-                                </h2>
+                            <section className={`${Styles.column} ${Styles.columns}`}>
+                                <h2 className="text text_type_main-large">Соберите бургер</h2>
                                 {show && (
                                     <div>
-                                        <Modal
-                                            title="Детали ингредиента"
-                                            onClose={() => setShow(false)}
-                                        >
+                                        <Modal title="Детали ингредиента" onClose={() => setShow(false)}>
                                             <Card {...details} />
                                         </Modal>
                                     </div>
                                 )}
-                                <div
-                                    className={`${Styles.article} ${Styles.first__article}`}
-                                >
+                                <div className={`${Styles.article} ${Styles.first__article}`}>
                                     <BurgerIngredients />
                                 </div>
                             </section>
                             <div>
-                                <TotalPriceContext.Provider
-                                    value={{ totalPrice, setTotalPrice }}
-                                >
-                                    <OrderContext.Provider
-                                        value={{ orderData, setOrderData }}
-                                    >
-                                        <section
-                                            className={`${Styles.column} ${Styles.columns}`}
-                                        >
-                                            <div
-                                                className={`${Styles.article} ${Styles.first__article}`}
-                                            >
+                                <TotalPriceContext.Provider value={{ totalPrice, setTotalPrice }}>
+                                    <OrderContext.Provider value={{ orderData, setOrderData }}>
+                                        <section className={`${Styles.column} ${Styles.columns}`}>
+                                            <div className={`${Styles.article} ${Styles.first__article}`}>
                                                 <BurgerConstructor />
                                             </div>
-                                            <div
-                                                className={`${Styles.middle}  ${Styles.article}  `}
-                                            >
+                                            <div className={`${Styles.middle}  ${Styles.article}  `}>
                                                 <BurgerOrder />
                                             </div>
                                         </section>

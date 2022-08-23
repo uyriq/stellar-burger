@@ -12,10 +12,8 @@ function* createBunIterator(
             calories: 420,
             price: 1255,
             image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-            image_mobile:
-                'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-            image_large:
-                'https://code.s3.yandex.net/react/code/bun-02-large.png',
+            image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
+            image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
             __v: 0,
         },
         {
@@ -28,10 +26,8 @@ function* createBunIterator(
             calories: 643,
             price: 988,
             image: 'https://code.s3.yandex.net/react/code/bun-01.png',
-            image_mobile:
-                'https://code.s3.yandex.net/react/code/bun-01-mobile.png',
-            image_large:
-                'https://code.s3.yandex.net/react/code/bun-01-large.png',
+            image_mobile: 'https://code.s3.yandex.net/react/code/bun-01-mobile.png',
+            image_large: 'https://code.s3.yandex.net/react/code/bun-01-large.png',
             __v: 0,
         },
     ]

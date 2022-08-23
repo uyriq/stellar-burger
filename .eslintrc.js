@@ -3,15 +3,17 @@ module.exports = {
         browser: true,
         es2021: true,
     },
-    extends: ['plugin:react/recommended', 'airbnb'],
+
+    extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
     overrides: [],
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    plugins: ['react'],
+    plugins: ['react', 'prettier'],
     rules: {
         'linebreak-style': 0,
+        'prettier/prettier': ['error'],
         // Indent with 4 spaces
         indent: ['error', 4],
 
@@ -21,4 +23,4 @@ module.exports = {
         // Indent props with 4 spaces
         'react/jsx-indent-props': ['error', 4],
     },
-};
+}

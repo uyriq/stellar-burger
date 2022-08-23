@@ -1,15 +1,8 @@
 import React, { useContext, useCallback, useEffect, useState } from 'react'
-import {
-    ConstructorElement,
-    DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import createBunIterator from '../utils/buns-generator'
-import {
-    TotalPriceContext,
-    OrderContext,
-    DataContext,
-} from '../../services/appContext'
+import { TotalPriceContext, OrderContext, DataContext } from '../../services/appContext'
 import Styles from './burger-constructor.module.css'
 
 let Buns = createBunIterator()
@@ -20,9 +13,7 @@ function BurgerConstructor() {
     const { setOrderData, orderData } = useContext(OrderContext)
     const { setTotalPrice, totalPrice } = useContext(TotalPriceContext)
     const { dataState, dataDispatch } = useContext(DataContext)
-    const notbunsIngredients = dataState.data.filter(
-        (item) => item.type !== 'bun'
-    )
+    const notbunsIngredients = dataState.data.filter((item) => item.type !== 'bun')
 
     const bunsIngredients = dataState.data.filter((item) => item.type === 'bun')
 
@@ -53,10 +44,7 @@ function BurgerConstructor() {
         newarr.unshift(bun)
         newarr.push(bun)
         const zdata = newarr.map((item) => item._id)
-        const result = newarr.reduce(
-            (acc, orderdata) => acc + orderdata.price,
-            0
-        )
+        const result = newarr.reduce((acc, orderdata) => acc + orderdata.price, 0)
         // console.log('\x1b[33m  OK \x1b[0m')
         // console.log(`цена \n ${result}`)
         return [{ ingredients: zdata }, result]
@@ -95,10 +83,7 @@ function BurgerConstructor() {
                 {dataState.data
                     .filter((item) => item.type !== 'bun')
                     .map((item) => (
-                        <li
-                            key={item._id}
-                            className={`${Styles['list-item']} `}
-                        >
+                        <li key={item._id} className={`${Styles['list-item']} `}>
                             <DragIcon type="primary" />
                             <ConstructorElement
                                 text={item.name}
