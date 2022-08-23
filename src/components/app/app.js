@@ -58,17 +58,25 @@ function App() {
             .catch((err) => {
                 setIsError(`  ошибка  - ${err}`)
             })
-            .finally(console.log('data api - ok!'))
-        return () => {}
+            .finally(() => {
+                console.log('data fetch finished')
+            })
     }, [])
 
-    const dispatchdata = useCallback(() => {
-        if (undefined !== data && data !== null && !dataState?.data.length) {
-            dataDispatch({ type: 'DATAFETCH', payload: data })
-            setIsLoading(false)
+    useEffect(() => {
+        const dispatchData = () => {
+            if (
+                undefined !== data &&
+                data !== null &&
+                !dataState?.data.length
+            ) {
+                dataDispatch({ type: 'DATAFETCH', payload: data })
+                setIsLoading(false)
+            }
         }
-    })
-    dispatchdata()
+
+        dispatchData()
+    }, [data])
 
     return (
         <div className={Styles.page}>
