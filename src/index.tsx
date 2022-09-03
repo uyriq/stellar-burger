@@ -1,7 +1,6 @@
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './components/app/app';
-// import reportWebVitals from './reportWebVitals';
 import './index.css'
 
 const rootElement = document.getElementById("root") as HTMLElement;

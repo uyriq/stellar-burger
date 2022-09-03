@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { PropTypes } from 'prop-types'
 import Styles from './burger-ingredients-item.module.css'
-import { ingredientPropType } from '../utils/prop-types'
 
 function BurgerIngredientsItem(props) {
     const { ingredient, onClick, onClose } = props
@@ -31,9 +33,14 @@ function BurgerIngredientsItem(props) {
 }
 
 BurgerIngredientsItem.propTypes = {
-    onClose: PropTypes.func.isRequired,
+    ingredient: PropTypes.shape({
+        image: PropTypes.string,
+        name: PropTypes.string,
+        price: PropTypes.string,
+    }).isRequired,
+
     onClick: PropTypes.func.isRequired,
-    ingredient: PropTypes.shape({ ingredientPropType }).isRequired,
+    onClose: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredientsItem

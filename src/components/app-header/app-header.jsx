@@ -1,4 +1,4 @@
-import React from 'react'
+/* eslint-disable react/jsx-filename-extension */
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import useWindowDimensions from '../utils/use-windowdimensions'
 import Styles from './app-header.module.css'

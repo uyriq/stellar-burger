@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import Style from './order-confirm.module.css'
 import { ReactComponent as DoneLogo } from '../../images/done.svg'

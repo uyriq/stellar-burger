@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useContext, useState, useEffect } from 'react'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../modal/modal'
 import OrderConfirm from '../modal/order-confirm'
@@ -17,9 +16,7 @@ function BurgerOrder() {
     const [message, setMessage] = useState('')
 
     useEffect(() => {
-        // console.log('Привет, ORDER! Я примонтировался')
         if (showorder) {
-            //  console.log(`- ${JSON.stringify(orderData)} - , \n ${totalPrice}`)
             getOrderNumber(orderData)
                 .then((data) => {
                     setOrderNumber(data)
@@ -33,6 +30,7 @@ function BurgerOrder() {
                 .catch((err) => {
                     setOrderNumber(`  ошибка  - ${err}`).then(setMessage('извините, ошибка'))
                 })
+                // eslint-disable-next-line no-console
                 .finally(console.log('data api - ok!'))
         }
         return () => {}
@@ -67,11 +65,4 @@ function BurgerOrder() {
     )
 }
 
-/* const OrderPropType = PropTypes.shape({
-    totalPrice: PropTypes.number,
-    numero: PropTypes.string,
-    message: PropTypes.array
-});
-
-BurgerOrder.propTypes = { OrderPropType } */
 export default BurgerOrder

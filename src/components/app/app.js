@@ -1,4 +1,7 @@
-import React, { useState, useReducer, useEffect, useCallback } from 'react'
+/* eslint-disable react/jsx-no-constructed-context-values */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-filename-extension */
+import { useState, useReducer, useEffect } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import AppHeader from '../app-header/app-header'
 import Modal from '../modal/modal'
@@ -18,6 +21,7 @@ const dataReducer = (state, { type, payload }) => {
         case 'DELETE':
             return {
                 ...state,
+                // eslint-disable-next-line no-underscore-dangle
                 data: state.data.filter((item) => item._id !== payload._id),
             }
         case 'DATAFETCH':
@@ -44,6 +48,7 @@ function App() {
     // init
     useEffect(() => {
         getIngredients()
+            // eslint-disable-next-line no-shadow
             .then((data) => {
                 setData(data)
             })
@@ -51,6 +56,7 @@ function App() {
                 setIsError(`  ошибка  - ${err}`)
             })
             .finally(() => {
+                // eslint-disable-next-line no-console
                 console.log('data fetch finished')
             })
     }, [])
@@ -82,6 +88,7 @@ function App() {
             {Boolean(dataState?.data.length) && (
                 <div className={`${Styles.container} `}>
                     <DataContext.Provider
+                        // eslint-disable-next-line react/jsx-no-constructed-context-values
                         value={{
                             dataState,
                             dataDispatch,

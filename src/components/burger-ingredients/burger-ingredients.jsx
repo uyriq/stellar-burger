@@ -1,3 +1,8 @@
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React, { useMemo, useRef, useContext, useEffect } from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientsItem from './burger-ingredients-item'
@@ -6,7 +11,7 @@ import Styles from './burger-ingredients.module.css'
 
 function BurgerIngredients() {
     const pageRefs = useRef({})
-    const { data, setData, details, setDetails, show, setShow } = useContext(DataContext)
+    const { data, setDetails, show, setShow } = useContext(DataContext)
     const [choice, setChoice] = React.useState('buns')
 
     const buns = data.filter((item) => item.type === 'bun')
@@ -16,19 +21,6 @@ function BurgerIngredients() {
     useEffect(() => {
         setShow(false)
     }, [])
-
-    const IngredientsList = (array) =>
-        array.map((item) => (
-            // issue #27
-            <BurgerIngredientsItem
-                key={item._id}
-                ingredient={item}
-                onClick={() => ingredientClick(item)}
-                onClose={() => setShow(false)}
-            />
-        ))
-
-    // issue #27
 
     const ingredientClick = (details) => {
         // console.log('ingredientClick')
@@ -40,10 +32,21 @@ function BurgerIngredients() {
         setDetails(details)
     }
 
-    function scrollIntoView(type) {
-        // решение  https://stackoverflow.com/questions/64188338/scrolling-components-into-view-with-react-with-useref
-        // также два действия на OnСlick без промежуточной функции по https://stackoverflow.com/questions/26069238/call-multiple-functions-onclick-reactjs
+    const IngredientsList = (array) =>
+        array.map((item) => (
+            // issue #27
+            <BurgerIngredientsItem
+                // eslint-disable-next-line no-underscore-dangle
+                key={item._id}
+                ingredient={item}
+                onClick={() => ingredientClick(item)}
+                onClose={() => setShow(false)}
+            />
+        ))
 
+    // issue #27
+
+    function scrollIntoView(type) {
         pageRefs.current[type].scrollIntoView({ behavior: 'smooth' })
     }
 
@@ -134,7 +137,5 @@ function BurgerIngredients() {
         </section>
     )
 }
-
-// BurgerIngredients.propTypes =  {ingredientPropType}
 
 export default BurgerIngredients

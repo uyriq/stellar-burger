@@ -1,4 +1,6 @@
-import React, { useContext, useCallback, useEffect, useState } from 'react'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useContext, useCallback, useEffect, useState } from 'react'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import createBunIterator from '../utils/buns-generator'
@@ -10,8 +12,8 @@ const initialState = Buns.next()
 let OneBun
 
 function BurgerConstructor() {
-    const { setOrderData, orderData } = useContext(OrderContext)
-    const { setTotalPrice, totalPrice } = useContext(TotalPriceContext)
+    const { setOrderData } = useContext(OrderContext)
+    const { setTotalPrice } = useContext(TotalPriceContext)
     const { dataState, dataDispatch } = useContext(DataContext)
     const notbunsIngredients = dataState.data.filter((item) => item.type !== 'bun')
 
@@ -26,41 +28,33 @@ function BurgerConstructor() {
     const switchBun = () => {
         Buns.next()
         if (bunState.value === undefined) {
-            // похоже сюда  не попадает проход кода never
             resetBunSwitch()
         }
         if (bunState.value) setBunState(Buns.next())
-
-        // console.dir(bunState)
-        // console.log('click!')
     }
-    //  console.dir(bunState.value)
+
     if (bunState.value === undefined) resetBunSwitch()
     if (bunState.value) OneBun = bunState.value
-    // console.dir(`булка - ${JSON.stringify(onebun)}`);
 
     const makeOrderData = useCallback((array, bun) => {
         const newarr = array.filter((item) => !bunsIngredients.includes(item))
         newarr.unshift(bun)
         newarr.push(bun)
+        // eslint-disable-next-line no-underscore-dangle
         const zdata = newarr.map((item) => item._id)
         const result = newarr.reduce((acc, orderdata) => acc + orderdata.price, 0)
-        // console.log('\x1b[33m  OK \x1b[0m')
-        // console.log(`цена \n ${result}`)
+
         return [{ ingredients: zdata }, result]
     }, [])
 
     useEffect(() => {
         resetBunSwitch()
-        // console.log('init bun #0')
     }, [])
 
     useEffect(() => {
-        //  console.log('Привет! Я примонтировался')
         const [zdata, cost] = makeOrderData(notbunsIngredients, OneBun)
         setTotalPrice(cost)
         setOrderData(zdata)
-        // console.log(`- ${zdata.ingredients} - , \n ${cost}`)
     }, [bunState, dataState])
 
     const handleClose = (item) => () => {
@@ -83,6 +77,7 @@ function BurgerConstructor() {
                 {dataState.data
                     .filter((item) => item.type !== 'bun')
                     .map((item) => (
+                        // eslint-disable-next-line no-underscore-dangle
                         <li key={item._id} className={`${Styles['list-item']} `}>
                             <DragIcon type="primary" />
                             <ConstructorElement
@@ -105,7 +100,5 @@ function BurgerConstructor() {
         </section>
     )
 }
-
-/* BurgerConstructor.propTypes = { ingredientPropType }.isRequired */
 
 export default BurgerConstructor

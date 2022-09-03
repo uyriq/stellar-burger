@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { BURGER_API_URL, HEADERS } from '../components/utils/constants'
 
 const checkReponse = (res) => (res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
@@ -6,6 +5,7 @@ const checkReponse = (res) => (res.ok ? res.json() : res.json().then((err) => Pr
 const checkSuccess = (data) => (data.success ? data : Promise.reject(data))
 
 export const getIngredients = async () =>
+    // eslint-disable-next-line no-return-await
     await fetch(`${BURGER_API_URL}/ingredients`, {
         headers: HEADERS,
     })
@@ -21,6 +21,7 @@ export const getIngredients = async () =>
     */
 
 export const getOrderNumber = async (ingredients) =>
+    // eslint-disable-next-line no-return-await
     await fetch(`${BURGER_API_URL}/orders`, {
         method: 'POST',
         headers: HEADERS,

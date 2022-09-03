@@ -35,6 +35,7 @@ function* createBunIterator(
     let i = 0
     while (i < buns.length) {
         const bun = buns[i]
+        // eslint-disable-next-line no-plusplus
         i++
         yield bun
     }
