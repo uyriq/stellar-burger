@@ -36,7 +36,7 @@ BurgerIngredientsItem.propTypes = {
     ingredient: PropTypes.shape({
         image: PropTypes.string,
         name: PropTypes.string,
-        price: PropTypes.string,
+        price: PropTypes.number,
     }).isRequired,
 
     onClick: PropTypes.func.isRequired,

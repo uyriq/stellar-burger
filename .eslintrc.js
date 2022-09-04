@@ -14,7 +14,7 @@ module.exports = {
     },
     plugins: ['react', 'prettier'],
     rules: {
-        'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
+        'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx', '.tsx', '.ts'] }],
         'prettier/prettier': 0,
         'linebreak-style': 0,
 
