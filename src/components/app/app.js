@@ -4,6 +4,7 @@
 import { useState, useReducer, useEffect } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import AppHeader from '../app-header/app-header'
+import { apiIngredients } from '../../services/use-api'
 import Modal from '../modal/modal'
 import Card from '../modal/card'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
@@ -14,7 +15,7 @@ import useWindowDimensions from '../utils/use-windowdimensions'
 import { TotalPriceContext, OrderContext, DataContext } from '../../services/appContext'
 import Styles from './app.module.css'
 
-// TODO исправить ошибки Eslint
+// написатьь примечание на ревью
 
 const dataReducer = (state, { type, payload }) => {
     switch (type) {
@@ -46,6 +47,9 @@ function App() {
     const [dataState, dataDispatch] = useReducer(dataReducer, { data: [] }, undefined)
 
     // init
+    const { ingredients, loading } = apiIngredients()
+    console.log(ingredients, loading)
+
     useEffect(() => {
         getIngredients()
             // eslint-disable-next-line no-shadow

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TouchBackend } from 'react-dnd-touch-backend'
 import { DndProvider } from 'react-dnd'
-import store from './store'
+import { store } from './store'
 import App from './components/app/app'
 import './index.css'
 
