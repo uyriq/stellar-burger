@@ -1,18 +1,22 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect } from 'react'
-import ReactDom from 'react-dom'
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types'
+import ReactDom from 'react-dom'
+import { setShowCard } from '../../store/slices/ingredient-details-slice'
 import ModalOverlay from './modal-overlay'
 
 import Styles from './modal.module.css'
 
 const Modal = (props) => {
+    const dispatch = useDispatch()
     const portal = document.getElementById('root_modal_overlay')
 
     const closeOnEscapeKeyDown = (e) => {
         if (e.key === 'Escape') {
+            dispatch(setShowCard(false))
             props.onClose()
         }
     }
@@ -28,6 +32,7 @@ const Modal = (props) => {
 
     const onOverlayClose = (e) => {
         if (e.target === e.currentTarget) {
+            dispatch(setShowCard(false))
             onClose()
         }
     }

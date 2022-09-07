@@ -21,7 +21,6 @@ function Card(props) {
             <div className={` ${Style.div8}   text_type_digits-default text_color_inactive `}> {`${fat}`} </div>
             <div className={` ${Style.div9}   text_color_inactive text_type_main-small  `}> Углеводы, г </div>
             <div className={` ${Style.div10}  text_type_digits-default text_color_inactive `}>
-                {' '}
                 {`${carbohydrates}`}{' '}
             </div>
         </div>

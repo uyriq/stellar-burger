@@ -12,7 +12,7 @@ export const commonApi = createApi({
             return headers
         },
     }),
-    tagTypes: ['Ingred'],
+    tagTypes: ['Ingredients'],
     // eslint-disable-next-line no-unused-vars
     endpoints: (_) => ({}),
 })

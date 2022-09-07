@@ -10,17 +10,45 @@
     flex: 1;
 }
 
+/* конструктор показывает, что готов принять ингреденты  */
+.top span {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+.bottom span {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+.middle span {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
 
+.top div {
+    transform: translateY(5%);
+    width: 200%;
+    text-align: left;
+}
 
-.constructor>.list>* {
+.bottom div {
+    transform: translate(-22%, 100%);
+    width: 200%;
+}
+.middle div {
+    width: 200%;
+    transform: translate(-45%, 115%);
+    text-indent: -20%;
+}
+
+.constructor > .list > * {
     flex: 0 auto;
 }
 
-.constructor  span {
-    margin-right: 0 ;
+.constructor span {
+    margin-right: 0;
 }
 
-.list {   
+.list {
     margin-right: 0;
     width: 100%;
     flex: 1 1 auto;
@@ -30,7 +58,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
- 
+
 .list-item {
     flex-grow: 0;
     flex-shrink: 0;
@@ -41,7 +69,7 @@
 }
 
 .list-item span {
-    margin-left:-1.5% ;
+    margin-left: -1.5%;
     margin-right: 2%;
 }
 
