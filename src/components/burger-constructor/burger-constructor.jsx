@@ -12,15 +12,11 @@ import {
     selectBunsCart,
     selectNotBunsCart,
 } from '../../store/slices/burger-constructor-slice'
-// import createBunIterator from '../utils/buns-generator'
-import { TotalPriceContext, OrderContext } from '../../services/appContext'
+
 import Styles from './burger-constructor.module.css'
 
 function BurgerConstructor() {
     const dispatch = useDispatch()
-    const { setOrderData } = useContext(OrderContext)
-    const { setTotalPrice } = useContext(TotalPriceContext)
-    //    const { dataState, dataDispatch } = useContext(DataContext)
 
     const notbunsIngredients = useSelector(selectNotBunsCart)
     const bunsIngredient = useSelector(selectBunsCart)
@@ -43,7 +39,6 @@ function BurgerConstructor() {
     }, [])
 
     const handleClose = (item) => () => {
-        // console.log(`will handle close on - ${item._id}`)
         dispatch(delItem(item))
     }
 
@@ -57,7 +52,7 @@ function BurgerConstructor() {
         />
     ) : (
         <div className={`${Styles.top}`}>
-            <ConstructorElement type="top" text=""></ConstructorElement>
+            <ConstructorElement type="top" text="" />
             <p className="text text_type_main-small" style={{ transform: `translate(${150}px, ${-45}px)` }}>
                 🍔поместите сюда булочку🍔
             </p>
@@ -82,8 +77,10 @@ function BurgerConstructor() {
     )
 
     const htmlMiddleConstructorElement = bunsIngredient._id ? (
+        /* TODO: отобр. элементов бургера */
         <ul className={`${Styles.list} custom-scroll `} />
     ) : (
+        /* Заглушка, если элементов нет */
         <div className={`${Styles.middle} custom-scroll`}>
             <ConstructorElement type="" isLocked={false} />
             <MotoAnimate>🍔 поместите сюда начинки и соусы 🍔</MotoAnimate>

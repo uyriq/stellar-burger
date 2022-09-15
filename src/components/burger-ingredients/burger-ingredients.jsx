@@ -6,6 +6,13 @@
 import React, { useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import {
+    resetShowCard,
+    setShowCard,
+    selectShowCard,
+    selectDetailsCard,
+    setDetailsCard,
+} from '../../store/slices/ingredient-details-slice'
 import { ingredientsApi } from '../../store/services/ingredients.api'
 import BurgerIngredientsItem from './burger-ingredients-item'
 import Styles from './burger-ingredients.module.css'
@@ -18,8 +25,10 @@ function BurgerIngredients() {
     const { data } = useSelector((state) => ({
         data: state.api.queries['fetchIngredients(undefined)'].data.data,
     }))
-    const { show } = useSelector((state) => ({ show: state.ingredientDetail }))
-
+    // const { show } = useSelector((state) => ({ show: state.ingredientDetail }))
+    const isShowCard = useSelector(selectShowCard)
+    const detailsCard = useSelector(selectDetailsCard)
+    console.log(`${detailsCard} in burg-ing`)
     //    const { data, setDetails, show, setShow } = useContext(DataContext)
     const [choice, setChoice] = React.useState('buns')
 
@@ -28,11 +37,11 @@ function BurgerIngredients() {
     const main = data.filter((item) => item.type === 'main')
 
     const ingredientClick = (details) => {
-        if (show) {
+        if (isShowCard) {
             return
         }
-        setShow(true)
-        setDetails(details)
+        dispatch(setShowCard(true))
+        dispatch(setDetailsCard(details))
     }
 
     const IngredientsList = (array) =>
@@ -43,7 +52,7 @@ function BurgerIngredients() {
                 key={item._id}
                 ingredient={item}
                 onClick={() => ingredientClick(item)}
-                onClose={() => setShow(false)}
+                onClose={() => dispatch(setShowCard(false))}
             />
         ))
 
