@@ -3,15 +3,14 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
-    resetShowCard,
     setShowCard,
+    setDetailsCard,
     selectShowCard,
     selectDetailsCard,
-    setDetailsCard,
 } from '../../store/slices/ingredient-details-slice'
 import { ingredientsApi } from '../../store/services/ingredients.api'
 import BurgerIngredientsItem from './burger-ingredients-item'
@@ -20,21 +19,14 @@ import Styles from './burger-ingredients.module.css'
 function BurgerIngredients() {
     const dispatch = useDispatch()
     const pageRefs = useRef({})
-
-    //    const { data } = ingredientsApi.useFetchIngredientsQuery([])
-    const { data } = useSelector((state) => ({
-        data: state.api.queries['fetchIngredients(undefined)'].data.data,
-    }))
-    // const { show } = useSelector((state) => ({ show: state.ingredientDetail }))
+    const { ...data } = ingredientsApi.useFetchIngredientsQuery()
     const isShowCard = useSelector(selectShowCard)
-    const detailsCard = useSelector(selectDetailsCard)
-    console.log(`${detailsCard} in burg-ing`)
+    console.log(`${isShowCard} in burg-ing`)
     //    const { data, setDetails, show, setShow } = useContext(DataContext)
-    const [choice, setChoice] = React.useState('buns')
-
-    const buns = data.filter((item) => item.type === 'bun')
-    const sauces = data.filter((item) => item.type === 'sauce')
-    const main = data.filter((item) => item.type === 'main')
+    const [choice, setChoice] = useState('buns')
+    const buns = data.currentData.data.filter((item) => item.type === 'bun')
+    const sauces = data.currentData.data.filter((item) => item.type === 'sauce')
+    const main = data.currentData.data.filter((item) => item.type === 'main')
 
     const ingredientClick = (details) => {
         if (isShowCard) {

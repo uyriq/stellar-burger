@@ -7,11 +7,12 @@ export const orderDetailSlice = createSlice({
     name: 'orderDetail',
     initialState,
     reducers: {
-        setOrder: (state, action) => {
+        setOrder: (state, payload) => {
             const order = {
-                ...action.payload,
+                ...payload.payload,
             }
-            state.ids = order
+            console.log(order)
+            state.ids = { ...payload }
         },
         resetOrder: (state) => {
             // eslint-disable-next-line no-return-assign, no-unused-vars

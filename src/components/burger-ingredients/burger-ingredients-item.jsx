@@ -2,11 +2,20 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useDrag } from 'react-dnd'
+import { useDispatch } from 'react-redux'
+
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { PropTypes } from 'prop-types'
+import {
+    setShowCard,
+    setDetailsCard,
+    selectShowCard,
+    selectDetailsCard,
+} from '../../store/slices/ingredient-details-slice'
 import Styles from './burger-ingredients-item.module.css'
 
 function BurgerIngredientsItem(props) {
+    const dispatch = useDispatch()
     const { ingredient, onClick, onClose } = props
     const { name, image, price, _id } = ingredient
 
@@ -27,7 +36,7 @@ function BurgerIngredientsItem(props) {
                     onClick(ingredient)
                 }}
                 onClose={() => {
-                    onClose()
+                    dispatch(setShowCard(false))
                 }}
             >
                 <Counter count={1} size="default" />

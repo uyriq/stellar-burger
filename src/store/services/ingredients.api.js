@@ -12,7 +12,7 @@ export const ingredientsApi = commonApi.injectEndpoints({
             }),
             // eslint-disable-next-line no-unused-vars
             // transformResponse: (response) => response.data
-            providesTags: (result) => [{ type: 'Ingredients', id: 'Data' }],
+            // providesTags: (result) => [{ type: 'Ingredients', id: 'Data' }],
         }),
     }),
 })

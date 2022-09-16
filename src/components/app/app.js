@@ -3,9 +3,10 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/jsx-filename-extension */
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import ClipLoader from 'react-spinners/ClipLoader'
+import { setData, selectDataFetched } from '../../store/slices/fetched-data-slice'
 import {
     resetShowCard,
     setShowCard,
@@ -31,6 +32,8 @@ const App = memo(() => {
     const isShowCard = useSelector(selectShowCard)
     const detailsCard = useSelector(selectDetailsCard)
     const detailsOrder = useSelector(selectDetailsOrder)
+    const fetchedData = useSelector(selectDataFetched)
+
     const bunCart = useSelector(selectBunsCart)
 
     console.log(`isShowCard -  ${isShowCard} detailsCard - ${detailsCard._id} detailsOrder - ${detailsOrder}`)
@@ -40,24 +43,24 @@ const App = memo(() => {
     const smallStyle = isSmall ? { tansform: `scale(${+(width / 1280).toFixed(2)})` } : null
     console.log(`scale${+(width / 1280).toFixed(2)}`, isSmall)
     // init
-    const { ingredients, isLoading = true, isError = false } = apiIngredients()
+    const { ingredients: data, isLoading: loading, isError: error } = apiIngredients()
+    console.log(data.data, loading, error)
     // const data = useSelector((state) => state.api.queries['fetchIngredients(undefined)'].data.data)
-    console.log(ingredients, isLoading, isError)
-
+    useEffect(() => {
+        dispatch(setData(data))
+    }, [loading])
     return (
         <div className={Styles.page} style={smallStyle}>
-            {isError && (
-                <p className={`${Styles.page} text_color_error `}>
-                    Что-то пошло не так, не получены данные, {isError}{' '}
-                </p>
+            {error && (
+                <p className={`${Styles.page} text_color_error `}>Что-то пошло не так, не получены данные, {error} </p>
             )}
-            {isLoading && (
+            {loading && (
                 <span className={`${Styles.spinner} `}>
-                    <ClipLoader color="#ffff" loading={isLoading} size={550} />
+                    <ClipLoader color="#ffff" loading={loading} size={550} />
                 </span>
             )}
 
-            {Boolean(ingredients?.length) && (
+            {Boolean(data.data?.length) && (
                 <div className={`${Styles.container} `}>
                     <AppHeader />
                     <main

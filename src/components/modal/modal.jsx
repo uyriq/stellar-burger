@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
 import ReactDom from 'react-dom'
-import { setShowCard } from '../../store/slices/ingredient-details-slice'
 import ModalOverlay from './modal-overlay'
 
 import Styles from './modal.module.css'
@@ -16,7 +15,6 @@ const Modal = (props) => {
 
     const closeOnEscapeKeyDown = (e) => {
         if (e.key === 'Escape') {
-            dispatch(setShowCard(false))
             props.onClose()
         }
     }
@@ -32,7 +30,6 @@ const Modal = (props) => {
 
     const onOverlayClose = (e) => {
         if (e.target === e.currentTarget) {
-            dispatch(setShowCard(false))
             onClose()
         }
     }
