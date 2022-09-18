@@ -81,7 +81,7 @@ function BurgerConstructor() {
         <ul className={`${Styles.list} custom-scroll `} />
     ) : (
         /* Заглушка, если элементов нет */
-        <div className={`${Styles.middle} custom-scroll`}>
+        <div className={`${Styles.middle} custom-scroll`} style={{ whiteSpace: `pre-wrap` }}>
             <ConstructorElement type="" isLocked={false} />
             <MotoAnimate>🍔 поместите сюда начинки и соусы 🍔</MotoAnimate>
         </div>

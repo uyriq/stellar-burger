@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     show: false,
     details: {
-        _id: '',
+        _id: 'no_id',
         name: '',
         type: '',
         proteins: 0,
@@ -32,7 +32,7 @@ export const ingredientDetailSlice = createSlice({
             state = initialState
         },
         setShowCard: (state, payload) => {
-            state.show = payload // true
+            state.show = payload.payload // true
         },
         // eslint-disable-next-line no-return-assign, no-unused-vars
         resetShowCard: (state) => (state = initialState),

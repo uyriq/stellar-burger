@@ -36,7 +36,7 @@ const App = memo(() => {
 
     const bunCart = useSelector(selectBunsCart)
 
-    console.log(`isShowCard -  ${isShowCard} detailsCard - ${detailsCard._id} detailsOrder - ${detailsOrder}`)
+    console.dir(`isShowCard -  ${isShowCard} detailsCard - ${detailsCard._id} detailsOrder - ${detailsOrder}`)
 
     const { width } = useWindowDimensions()
     const isSmall = Boolean(width < 1280)
@@ -47,12 +47,12 @@ const App = memo(() => {
     console.log(data.data, loading, error)
     // const data = useSelector((state) => state.api.queries['fetchIngredients(undefined)'].data.data)
     useEffect(() => {
-        dispatch(setData(data))
+        dispatch(setData(data.data))
     }, [loading])
     return (
         <div className={Styles.page} style={smallStyle}>
             {error && (
-                <p className={`${Styles.page} text_color_error `}>Что-то пошло не так, не получены данные, {error} </p>
+                <p className={`${Styles.page} text_color_error `}>Что-то пошло не так, не получены данные, {error}</p>
             )}
             {loading && (
                 <span className={`${Styles.spinner} `}>
@@ -72,11 +72,11 @@ const App = memo(() => {
                     >
                         <section className={`${Styles.column} ${Styles.columns}`}>
                             <h2 className="text text_type_main-large">Соберите бургер</h2>
-                            {isShowCard && (
+                            {(!!isShowCard.payload || !!isShowCard) && (
                                 <div>
-                                    {/* не работает -  показываем и закрываем карту через (setShowCard())  */}
+                                    {/*  показываем и закрываем карту через (setShowCard())  */}
                                     <Modal title="Детали ингредиента" onClose={() => dispatch(setShowCard(false))}>
-                                        <Card {...detailsCard} />
+                                        <Card {...detailsCard.payload} />
                                     </Modal>
                                 </div>
                             )}
@@ -91,7 +91,7 @@ const App = memo(() => {
                                 </div>
                                 {!!detailsOrder &&
                                     !!bunCart._id(
-                                        <div className={`${Styles.middle}  ${Styles.article}  `}>
+                                        <div className={`${Styles.middle} ${Styles.article}`}>
                                             <BurgerOrder />
                                         </div>
                                     )}

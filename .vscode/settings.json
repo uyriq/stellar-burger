@@ -1,7 +1,4 @@
 {
-    "cSpell.words": [
-        "outsideclick",
-        "praktikum",
-        "rootelement"
-    ]
+    "cSpell.words": ["outsideclick", "praktikum", "rootelement"],
+    "editor.formatOnSave": true
 }

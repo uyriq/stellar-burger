@@ -5,6 +5,7 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useDrag } from 'react-dnd'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
     setShowCard,
@@ -12,6 +13,14 @@ import {
     selectShowCard,
     selectDetailsCard,
 } from '../../store/slices/ingredient-details-slice'
+import {
+    delItem,
+    addBun,
+    addNotBun,
+    resetItems,
+    selectBunsCart,
+    selectNotBunsCart,
+} from '../../store/slices/burger-constructor-slice'
 import { ingredientsApi } from '../../store/services/ingredients.api'
 import BurgerIngredientsItem from './burger-ingredients-item'
 import Styles from './burger-ingredients.module.css'
@@ -21,24 +30,42 @@ function BurgerIngredients() {
     const pageRefs = useRef({})
     const { ...data } = ingredientsApi.useFetchIngredientsQuery()
     const isShowCard = useSelector(selectShowCard)
-    console.log(`${isShowCard} in burg-ing`)
+    const notBunsCart = useSelector(selectNotBunsCart)
+    const bunsCart = useSelector(selectBunsCart)
+    //  console.log(`${isShowCard} in burg-ing`)
     //    const { data, setDetails, show, setShow } = useContext(DataContext)
+
     const [choice, setChoice] = useState('buns')
     const buns = data.currentData.data.filter((item) => item.type === 'bun')
     const sauces = data.currentData.data.filter((item) => item.type === 'sauce')
     const main = data.currentData.data.filter((item) => item.type === 'main')
 
+    function countIngredients(item) {
+        // булка по условию только 1
+        if (item.type === 'bun') return 1
+        if (item.type === 'sauce' || item.type === 'main')
+            return notBunsCart.filter((items) => el._id === item._id).length
+        return 888
+    }
+
     const ingredientClick = (details) => {
+        if (details.type === 'bun') dispatch(addBun(details))
+        if (details.type === 'sauce' || details.type === 'main') dispatch(addNotBun(details))
         if (isShowCard) {
             return
         }
+        console.log(
+            ` -- ${details.type === 'sauce' || details.type === 'main'
+                ? notBunsCart.filter((items) => el._id === details._id).length
+                : '1'
+            }`
+        )
         dispatch(setShowCard(true))
         dispatch(setDetailsCard(details))
     }
 
     const IngredientsList = (array) =>
         array.map((item) => (
-            // issue #27
             <BurgerIngredientsItem
                 // eslint-disable-next-line no-underscore-dangle
                 key={item._id}
