@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
-import { v4 as uuid } from 'uuid'
+import { v1 as uuid } from 'uuid'
 
 const initialState = {
     bun: {

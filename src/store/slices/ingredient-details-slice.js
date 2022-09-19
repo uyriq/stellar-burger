@@ -25,7 +25,8 @@ export const ingredientDetailSlice = createSlice({
     initialState,
     reducers: {
         setDetailsCard: (state, payload) => {
-            state.details = { ...payload }
+            state.details = payload
+            // state.details = { ...payload }
         },
         resetDetailsCard: (state) => {
             // eslint-disable-next-line no-return-assign, no-unused-vars

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useContext, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { MotoAnimate } from '../utils/moto-animate'
@@ -12,14 +12,14 @@ import {
     selectBunsCart,
     selectNotBunsCart,
 } from '../../store/slices/burger-constructor-slice'
-
+import BurgerConstructorItem from './burger-constructor-item'
 import Styles from './burger-constructor.module.css'
 
 function BurgerConstructor() {
     const dispatch = useDispatch()
 
-    const notbunsIngredients = useSelector(selectNotBunsCart)
-    const bunsIngredient = useSelector(selectBunsCart)
+    const notBunsCart = useSelector(selectNotBunsCart)
+    const bunsCart = useSelector(selectBunsCart)
 
     const makeOrderData = useCallback((array, bun) => {
         // newarr.unshift(bun)
@@ -30,7 +30,7 @@ function BurgerConstructor() {
         //  return [{ ingredients: zdata }, result]
     }, [])
 
-    useEffect(() => {}, [])
+    useEffect(() => { }, [])
 
     useEffect(() => {
         //  const [zdata, cost] = makeOrderData(notbunsIngredients, data.bun)
@@ -42,13 +42,13 @@ function BurgerConstructor() {
         dispatch(delItem(item))
     }
 
-    const htmlTopConstructorElement = bunsIngredient._id ? (
+    const htmlTopConstructorElement = bunsCart._id ? (
         <ConstructorElement
             type="top"
             isLocked
-            text={`${bunsIngredient.name} (верх)`}
-            price={bunsIngredient.price}
-            thumbnail={bunsIngredient.image}
+            text={`${bunsCart.name} (верх)`}
+            price={bunsCart.price}
+            thumbnail={bunsCart.image}
         />
     ) : (
         <div className={`${Styles.top}`}>
@@ -59,26 +59,39 @@ function BurgerConstructor() {
         </div>
     )
 
-    const htmlBottomConstructorElement = bunsIngredient._id ? (
+    const htmlBottomConstructorElement = bunsCart._id ? (
         <div>
             <ConstructorElement
                 type="bottom"
                 isLocked
-                text={`${bunsIngredient.name} (низ)`}
-                price={bunsIngredient.price}
-                thumbnail={bunsIngredient.image}
+                text={`${bunsCart.name} (низ)`}
+                price={bunsCart.price}
+                thumbnail={bunsCart.image}
             />
         </div>
     ) : (
         <div className={`${Styles.bottom}`}>
             <ConstructorElement type="bottom" />
-            <MotoAnimate>🍔🍔🍔🍔🍔🍔 поместите сюда булочку </MotoAnimate>
+            <MotoAnimate>🍔🍔🍔поместите сюда булочку🍔🍔🍔  </MotoAnimate>
         </div>
     )
 
-    const htmlMiddleConstructorElement = bunsIngredient._id ? (
+    const htmlMiddleConstructorElement = (bunsCart._id && notBunsCart.length > 0) ? (
         /* TODO: отобр. элементов бургера */
-        <ul className={`${Styles.list} custom-scroll `} />
+        <ul className={`${Styles.list} custom-scroll `} >
+            {notBunsCart.map((item) => (
+                < BurgerConstructorItem key={item.uuid} value={item._id} className={`${Styles['list-item']} `}>
+                    <DragIcon type="primary" />
+                    <ConstructorElement
+                        text={item.name}
+                        thumbnail={item.image}
+                        price={item.price}
+                        isLocked={false}
+                        handleClose={handleClose(item)}
+                    />
+                </BurgerConstructorItem>
+            ))}
+        </ul>
     ) : (
         /* Заглушка, если элементов нет */
         <div className={`${Styles.middle} custom-scroll`} style={{ whiteSpace: `pre-wrap` }}>
