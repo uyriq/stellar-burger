@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useCallback, useEffect, useState } from 'react'
@@ -72,15 +73,15 @@ function BurgerConstructor() {
     ) : (
         <div className={`${Styles.bottom}`}>
             <ConstructorElement type="bottom" />
-            <MotoAnimate>🍔🍔🍔поместите сюда булочку🍔🍔🍔  </MotoAnimate>
+            <MotoAnimate>🍔🍔🍔поместите сюда булочку🍔🍔🍔</MotoAnimate>
         </div>
     )
 
     const htmlMiddleConstructorElement = (bunsCart._id && notBunsCart.length > 0) ? (
-        /* TODO: отобр. элементов бургера */
+        /* TODO:  useDrag перетаскивание внутри конструктора */
         <ul className={`${Styles.list} custom-scroll `} >
             {notBunsCart.map((item) => (
-                < BurgerConstructorItem key={item.uuid} value={item._id} className={`${Styles['list-item']} `}>
+                < BurgerConstructorItem key={item.uuid} value={item._id}>
                     <DragIcon type="primary" />
                     <ConstructorElement
                         text={item.name}

@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable react/require-default-props */
 import PropTypes from "prop-types"
 import { useRef, useEffect, } from "react";
-
+import Styles from './burger-constructor.module.css'
 
 function BurgerConstructorItem({ children }) {
     const ref = useRef();
@@ -12,12 +14,13 @@ function BurgerConstructorItem({ children }) {
     }, [ref]);
 
     return (
-        <li className="Item" ref={ref}>
+        <li ref={ref} className={`${Styles['list-item']} `}>
             {children}
         </li>
     );
 }
 
+// для вставки ингредиента не вниз а сверху списка  переупорядочить список  setItems( (x) => [...x, makeItem()].sort(sortItems) )
 function sortItems(a, b) {
     return a.key.localeCompare(b.key);
 }
@@ -25,8 +28,6 @@ function sortItems(a, b) {
 BurgerConstructorItem.propTypes = {
     children: PropTypes.objectOf(
         PropTypes.shape({
-            value: PropTypes.string,
-            key: PropTypes.string,
             uuid: PropTypes.string,
             _id: PropTypes.string,
             name: PropTypes.string,
@@ -41,7 +42,9 @@ BurgerConstructorItem.propTypes = {
             image_large: PropTypes.string,
             __v: PropTypes.number,
         })
-    ).isRequired
+    ).isRequired,
+    value: PropTypes.string,
+    key: PropTypes.string,
 }
 
 export default BurgerConstructorItem
