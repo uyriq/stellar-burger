@@ -17,7 +17,7 @@ import {
     delItem,
     addBun,
     addNotBun,
-    resetItems,
+    resetBuns,
     selectBunsCart,
     selectNotBunsCart,
 } from '../../store/slices/burger-constructor-slice'
@@ -42,9 +42,14 @@ function BurgerIngredients() {
 
     function countIngredients(item) {
         // булка по условию только 1
-        const bunCount = (Object.keys(bunsCart.Buns).length !== 0) ? 1 : 0
-        if (item.type === 'bun') return bunCount
+        if (item.type === 'bun') {
+
+            // eslint-disable-next-line no-underscore-dangle
+            const bunCount = ((bunsCart._id).length !== 0 && bunsCart._id !== '' && bunsCart._id === item._id) ? 1 : 0
+            return bunCount
+        }
         if (item.type === 'sauce' || item.type === 'main')
+            // eslint-disable-next-line no-underscore-dangle
             return notBunsCart.filter((el) => el._id === item._id).length
         return 888
     }
@@ -67,6 +72,7 @@ function BurgerIngredients() {
                 ingredient={item}
                 onClick={() => ingredientClick(item)}
                 onClose={() => dispatch(setShowCard(false))}
+                counter={() => countIngredients(item)}
             />
         ))
 

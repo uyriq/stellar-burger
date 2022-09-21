@@ -52,10 +52,13 @@ export const burgerConstructorSlice = createSlice({
             state.notbun = initialState.notbun
             state.bun = initialState.bun
         },
+        resetBuns: (state) => {
+            state.bun = initialState.bun
+        },
     },
 })
 
-export const { addBun, addNotBun, delItem, resetItems } = burgerConstructorSlice.actions
+export const { addBun, addNotBun, delItem, resetItems, resetBuns } = burgerConstructorSlice.actions
 
 export default burgerConstructorSlice.reducer
 

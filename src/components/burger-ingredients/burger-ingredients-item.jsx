@@ -16,7 +16,7 @@ import Styles from './burger-ingredients-item.module.css'
 
 function BurgerIngredientsItem(props) {
     const dispatch = useDispatch()
-    const { ingredient, onClick, onClose } = props
+    const { ingredient, onClick, onClose, counter } = props
     const { name, image, price, _id } = ingredient
 
     const [{ opacity }, refDrag] = useDrag({
@@ -37,7 +37,7 @@ function BurgerIngredientsItem(props) {
                 }}
                 onClose={onClose}
             >
-                <Counter count={1} size="default" />
+                <Counter count={counter(ingredient)} size="default" />
                 <img src={image} alt={name} className="ml-4 mr-4 mb-1" />
                 <div className={`${Styles.currency} mb-1`}>
                     <span className="text text_type_digits-default ">{price}</span>
@@ -60,6 +60,7 @@ BurgerIngredientsItem.propTypes = {
 
     onClick: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+    counter: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredientsItem
