@@ -40,12 +40,12 @@ export const burgerConstructorSlice = createSlice({
             state.notbun = [...state.notbun, notbun]
         },
         delItem: (state, action) => {
-            const { type, uuid } = action.payload
+            const { type, uuid: _uuid } = action.payload
             if (type === 'bun') {
                 state.bun = initialState.bun
             }
             if (type !== 'bun' && type !== undefined && type !== null) {
-                state.notbun = state.notbun.filter((el) => el.uuid !== uuid)
+                state.notbun = state.notbun.filter((el) => el.uuid !== _uuid)
             }
         },
         resetItems: (state) => {

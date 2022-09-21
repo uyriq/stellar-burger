@@ -42,26 +42,21 @@ function BurgerIngredients() {
 
     function countIngredients(item) {
         // булка по условию только 1
-        if (item.type === 'bun') return 1
+        const bunCount = (Object.keys(bunsCart.Buns).length !== 0) ? 1 : 0
+        if (item.type === 'bun') return bunCount
         if (item.type === 'sauce' || item.type === 'main')
-            return notBunsCart.filter((items) => el._id === item._id).length
+            return notBunsCart.filter((el) => el._id === item._id).length
         return 888
     }
 
     const ingredientClick = (details) => {
         if (details.type === 'bun') dispatch(addBun(details))
         if (details.type === 'sauce' || details.type === 'main') dispatch(addNotBun(details))
-        if (isShowCard) {
+        if (isShowCard || isShowCard.payload) {
             return
         }
-        console.log(
-            ` -- ${details.type === 'sauce' || details.type === 'main'
-                ? notBunsCart.filter((items) => el._id === details._id).length
-                : '1'
-            }`
-        )
-        dispatch(setShowCard(true))
         dispatch(setDetailsCard(details))
+        dispatch(setShowCard(true))
     }
 
     const IngredientsList = (array) =>

@@ -35,9 +35,7 @@ function BurgerIngredientsItem(props) {
                 onClick={() => {
                     onClick(ingredient)
                 }}
-                onClose={() => {
-                    dispatch(setShowCard(false))
-                }}
+                onClose={onClose}
             >
                 <Counter count={1} size="default" />
                 <img src={image} alt={name} className="ml-4 mr-4 mb-1" />
