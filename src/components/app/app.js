@@ -33,8 +33,7 @@ const App = memo(() => {
     const detailsCard = useSelector(selectDetailsCard)
     const detailsOrder = useSelector(selectDetailsOrder)
     const fetchedData = useSelector(selectDataFetched)
-
-    const bunCart = useSelector(selectBunsCart)
+    const bunsCart = useSelector(selectBunsCart)
 
     console.dir(`isShowCard -  ${isShowCard} detailsCard - ${detailsCard._id} detailsOrder - ${detailsOrder}`)
 
@@ -89,12 +88,11 @@ const App = memo(() => {
                                 <div className={`${Styles.article} ${Styles.first__article}`}>
                                     <BurgerConstructor />
                                 </div>
-                                {!!detailsOrder &&
-                                    !!bunCart._id(
-                                        <div className={`${Styles.middle} ${Styles.article}`}>
-                                            <BurgerOrder />
-                                        </div>
-                                    )}
+                                {Boolean(bunsCart._id.length !== 0 && bunsCart._id !== '') && (
+                                    <div className={`${Styles.middle} ${Styles.article}`}>
+                                        <BurgerOrder />
+                                    </div>
+                                )}
                             </section>
                         </div>
                     </main>

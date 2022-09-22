@@ -1,22 +1,38 @@
-import { useContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import {
+    delItem,
+    addBun,
+    addNotBun,
+    resetItems,
+    selectBunsCart,
+    selectNotBunsCart,
+} from '../../store/slices/burger-constructor-slice'
+import { setOrder, resetOrder, setShowOrder, resetShowOrder, selectShowOrder } from '../../store/slices/order-details-slice'
 import Modal from '../modal/modal'
 import OrderConfirm from '../modal/order-confirm'
 import { getOrderNumber } from '../../services/api'
-import { TotalPriceContext, OrderContext } from '../../services/appContext'
 import Styles from '../burger-ingredients/burger-ingredients.module.css'
 
 /* BurgerOrder.defaultProps xaрдкод пока нет ответа от апи  */
 
 function BurgerOrder() {
-    const { totalPrice } = useContext(TotalPriceContext)
-    const { orderData } = useContext(OrderContext)
+    const notBunsCart = useSelector(selectNotBunsCart)
+    const bunsCart = useSelector(selectBunsCart)
+    const isShowOrder = useSelector(selectShowOrder)
+    //    const { totalPrice } = useContext(TotalPriceContext)
+    //    const { orderData } = useContext(OrderContext)
     const [orderNumber, setOrderNumber] = useState(null)
-    const [showorder, setShowOrder] = useState(false)
+
     const [message, setMessage] = useState('')
+    const dispatch = useDispatch()
+
+    const orderData = []
+    const totalPrice = 0
 
     useEffect(() => {
-        if (showorder) {
+        if (isShowOrder || isShowOrder.payload) {
             getOrderNumber(orderData)
                 .then((data) => {
                     setOrderNumber(data)
@@ -33,7 +49,7 @@ function BurgerOrder() {
                 // eslint-disable-next-line no-console
                 .finally(console.log('data api - ok!'))
         }
-        return () => {}
+        return () => { }
     }, [totalPrice, orderData, message])
 
     //    console.log(`номер заказа -- ${JSON.stringify(orderNumber)}`)
@@ -55,7 +71,7 @@ function BurgerOrder() {
                 >
                     Оформить заказ
                 </Button>
-                {showorder && (
+                {isShowOrder && (
                     <Modal title="&nbsp;" onClose={() => setShowOrder(false)}>
                         <OrderConfirm numero={orderNumber?.order.number} message={message} />
                     </Modal>

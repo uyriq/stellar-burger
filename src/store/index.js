@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 // import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { fetchedDataSlice } from './slices/fetched-data-slice'
 import { burgerConstructorSlice } from './slices/burger-constructor-slice'
-import { orderDetailSlice } from './slices/order-details-slice'
+import { orderDetailsSlice } from './slices/order-details-slice'
 import { ingredientDetailSlice } from './slices/ingredient-details-slice'
 import { commonApi } from './services/common.api'
 
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     fetchedData: fetchedDataSlice.reducer,
     burgerConstructor: burgerConstructorSlice.reducer,
     ingredientDetail: ingredientDetailSlice.reducer,
-    orderDetails: orderDetailSlice.reducer,
+    orderDetails: orderDetailsSlice.reducer,
 })
 
 // eslint-disable-next-line import/prefer-default-export

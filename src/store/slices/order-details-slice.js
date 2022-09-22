@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = { ids: [1, 2], show: false }
 
-export const orderDetailSlice = createSlice({
-    name: 'orderDetail',
+export const orderDetailsSlice = createSlice({
+    name: 'orderDetails',
     initialState,
     reducers: {
         setOrder: (state, payload) => {
@@ -24,13 +24,17 @@ export const orderDetailSlice = createSlice({
             }
             state.show = !curState.show
         },
+        setShow2Order: (state, payload) => {
+            state.show = payload.payload // true
+        },
+
         // eslint-disable-next-line no-return-assign, no-unused-vars
         resetShowOrder: (state) => (state = initialState),
     },
 })
 
-export const { setOrder, resetOrder, setShowOrder, resetShowOrder } = orderDetailSlice.actions
-export const selectShowOrder = (state) => state.orderDetail.show
-export const selectDetailsOrder = (state) => state.orderDetail?.ids
+export const { setOrder, resetOrder, setShowOrder, resetShowOrder } = orderDetailsSlice.actions
+export const selectShowOrder = (state) => state.orderDetails?.show
+export const selectDetailsOrder = (state) => state.orderDetails?.ids
 
-export default orderDetailSlice.reducer
+export default orderDetailsSlice.reducer
