@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
@@ -9,27 +9,33 @@ import {
     selectBunsCart,
     selectNotBunsCart,
 } from '../../store/slices/burger-constructor-slice'
-import { setOrder, resetOrder, setShowOrder, resetShowOrder, selectShowOrder } from '../../store/slices/order-details-slice'
+import {
+    setOrder,
+    resetOrder,
+    setShowOrder,
+    resetShowOrder,
+    selectShowOrder,
+} from '../../store/slices/order-details-slice'
 import Modal from '../modal/modal'
 import OrderConfirm from '../modal/order-confirm'
 import { getOrderNumber } from '../../services/api'
 import Styles from '../burger-ingredients/burger-ingredients.module.css'
 
-/* BurgerOrder.defaultProps xaрдкод пока нет ответа от апи  */
-
 function BurgerOrder() {
     const notBunsCart = useSelector(selectNotBunsCart)
     const bunsCart = useSelector(selectBunsCart)
     const isShowOrder = useSelector(selectShowOrder)
-    //    const { totalPrice } = useContext(TotalPriceContext)
-    //    const { orderData } = useContext(OrderContext)
     const [orderNumber, setOrderNumber] = useState(null)
 
     const [message, setMessage] = useState('')
     const dispatch = useDispatch()
 
-    const orderData = []
-    const totalPrice = 0
+    const orderData = useMemo(() => ({ ingredients: notBunsCart.map(({ _id }) => _id) }), [bunsCart, notBunsCart])
+    const totalPrice = useMemo(
+        () => notBunsCart.reduce((sum, { price }) => sum + price, 0) + bunsCart.price * 2,
+        [bunsCart, notBunsCart]
+    )
+    // notBunsCart.reduce((a, b) => ({ price: (Number(a.price) ) + Number(b.price) }), 0) * 1 + bunsCart.price * 2
 
     useEffect(() => {
         if (isShowOrder || isShowOrder.payload) {
@@ -49,7 +55,7 @@ function BurgerOrder() {
                 // eslint-disable-next-line no-console
                 .finally(console.log('data api - ok!'))
         }
-        return () => { }
+        return () => {}
     }, [totalPrice, orderData, message])
 
     //    console.log(`номер заказа -- ${JSON.stringify(orderNumber)}`)
