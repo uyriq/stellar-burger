@@ -1,21 +1,8 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import {
-    delItem,
-    addBun,
-    addNotBun,
-    resetItems,
-    selectBunsCart,
-    selectNotBunsCart,
-} from '../../store/slices/burger-constructor-slice'
-import {
-    setOrder,
-    resetOrder,
-    setShowOrder,
-    resetShowOrder,
-    selectShowOrder,
-} from '../../store/slices/order-details-slice'
+import { selectBunsCart, selectNotBunsCart } from '../../store/slices/burger-constructor-slice'
+import { setShowOrder, selectShowOrder } from '../../store/slices/order-details-slice'
 import Modal from '../modal/modal'
 import OrderConfirm from '../modal/order-confirm'
 import { getOrderNumber } from '../../services/api'
@@ -30,7 +17,18 @@ function BurgerOrder() {
     const [message, setMessage] = useState('')
     const dispatch = useDispatch()
 
-    const orderData = useMemo(() => ({ ingredients: notBunsCart.map(({ _id }) => _id) }), [bunsCart, notBunsCart])
+    // eslint-disable-next-line no-underscore-dangle
+    const orderData = useMemo(
+        () => ({
+            ingredients: []
+                // eslint-disable-next-line no-underscore-dangle
+                .concat(bunsCart._id)
+                .concat(notBunsCart.map(({ _id }) => _id))
+                // eslint-disable-next-line no-underscore-dangle
+                .concat(bunsCart._id),
+        }),
+        [bunsCart, notBunsCart]
+    )
     const totalPrice = useMemo(
         () => notBunsCart.reduce((sum, { price }) => sum + price, 0) + bunsCart.price * 2,
         [bunsCart, notBunsCart]
@@ -71,14 +69,14 @@ function BurgerOrder() {
                     type="primary"
                     size="large"
                     onClick={() => {
-                        setShowOrder(true)
+                        dispatch(setShowOrder())
                         setMessage('Приступили к работе ...')
                     }}
                 >
                     Оформить заказ
                 </Button>
                 {isShowOrder && (
-                    <Modal title="&nbsp;" onClose={() => setShowOrder(false)}>
+                    <Modal title="&nbsp;" onClose={() => dispatch(setShowOrder())}>
                         <OrderConfirm numero={orderNumber?.order.number} message={message} />
                     </Modal>
                 )}
