@@ -19,7 +19,8 @@
     visibility: hidden !important;
     opacity: 0 !important;
 }
-.middle span {
+.middle span,
+.middlewithbun span {
     visibility: hidden !important;
     opacity: 0 !important;
 }
@@ -38,6 +39,17 @@
     width: 200%;
     transform: translate(-45%, 115%);
     text-indent: -20%;
+}
+
+.middlewithbun div {
+    width: 200%;
+    transform: translate(-22%, 15%);
+    text-indent: -20%;
+}
+
+.middlewithbun h4 {
+    transform: translate(0px, -35px) !important;
+    text-indent: 0%;
 }
 
 .constructor > .list > * {

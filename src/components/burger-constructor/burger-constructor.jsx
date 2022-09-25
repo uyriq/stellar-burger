@@ -31,7 +31,7 @@ function BurgerConstructor() {
         //  return [{ ingredients: zdata }, result]
     }, [])
 
-    useEffect(() => { }, [])
+    useEffect(() => {}, [])
 
     useEffect(() => {
         //  const [zdata, cost] = makeOrderData(notbunsIngredients, data.bun)
@@ -77,29 +77,30 @@ function BurgerConstructor() {
         </div>
     )
 
-    const htmlMiddleConstructorElement = (bunsCart._id && notBunsCart.length > 0) ? (
-        /* TODO:  useDrag перетаскивание внутри конструктора */
-        <ul className={`${Styles.list} custom-scroll `} >
-            {notBunsCart.map((item) => (
-                < BurgerConstructorItem key={item.uuid} value={item._id}>
-                    <DragIcon type="primary" />
-                    <ConstructorElement
-                        text={item.name}
-                        thumbnail={item.image}
-                        price={item.price}
-                        isLocked={false}
-                        handleClose={handleClose(item)}
-                    />
-                </BurgerConstructorItem>
-            ))}
-        </ul>
-    ) : (
-        /* Заглушка, если элементов нет */
-        <div className={`${Styles.middle} custom-scroll`} style={{ whiteSpace: `pre-wrap` }}>
-            <ConstructorElement type="" isLocked={false} />
-            <MotoAnimate>🍔 поместите сюда начинки и соусы 🍔</MotoAnimate>
-        </div>
-    )
+    const htmlMiddleConstructorElement =
+        bunsCart._id && notBunsCart.length > 0 ? (
+            /* TODO:  useDrag перетаскивание внутри конструктора */
+            <ul className={`${Styles.list} custom-scroll `}>
+                {notBunsCart.map((item) => (
+                    <BurgerConstructorItem key={item.uuid} value={item._id}>
+                        <DragIcon type="primary" />
+                        <ConstructorElement
+                            text={item.name}
+                            thumbnail={item.image}
+                            price={item.price}
+                            isLocked={false}
+                            handleClose={handleClose(item)}
+                        />
+                    </BurgerConstructorItem>
+                ))}
+            </ul>
+        ) : (
+            /* Заглушка, если элементов нет */
+            <div className={bunsCart._id ? `${Styles.middlewithbun}` : `${Styles.middle}`}>
+                <ConstructorElement type="" isLocked={false} />
+                <MotoAnimate>🍔 поместите сюда начинки и соусы 🍔</MotoAnimate>
+            </div>
+        )
 
     return (
         <section className={`${Styles.constructor} `}>
