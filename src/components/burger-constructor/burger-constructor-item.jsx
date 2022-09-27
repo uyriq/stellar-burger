@@ -1,28 +1,80 @@
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/require-default-props */
-import PropTypes from "prop-types"
-import { useRef, useEffect, } from "react";
+import PropTypes from 'prop-types'
+import { useRef, useEffect } from 'react'
+import { useDrag, useDrop } from 'react-dnd'
 import Styles from './burger-constructor.module.css'
 
-function BurgerConstructorItem({ children }) {
-    const ref = useRef();
+function BurgerConstructorItem({ children, key, index, moveCard }) {
+    const ref = useRef()
+    const [, drop] = useDrop({
+        accept: 'card',
+        hover: (item, monitor) => {
+            if (!ref.current) {
+                return
+            }
+
+            const dragIndex = item.index
+            const hoverIndex = index
+
+            if (dragIndex === hoverIndex) {
+                return
+            }
+
+            // Determine rectangle on screen
+            const hoverBoundingRect = ref.current?.getBoundingClientRect()
+            // Get vertical middle
+            const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+
+            // Determine mouse position
+            const clientOffset = monitor.getClientOffset()
+            // Get pixels to the top
+            const hoverClientY = clientOffset.y - hoverBoundingRect.top
+
+            // Only perform the move when the mouse has crossed half of the items height
+            // When dragging downwards, only move when the cursor is below 50%
+            // When dragging upwards, only move when the cursor is above 50%
+            // Dragging downwards
+            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+                return
+            }
+            // Dragging upwards
+            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+                return
+            }
+
+            moveCard(dragIndex, hoverIndex)
+
+            item.index = hoverIndex
+        },
+    })
+
+    const [{ isDragging }, drag] = useDrag({
+        type: 'card',
+        item: () => ({ key, index }),
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
+    })
+    const opacity = isDragging ? 0 : 1
+    drag(drop(ref))
 
     useEffect(() => {
         if (ref.current) {
-            ref.current.scrollIntoView({ behavior: "smooth", block: "end" });
+            ref.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
         }
-    }, [ref]);
+    }, [])
 
     return (
-        <li ref={ref} className={`${Styles['list-item']} `}>
+        <li ref={ref} className={`${Styles['list-item']} `} style={{ ...Styles, opacity }}>
             {children}
         </li>
-    );
+    )
 }
 
 // для вставки ингредиента не вниз а сверху списка  переупорядочить список  setItems( (x) => [...x, makeItem()].sort(sortItems) )
 function sortItems(a, b) {
-    return a.key.localeCompare(b.key);
+    return a.key.localeCompare(b.key)
 }
 
 BurgerConstructorItem.propTypes = {
@@ -31,7 +83,7 @@ BurgerConstructorItem.propTypes = {
             uuid: PropTypes.string,
             _id: PropTypes.string,
             name: PropTypes.string,
-            type: PropTypes.oneOf("mains", "sauces"),
+            type: PropTypes.oneOf('mains', 'sauces'),
             proteins: PropTypes.number,
             fat: PropTypes.number,
             carbohydrates: PropTypes.number,
@@ -43,8 +95,9 @@ BurgerConstructorItem.propTypes = {
             __v: PropTypes.number,
         })
     ).isRequired,
-    value: PropTypes.string,
+    index: PropTypes.number,
     key: PropTypes.string,
+    moveCard: PropTypes.func,
 }
 
 export default BurgerConstructorItem

@@ -21,6 +21,7 @@ function BurgerConstructor() {
 
     const notBunsCart = useSelector(selectNotBunsCart)
     const bunsCart = useSelector(selectBunsCart)
+    const [cards, setCards] = useState([...notBunsCart]) // для сортировки dnd внутри конструктора
 
     const makeOrderData = useCallback((array, bun) => {
         // newarr.unshift(bun)
@@ -43,6 +44,14 @@ function BurgerConstructor() {
         dispatch(delItem(item))
     }
 
+    const moveCard = (dragIndex, hoverIndex) => {
+        const dragCard = cards[dragIndex]
+        const newCards = [...cards]
+        newCards.splice(dragIndex, 1)
+        newCards.splice(hoverIndex, 0, dragCard)
+
+        setCards(newCards)
+    }
     const htmlTopConstructorElement = bunsCart._id ? (
         <ConstructorElement
             type="top"
@@ -81,8 +90,8 @@ function BurgerConstructor() {
         bunsCart._id && notBunsCart.length > 0 ? (
             /* TODO:  useDrag перетаскивание внутри конструктора */
             <ul className={`${Styles.list} custom-scroll `}>
-                {notBunsCart.map((item) => (
-                    <BurgerConstructorItem key={item.uuid} value={item._id}>
+                {notBunsCart.map((item, index) => (
+                    <BurgerConstructorItem key={item.uuid} index={index} value={item._id}>
                         <DragIcon type="primary" />
                         <ConstructorElement
                             text={item.name}
@@ -90,6 +99,7 @@ function BurgerConstructor() {
                             price={item.price}
                             isLocked={false}
                             handleClose={handleClose(item)}
+                            moveCard={moveCard}
                         />
                     </BurgerConstructorItem>
                 ))}
