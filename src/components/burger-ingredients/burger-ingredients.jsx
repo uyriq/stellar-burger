@@ -3,9 +3,8 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
-import React, { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useDrag } from 'react-dnd'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
     setShowCard,
@@ -21,6 +20,7 @@ import {
     selectBunsCart,
     selectNotBunsCart,
 } from '../../store/slices/burger-constructor-slice'
+import { setData } from '../../store/slices/fetched-data-slice'
 import { ingredientsApi } from '../../store/services/ingredients.api'
 import BurgerIngredientsItem from './burger-ingredients-item'
 import Styles from './burger-ingredients.module.css'
@@ -40,12 +40,15 @@ function BurgerIngredients() {
     const sauces = data.currentData.data.filter((item) => item.type === 'sauce')
     const main = data.currentData.data.filter((item) => item.type === 'main')
 
+    useEffect(() => {
+        dispatch(setData([].concat(buns).concat(sauces).concat(main)))
+    }, [])
+
     function countIngredients(item) {
         // булка по условию только 1
         if (item.type === 'bun') {
-
             // eslint-disable-next-line no-underscore-dangle
-            const bunCount = ((bunsCart._id).length !== 0 && bunsCart._id !== '' && bunsCart._id === item._id) ? 1 : 0
+            const bunCount = bunsCart._id.length !== 0 && bunsCart._id !== '' && bunsCart._id === item._id ? 1 : 0
             return bunCount
         }
         if (item.type === 'sauce' || item.type === 'main')

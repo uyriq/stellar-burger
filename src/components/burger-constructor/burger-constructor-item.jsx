@@ -58,7 +58,7 @@ function BurgerConstructorItem({ children, key, index, moveCard }) {
     })
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
-
+    // нужна проверка на булку, чтобы булку не перемещать if (item.type !== 'bun') drag(drop(ref));
     useEffect(() => {
         if (ref.current) {
             ref.current.scrollIntoView({ behavior: 'smooth', block: 'end' })

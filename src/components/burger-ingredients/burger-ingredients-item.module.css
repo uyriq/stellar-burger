@@ -8,6 +8,11 @@
     text-align: center;
 }
 
+.item__hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .currency {
     flex-direction: row;
     break-inside: avoid;

@@ -14,6 +14,7 @@ import {
     selectNotBunsCart,
 } from '../../store/slices/burger-constructor-slice'
 import BurgerConstructorItem from './burger-constructor-item'
+import CategoryDropAccept from './burger-constructor-category'
 import Styles from './burger-constructor.module.css'
 
 function BurgerConstructor() {
@@ -23,22 +24,11 @@ function BurgerConstructor() {
     const bunsCart = useSelector(selectBunsCart)
     const [cards, setCards] = useState([...notBunsCart]) // для сортировки dnd внутри конструктора
 
-    const makeOrderData = useCallback((array, bun) => {
-        // newarr.unshift(bun)
-        // newarr.push(bun)
-        // eslint-disable-next-line no-underscore-dangle
-        //  const zdata = newarr.map((item) => item._id)
-        //  const result = newarr.reduce((acc, orderdata) => acc + orderdata.price, 0)
-        //  return [{ ingredients: zdata }, result]
-    }, [])
+    const makeOrderData = useCallback((array, bun) => {}, [])
 
     useEffect(() => {}, [])
 
-    useEffect(() => {
-        //  const [zdata, cost] = makeOrderData(notbunsIngredients, data.bun)
-        //  setTotalPrice(cost)
-        //  setOrderData(zdata)
-    }, [])
+    useEffect(() => {}, [])
 
     const handleClose = (item) => () => {
         dispatch(delItem(item))
@@ -114,9 +104,15 @@ function BurgerConstructor() {
 
     return (
         <section className={`${Styles.constructor} `}>
-            <div>{htmlTopConstructorElement}</div>
-            <div>{htmlMiddleConstructorElement}</div>
-            <div>{htmlBottomConstructorElement}</div>
+            <div>
+                <CategoryDropAccept category="bun"> {htmlTopConstructorElement}</CategoryDropAccept>
+            </div>
+            <div>
+                <CategoryDropAccept category="notbun">{htmlMiddleConstructorElement}</CategoryDropAccept>
+            </div>
+            <div>
+                <CategoryDropAccept category="bun">{htmlBottomConstructorElement}</CategoryDropAccept>
+            </div>
         </section>
     )
 }

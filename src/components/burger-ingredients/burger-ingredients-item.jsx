@@ -17,21 +17,22 @@ import Styles from './burger-ingredients-item.module.css'
 function BurgerIngredientsItem(props) {
     const dispatch = useDispatch()
     const { ingredient, onClick, onClose, counter } = props
-    const { name, image, price, _id } = ingredient
+    const { name, image, price, _id, type } = ingredient
 
-    const [{ opacity }, refDrag] = useDrag({
-        type: 'items',
-        item: { _id },
+    const [{ isDrag }, dragRef] = useDrag({
+        type: `ingredient`, // -${type}
+        item: { _id, type },
         collect: (monitor) => ({
-            opacity: monitor.isDragging() ? 0.1 : 1,
+            isDrag: monitor.isDragging(),
         }),
     })
-
+    const opacity = isDrag ? 0.5 : 1.0
     return (
         <li className={`${Styles.item} mb-8 `}>
             <div
-                ref={refDrag}
-                style={{ opacity }}
+                ref={dragRef}
+                style={{ ...Styles, opacity }}
+                className={isDrag ? `${Styles.item__hide}` : {}}
                 onClick={() => {
                     onClick(ingredient)
                 }}
@@ -56,6 +57,7 @@ BurgerIngredientsItem.propTypes = {
         name: PropTypes.string,
         price: PropTypes.number,
         _id: PropTypes.string,
+        type: PropTypes.string,
     }).isRequired,
 
     onClick: PropTypes.func.isRequired,
