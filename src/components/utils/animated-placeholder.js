@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 
-export function MotoAnimate({ children }) {
+export function AnimatedPlaceholder({ children }) {
     const randomDelay = (0.1 + 1.5 * Math.random()).toFixed(2)
     const randomDuration = (0.1 + 1.1 * Math.random()).toFixed(2)
 
@@ -39,6 +39,6 @@ export function MotoAnimate({ children }) {
     )
 }
 
-MotoAnimate.propTypes = {
+AnimatedPlaceholder.propTypes = {
     children: PropTypes.string.isRequired,
 }

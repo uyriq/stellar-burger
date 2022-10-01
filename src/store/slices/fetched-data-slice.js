@@ -32,9 +32,9 @@ export const fetchedDataSlice = createSlice({
             // eslint-disable-next-line no-return-assign, no-unused-vars
             state = initialState
         },
-        setActiveIngredientById: (state, payload) => {
+        setActiveIngredientById: (state, action) => {
             // eslint-disable-next-line no-underscore-dangle
-            const activeIngredient = state.data.filter((el) => el._id === payload.payload._id)
+            const activeIngredient = state.data.filter((el) => el._id === action.payload._id)
             state.activeIngredient = activeIngredient
         },
     },

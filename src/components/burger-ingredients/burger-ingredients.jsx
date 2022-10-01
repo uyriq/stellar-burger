@@ -58,8 +58,6 @@ function BurgerIngredients() {
     }
 
     const ingredientClick = (details) => {
-        if (details.type === 'bun') dispatch(addBun(details))
-        if (details.type === 'sauce' || details.type === 'main') dispatch(addNotBun(details))
         if (isShowCard || isShowCard.payload) {
             return
         }
