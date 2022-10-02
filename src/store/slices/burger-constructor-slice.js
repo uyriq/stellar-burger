@@ -18,7 +18,7 @@ const initialState = {
         __v: 0,
         uuid: '',
     },
-    notbun: [],
+    notbun: [], // sauces, mains
 }
 
 export const burgerConstructorSlice = createSlice({
@@ -48,6 +48,10 @@ export const burgerConstructorSlice = createSlice({
                 state.notbun = state.notbun.filter((el) => el.uuid !== _uuid)
             }
         },
+        setItems: (state, action) => {
+            const newItems = Array.from(action.payload)
+            state.notbun = [...newItems]
+        },
         resetItems: (state) => {
             state.notbun = initialState.notbun
             state.bun = initialState.bun
@@ -58,7 +62,7 @@ export const burgerConstructorSlice = createSlice({
     },
 })
 
-export const { addBun, addNotBun, delItem, resetItems, resetBuns } = burgerConstructorSlice.actions
+export const { addBun, addNotBun, delItem, setItems, resetItems, resetBuns } = burgerConstructorSlice.actions
 
 export default burgerConstructorSlice.reducer
 

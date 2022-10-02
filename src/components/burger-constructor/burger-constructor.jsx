@@ -35,12 +35,40 @@ function BurgerConstructor() {
     }
 
     const moveCard = (dragIndex, hoverIndex) => {
-        const dragCard = cards[dragIndex]
+        const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === dragIndex)
+/*         const dragCard = cards[dragIndex]
         const newCards = [...cards]
         newCards.splice(dragIndex, 1)
         newCards.splice(hoverIndex, 0, dragCard)
 
-        setCards(newCards)
+        setCards(newCards) */
+        /*
+        const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === dragUUID)
+        if (dragCard) {
+            const newCards = [...notBunsCart]
+            newCards.splice(dragUUID, 1)
+            newCards.splice(hoverUUID, 0, dragCard)
+            dispatch(setItems(newCards))
+        }
+        
+                 const moveCardHandler = (dragIndex, hoverIndex) => {
+            const dragItem = items[dragIndex];
+
+            if (dragItem) {
+              setItems((prevState) => {
+                const coppiedStateArray = [...prevState];
+
+                // remove item by "hoverIndex" and put "dragItem" instead
+                const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
+
+                // remove item by "dragIndex" and put "prevItem" instead
+                coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
+
+                return coppiedStateArray;
+              });
+            }
+          };
+           */
     }
     const htmlTopConstructorElement = bunsCart._id ? (
         <ConstructorElement
@@ -81,7 +109,7 @@ function BurgerConstructor() {
             /* TODO:  useDrag  перетаскивание внутри конструктора */
             <ul className={`${Styles.list} custom-scroll `}>
                 {notBunsCart.map((item, index) => (
-                    <BurgerConstructorItem key={item.uuid} index={index} value={item._id}>
+                    <BurgerConstructorItem key={item.uuid} index={index} value={item} moveCard={moveCard} >
                         <DragIcon type="primary" />
                         <ConstructorElement
                             text={item.name}
@@ -89,7 +117,6 @@ function BurgerConstructor() {
                             price={item.price}
                             isLocked={false}
                             handleClose={handleClose(item)}
-                            moveCard={moveCard}
                         />
                     </BurgerConstructorItem>
                 ))}

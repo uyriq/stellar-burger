@@ -5,7 +5,7 @@ import { useRef, useEffect } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import Styles from './burger-constructor.module.css'
 
-function BurgerConstructorItem({ children, key, index, moveCard }) {
+function BurgerConstructorItem({ children, key, index, value, moveCard }) {
     const ref = useRef()
     const [, drop] = useDrop({
         accept: 'card',
@@ -14,8 +14,8 @@ function BurgerConstructorItem({ children, key, index, moveCard }) {
                 return
             }
 
-            const dragIndex = item.index
-            const hoverIndex = index
+            const dragIndex = item.uuid
+            const hoverIndex = key
 
             if (dragIndex === hoverIndex) {
                 return
@@ -45,13 +45,13 @@ function BurgerConstructorItem({ children, key, index, moveCard }) {
 
             moveCard(dragIndex, hoverIndex)
 
-            item.index = hoverIndex
+            item.uuid = hoverIndex
         },
     })
 
     const [{ isDragging }, drag] = useDrag({
         type: 'card',
-        item: () => ({ key, index }),
+        item: { key, index, ...value },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
@@ -72,7 +72,8 @@ function BurgerConstructorItem({ children, key, index, moveCard }) {
     )
 }
 
-// для вставки ингредиента не вниз а сверху списка  переупорядочить список  setItems( (x) => [...x, makeItem()].sort(sortItems) )
+//  для вставки ингредиента не вниз а сверху списка  переупорядочить список 
+// setItems( (x) => [...x, makeItem()].sort(sortItems) )
 function sortItems(a, b) {
     return a.key.localeCompare(b.key)
 }

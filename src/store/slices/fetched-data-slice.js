@@ -32,15 +32,15 @@ export const fetchedDataSlice = createSlice({
             // eslint-disable-next-line no-return-assign, no-unused-vars
             state = initialState
         },
-        setActiveIngredientById: (state, action) => {
+        setActiveIngredientByUuid: (state, action) => {
             // eslint-disable-next-line no-underscore-dangle
-            const activeIngredient = state.data.filter((el) => el._id === action.payload._id)
+            const activeIngredient = state.data.filter((el) => el._id === action.payload.uuid)
             state.activeIngredient = activeIngredient
         },
     },
 })
 
-export const { resetData, setData, setActiveIngredientById } = fetchedDataSlice.actions
+export const { resetData, setData, setActiveIngredientByUuid } = fetchedDataSlice.actions
 export const selectDataSucces = (state) => state.fetchedData.success
 export const selectDataFetched = (state) => state.fetchedData?.data
 export const selectActiveIngredient = (state) => state.fetchedData?.activeIngredient
