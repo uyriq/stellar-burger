@@ -5,7 +5,8 @@ import { useRef, useEffect } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import Styles from './burger-constructor.module.css'
 
-function BurgerConstructorItem({ children, key, index, value, moveCard }) {
+function BurgerConstructorItem(props) {
+    const { key, uuid, index, value, moveCard, children } = props
     const ref = useRef()
     const [, drop] = useDrop({
         accept: 'card',
@@ -13,9 +14,10 @@ function BurgerConstructorItem({ children, key, index, value, moveCard }) {
             if (!ref.current) {
                 return
             }
-
-            const dragIndex = item.uuid
-            const hoverIndex = key
+            const dragKey = item.uuid
+            const hoverKey = uuid
+            const dragIndex = item.index
+            const hoverIndex = index
 
             if (dragIndex === hoverIndex) {
                 return
@@ -43,15 +45,15 @@ function BurgerConstructorItem({ children, key, index, value, moveCard }) {
                 return
             }
 
-            moveCard(dragIndex, hoverIndex)
+            moveCard(dragIndex, hoverIndex, dragKey)
 
-            item.uuid = hoverIndex
+            item.index = hoverIndex
         },
     })
 
     const [{ isDragging }, drag] = useDrag({
         type: 'card',
-        item: { key, index, ...value },
+        item: { key, uuid, index, ...value },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
@@ -72,7 +74,7 @@ function BurgerConstructorItem({ children, key, index, value, moveCard }) {
     )
 }
 
-//  для вставки ингредиента не вниз а сверху списка  переупорядочить список 
+//  для вставки ингредиента не вниз а сверху списка  переупорядочить список
 // setItems( (x) => [...x, makeItem()].sort(sortItems) )
 function sortItems(a, b) {
     return a.key.localeCompare(b.key)
@@ -97,7 +99,7 @@ BurgerConstructorItem.propTypes = {
         })
     ).isRequired,
     index: PropTypes.number,
-    key: PropTypes.string,
+    // key: PropTypes.string,
     moveCard: PropTypes.func,
 }
 
