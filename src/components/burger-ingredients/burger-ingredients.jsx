@@ -5,6 +5,7 @@
 /* eslint-disable react/prop-types */
 import { useMemo, useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useScroll, motion } from 'framer-motion'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
     setShowCard,
@@ -28,21 +29,30 @@ import Styles from './burger-ingredients.module.css'
 function BurgerIngredients() {
     const dispatch = useDispatch()
     const pageRefs = useRef({})
+    const scrollRef = useRef(null)
     const { ...data } = ingredientsApi.useFetchIngredientsQuery()
     const isShowCard = useSelector(selectShowCard)
     const notBunsCart = useSelector(selectNotBunsCart)
     const bunsCart = useSelector(selectBunsCart)
-    //  console.log(`${isShowCard} in burg-ing`)
-    //    const { data, setDetails, show, setShow } = useContext(DataContext)
 
     const [choice, setChoice] = useState('buns')
     const buns = data.currentData.data.filter((item) => item.type === 'bun')
     const sauces = data.currentData.data.filter((item) => item.type === 'sauce')
     const main = data.currentData.data.filter((item) => item.type === 'main')
 
+    const { scrollYProgress, scrollY } = useScroll({
+        container: scrollRef,
+        offset: ['end end', 'start start'],
+    })
+
     useEffect(() => {
         dispatch(setData([].concat(buns).concat(sauces).concat(main)))
     }, [])
+    useEffect(() => {
+        scrollY.onChange((latest) => {
+            console.log(`scroll - ${latest} \n treshhold - ${latest > 100}`)
+        })
+    })
 
     function countIngredients(item) {
         // булка по условию только 1
@@ -86,7 +96,28 @@ function BurgerIngredients() {
     function Buns({ pageRefs }) {
         const bunsforrender = useMemo(() => IngredientsList(buns), [])
         return (
-            <section
+            <motion.section
+                viewport={{ amount: 1, once: false }}
+                onViewportEnter={(entry) => {
+                    const { boundingClientRect } = entry
+                    console.log(boundingClientRect)
+                    setChoice('buns')
+                }}
+                onViewportLeave={(entry) => {
+                    const { boundingClientRect } = entry
+                    console.log(boundingClientRect)
+                }}
+                whileInView={{ backgroundColor: '#2b0687' }}
+                initial={{ backgroundColor: '#131316' }}
+                exit={{
+                    opacity: 0,
+                    backgroundColor: '#131316',
+                    transition: { backgroundColor: { delay: 0 }, opacity: { delay: 0.1 } },
+                }}
+                transition={{
+                    duration: 0.25,
+                    delay: 0.5,
+                }}
                 className={`${Styles.buns}  `}
                 ref={(el) => (pageRefs.current = { ...pageRefs.current, buns: el })}
             >
@@ -94,14 +125,35 @@ function BurgerIngredients() {
                     Булки
                 </h2>
                 <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{bunsforrender}</ul>
-            </section>
+            </motion.section>
         )
     }
 
     function Sauces({ pageRefs }) {
         const saucesforrender = useMemo(() => IngredientsList(sauces), [])
         return (
-            <section
+            <motion.section
+                viewport={{ amount: 0.7, once: false }}
+                onViewportEnter={(entry) => {
+                    const { boundingClientRect } = entry
+                    console.log(boundingClientRect)
+                    setChoice('sauces')
+                }}
+                onViewportLeave={(entry) => {
+                    const { boundingClientRect } = entry
+                    console.log(boundingClientRect)
+                }}
+                whileInView={{ backgroundColor: '#2b0687' }}
+                initial={{ backgroundColor: '#131316' }}
+                exit={{
+                    opacity: 0,
+                    backgroundColor: '#131316',
+                    transition: { backgroundColor: { delay: 0 }, opacity: { delay: 0.1 } },
+                }}
+                transition={{
+                    duration: 0.25,
+                    delay: 0.5,
+                }}
                 className={`${Styles.sauces}  `}
                 ref={(el) => (pageRefs.current = { ...pageRefs.current, sauces: el })}
             >
@@ -109,14 +161,35 @@ function BurgerIngredients() {
                     Соусы
                 </h2>
                 <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{saucesforrender}</ul>
-            </section>
+            </motion.section>
         )
     }
 
     function Main({ pageRefs }) {
         const mainsforrender = useMemo(() => IngredientsList(main), [])
         return (
-            <section
+            <motion.section
+                viewport={{ amount: 0.5, once: false }}
+                onViewportEnter={(entry) => {
+                    const { boundingClientRect } = entry
+                    console.log(boundingClientRect)
+                    setChoice('main')
+                }}
+                onViewportLeave={(entry) => {
+                    const { boundingClientRect } = entry
+                    console.log(boundingClientRect)
+                }}
+                whileInView={{ backgroundColor: '#2b0687' }}
+                initial={{ backgroundColor: '#131316' }}
+                exit={{
+                    opacity: 0,
+                    backgroundColor: '#131316',
+                    transition: { backgroundColor: { delay: 0 }, opacity: { delay: 0.1 } },
+                }}
+                transition={{
+                    duration: 0.25,
+                    delay: 0.5,
+                }}
                 className={`${Styles.main}  `}
                 ref={(el) => (pageRefs.current = { ...pageRefs.current, main: el })}
             >
@@ -124,7 +197,7 @@ function BurgerIngredients() {
                     Начинки
                 </h2>
                 <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{mainsforrender}</ul>
-            </section>
+            </motion.section>
         )
     }
 
@@ -163,9 +236,9 @@ function BurgerIngredients() {
                 </Tab>
             </div>
             <div className={`${Styles.ingredients} custom-scroll`}>
-                <Buns pageRefs={pageRefs} />
-                <Sauces pageRefs={pageRefs} />
-                <Main pageRefs={pageRefs} />
+                <Buns ref={scrollRef} pageRefs={pageRefs} />
+                <Sauces ref={scrollRef} pageRefs={pageRefs} />
+                <Main ref={scrollRef} pageRefs={pageRefs} />
             </div>
         </section>
     )
