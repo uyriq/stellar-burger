@@ -5,7 +5,6 @@
 /* eslint-disable react/prop-types */
 import { useMemo, useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useScroll, motion } from 'framer-motion'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
     setShowCard,
@@ -40,19 +39,9 @@ function BurgerIngredients() {
     const sauces = data.currentData.data.filter((item) => item.type === 'sauce')
     const main = data.currentData.data.filter((item) => item.type === 'main')
 
-    const { scrollYProgress, scrollY } = useScroll({
-        container: scrollRef,
-        offset: ['end end', 'start start'],
-    })
-
     useEffect(() => {
         dispatch(setData([].concat(buns).concat(sauces).concat(main)))
     }, [])
-    useEffect(() => {
-        scrollY.onChange((latest) => {
-            console.log(`scroll - ${latest} \n treshhold - ${latest > 100}`)
-        })
-    })
 
     function countIngredients(item) {
         // булка по условию только 1
@@ -96,28 +85,7 @@ function BurgerIngredients() {
     function Buns({ pageRefs }) {
         const bunsforrender = useMemo(() => IngredientsList(buns), [])
         return (
-            <motion.section
-                viewport={{ amount: 1, once: false }}
-                onViewportEnter={(entry) => {
-                    const { boundingClientRect } = entry
-                    console.log(boundingClientRect)
-                    setChoice('buns')
-                }}
-                onViewportLeave={(entry) => {
-                    const { boundingClientRect } = entry
-                    console.log(boundingClientRect)
-                }}
-                whileInView={{ backgroundColor: '#2b0687' }}
-                initial={{ backgroundColor: '#131316' }}
-                exit={{
-                    opacity: 0,
-                    backgroundColor: '#131316',
-                    transition: { backgroundColor: { delay: 0 }, opacity: { delay: 0.1 } },
-                }}
-                transition={{
-                    duration: 0.25,
-                    delay: 0.5,
-                }}
+            <section
                 className={`${Styles.buns}  `}
                 ref={(el) => (pageRefs.current = { ...pageRefs.current, buns: el })}
             >
@@ -125,35 +93,14 @@ function BurgerIngredients() {
                     Булки
                 </h2>
                 <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{bunsforrender}</ul>
-            </motion.section>
+            </section>
         )
     }
 
     function Sauces({ pageRefs }) {
         const saucesforrender = useMemo(() => IngredientsList(sauces), [])
         return (
-            <motion.section
-                viewport={{ amount: 0.7, once: false }}
-                onViewportEnter={(entry) => {
-                    const { boundingClientRect } = entry
-                    console.log(boundingClientRect)
-                    setChoice('sauces')
-                }}
-                onViewportLeave={(entry) => {
-                    const { boundingClientRect } = entry
-                    console.log(boundingClientRect)
-                }}
-                whileInView={{ backgroundColor: '#2b0687' }}
-                initial={{ backgroundColor: '#131316' }}
-                exit={{
-                    opacity: 0,
-                    backgroundColor: '#131316',
-                    transition: { backgroundColor: { delay: 0 }, opacity: { delay: 0.1 } },
-                }}
-                transition={{
-                    duration: 0.25,
-                    delay: 0.5,
-                }}
+            <section
                 className={`${Styles.sauces}  `}
                 ref={(el) => (pageRefs.current = { ...pageRefs.current, sauces: el })}
             >
@@ -161,35 +108,14 @@ function BurgerIngredients() {
                     Соусы
                 </h2>
                 <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{saucesforrender}</ul>
-            </motion.section>
+            </section>
         )
     }
 
     function Main({ pageRefs }) {
         const mainsforrender = useMemo(() => IngredientsList(main), [])
         return (
-            <motion.section
-                viewport={{ amount: 0.5, once: false }}
-                onViewportEnter={(entry) => {
-                    const { boundingClientRect } = entry
-                    console.log(boundingClientRect)
-                    setChoice('main')
-                }}
-                onViewportLeave={(entry) => {
-                    const { boundingClientRect } = entry
-                    console.log(boundingClientRect)
-                }}
-                whileInView={{ backgroundColor: '#2b0687' }}
-                initial={{ backgroundColor: '#131316' }}
-                exit={{
-                    opacity: 0,
-                    backgroundColor: '#131316',
-                    transition: { backgroundColor: { delay: 0 }, opacity: { delay: 0.1 } },
-                }}
-                transition={{
-                    duration: 0.25,
-                    delay: 0.5,
-                }}
+            <section
                 className={`${Styles.main}  `}
                 ref={(el) => (pageRefs.current = { ...pageRefs.current, main: el })}
             >
@@ -197,7 +123,7 @@ function BurgerIngredients() {
                     Начинки
                 </h2>
                 <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{mainsforrender}</ul>
-            </motion.section>
+            </section>
         )
     }
 
