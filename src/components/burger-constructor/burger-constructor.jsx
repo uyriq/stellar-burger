@@ -10,7 +10,6 @@ import {
     addBun,
     addNotBun,
     resetItems,
-    setItems,
     selectBunsCart,
     selectNotBunsCart,
 } from '../../store/slices/burger-constructor-slice'
@@ -23,6 +22,11 @@ function BurgerConstructor() {
 
     const notBunsCart = useSelector(selectNotBunsCart)
     const bunsCart = useSelector(selectBunsCart)
+    const [cards, setCards] = useState([...notBunsCart]) // для сортировки dnd внутри конструктора
+
+    const makeOrderData = useCallback((array, bun) => {}, [])
+
+    useEffect(() => {}, [])
 
     useEffect(() => {}, [])
 
@@ -30,24 +34,23 @@ function BurgerConstructor() {
         dispatch(delItem(item))
     }
 
-    const moveCard = (dragIndex, hoverIndex, key) => {
-        const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === key)
-        /*         const dragCard = cards[dragIndex]
+    const moveCard = (dragIndex, hoverIndex) => {
+        const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === dragIndex)
+/*         const dragCard = cards[dragIndex]
         const newCards = [...cards]
         newCards.splice(dragIndex, 1)
         newCards.splice(hoverIndex, 0, dragCard)
 
-        setCards(newCards)
-
+        setCards(newCards) */
+        /*
         const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === dragUUID)
-        */
         if (dragCard) {
             const newCards = [...notBunsCart]
-            newCards.splice(dragIndex, 1)
-            newCards.splice(hoverIndex, 0, ...dragCard)
+            newCards.splice(dragUUID, 1)
+            newCards.splice(hoverUUID, 0, dragCard)
             dispatch(setItems(newCards))
         }
-        /*
+        
                  const moveCardHandler = (dragIndex, hoverIndex) => {
             const dragItem = items[dragIndex];
 
@@ -103,18 +106,10 @@ function BurgerConstructor() {
 
     const htmlMiddleConstructorElement =
         bunsCart._id && notBunsCart.length > 0 ? (
+            /* TODO:  useDrag  перетаскивание внутри конструктора */
             <ul className={`${Styles.list} custom-scroll `}>
                 {notBunsCart.map((item, index) => (
-                    <BurgerConstructorItem
-                        key={index}
-                        uuid={item.uuid} // дубль из-за Warning: li: 'key' is not a prop.
-                        // Trying to access it will result in 'undefined' being returned.
-                        // If you need to access the same value within the child component,
-                        // you should pass it as a different prop.
-                        index={index}
-                        value={item}
-                        moveCard={moveCard}
-                    >
+                    <BurgerConstructorItem key={item.uuid} index={index} value={item} moveCard={moveCard} >
                         <DragIcon type="primary" />
                         <ConstructorElement
                             text={item.name}
