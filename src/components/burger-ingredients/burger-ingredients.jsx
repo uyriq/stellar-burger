@@ -3,8 +3,9 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
-import { useMemo, useRef, useState, useEffect } from 'react'
+import { useMemo, useRef, useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useInView, InView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
     setShowCard,
@@ -28,20 +29,43 @@ import Styles from './burger-ingredients.module.css'
 function BurgerIngredients() {
     const dispatch = useDispatch()
     const pageRefs = useRef({})
-    const scrollRef = useRef(null)
     const { ...data } = ingredientsApi.useFetchIngredientsQuery()
     const isShowCard = useSelector(selectShowCard)
     const notBunsCart = useSelector(selectNotBunsCart)
     const bunsCart = useSelector(selectBunsCart)
 
     const [choice, setChoice] = useState('buns')
+    const [conditions, setCondition] = useState({ b: true, s: false, m: false })
+
     const buns = data.currentData.data.filter((item) => item.type === 'bun')
     const sauces = data.currentData.data.filter((item) => item.type === 'sauce')
     const main = data.currentData.data.filter((item) => item.type === 'main')
 
+    const optionsInView = { threshold: 0, initialInView: false }
+
+    // Use `useCallback` so we don't recreate the function on each render
+
     useEffect(() => {
         dispatch(setData([].concat(buns).concat(sauces).concat(main)))
     }, [])
+
+    useEffect(() => {
+        Object.entries(pageRefs.current).forEach((ref) => {
+            console.log('ref', ref)
+        })
+    }, [pageRefs.current['buns'], pageRefs.current['sauces'], pageRefs.current['mains']])
+
+    const onChange = useCallback((inView, entry) => {
+        console.log(`'Inview :', ${inView}, ${entry}`)
+        if (inView) {
+            setCondition((conditions) => ({
+                ...conditions,
+                b: false,
+            }))
+        }
+        if (!inView) setCondition({ ...conditions, b: false })
+        console.log(conditions)
+    }, []) // чем огр?
 
     function countIngredients(item) {
         // булка по условию только 1
@@ -85,45 +109,51 @@ function BurgerIngredients() {
     function Buns({ pageRefs }) {
         const bunsforrender = useMemo(() => IngredientsList(buns), [])
         return (
-            <section
-                className={`${Styles.buns}  `}
-                ref={(el) => (pageRefs.current = { ...pageRefs.current, buns: el })}
-            >
-                <h2 className="text text_type_main-medium mb-6" id="bun">
-                    Булки
-                </h2>
-                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{bunsforrender}</ul>
-            </section>
+            <InView as="div" initialInView={false} onChange={(inView, entry) => onChange(inView, entry)}>
+                <section
+                    className={`${Styles.buns}  `}
+                    ref={(el) => (pageRefs.current = { ...pageRefs.current, buns: el })}
+                >
+                    <h2 className="text text_type_main-medium mb-6" id="bun">
+                        Булки
+                    </h2>
+                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{bunsforrender}</ul>
+                </section>
+            </InView>
         )
     }
 
     function Sauces({ pageRefs }) {
         const saucesforrender = useMemo(() => IngredientsList(sauces), [])
         return (
-            <section
-                className={`${Styles.sauces}  `}
-                ref={(el) => (pageRefs.current = { ...pageRefs.current, sauces: el })}
-            >
-                <h2 className="text text_type_main-medium mb-6" id="sauce">
-                    Соусы
-                </h2>
-                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{saucesforrender}</ul>
-            </section>
+            <InView as="div" initialInView={false} onChange={(inView, entry) => console.log('Inview Sauces:', inView)}>
+                <section
+                    className={`${Styles.sauces}  `}
+                    ref={(el) => (pageRefs.current = { ...pageRefs.current, sauces: el })}
+                >
+                    <h2 className="text text_type_main-medium mb-6" id="sauce">
+                        Соусы
+                    </h2>
+                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{saucesforrender}</ul>
+                </section>
+            </InView>
         )
     }
 
     function Main({ pageRefs }) {
         const mainsforrender = useMemo(() => IngredientsList(main), [])
         return (
-            <section
-                className={`${Styles.main}  `}
-                ref={(el) => (pageRefs.current = { ...pageRefs.current, main: el })}
-            >
-                <h2 className="text text_type_main-medium mb-6" id="main">
-                    Начинки
-                </h2>
-                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{mainsforrender}</ul>
-            </section>
+            <InView as="div" onChange={(inView, entry) => console.log('Inview Mains:', inView)}>
+                <section
+                    className={`${Styles.main}  `}
+                    ref={(el) => (pageRefs.current = { ...pageRefs.current, main: el })}
+                >
+                    <h2 className="text text_type_main-medium mb-6" id="main">
+                        Начинки
+                    </h2>
+                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{mainsforrender}</ul>
+                </section>
+            </InView>
         )
     }
 
@@ -162,9 +192,9 @@ function BurgerIngredients() {
                 </Tab>
             </div>
             <div className={`${Styles.ingredients} custom-scroll`}>
-                <Buns ref={scrollRef} pageRefs={pageRefs} />
-                <Sauces ref={scrollRef} pageRefs={pageRefs} />
-                <Main ref={scrollRef} pageRefs={pageRefs} />
+                <Buns pageRefs={pageRefs} />
+                <Sauces pageRefs={pageRefs} />
+                <Main pageRefs={pageRefs} />
             </div>
         </section>
     )
