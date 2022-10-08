@@ -2,25 +2,17 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useDrag } from 'react-dnd'
-import { useDispatch } from 'react-redux'
 
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { PropTypes } from 'prop-types'
-import {
-    setShowCard,
-    setDetailsCard,
-    selectShowCard,
-    selectDetailsCard,
-} from '../../store/slices/ingredient-details-slice'
 import Styles from './burger-ingredients-item.module.css'
 
 function BurgerIngredientsItem(props) {
-    const dispatch = useDispatch()
     const { ingredient, onClick, onClose, counter } = props
     const { name, image, price, _id, type } = ingredient
 
     const [{ isDrag }, dragRef] = useDrag({
-        type: `ingredient`, // -${type}
+        type: `ingredient`,
         item: { _id, type, ...ingredient },
         collect: (monitor) => ({
             isDrag: monitor.isDragging(),
@@ -38,7 +30,7 @@ function BurgerIngredientsItem(props) {
                 }}
                 onClose={onClose}
             >
-                <Counter count={counter(ingredient)} size="default" />
+                {counter(ingredient) > 0 && <Counter count={counter(ingredient)} size="default" />}
                 <img src={image} alt={name} className="ml-4 mr-4 mb-1" />
                 <div className={`${Styles.currency} mb-1`}>
                     <span className="text text_type_digits-default ">{price}</span>

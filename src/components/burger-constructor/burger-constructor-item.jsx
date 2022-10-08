@@ -86,7 +86,7 @@ BurgerConstructorItem.propTypes = {
             uuid: PropTypes.string,
             _id: PropTypes.string,
             name: PropTypes.string,
-            type: PropTypes.oneOf('mains', 'sauces'),
+            type: PropTypes.oneOf(['mains', 'sauces', 'buns']),
             proteins: PropTypes.number,
             fat: PropTypes.number,
             carbohydrates: PropTypes.number,

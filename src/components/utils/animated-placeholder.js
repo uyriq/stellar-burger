@@ -1,10 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
+import Styles from './animated-placeholder.module.css'
 
 export function AnimatedPlaceholder({ children }) {
-    const randomDelay = (0.1 + 1.5 * Math.random()).toFixed(2)
-    const randomDuration = (0.1 + 1.1 * Math.random()).toFixed(2)
+    const randomDelay = (0.1 + 0.8 * Math.random()).toFixed(2)
+    const randomDuration = (0.1 + 0.2 * Math.random()).toFixed(2)
 
     return (
         <motion.div
@@ -32,9 +33,7 @@ export function AnimatedPlaceholder({ children }) {
                 },
             }}
         >
-            <h4 className="text text_type_main-small" style={{ transform: `translate(${-15}px, ${30}px)` }}>
-                {children}
-            </h4>
+            <h4 className={`${Styles.placeholder} text text_type_main-small`}>{children}</h4>
         </motion.div>
     )
 }
