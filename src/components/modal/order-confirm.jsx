@@ -4,7 +4,6 @@ import { ReactComponent as DoneLogo } from '../../images/done.svg'
 
 function OrderConfirm({ numero: Number, message }) {
     const messageArr = message.split(/\r?\n/)
-    // console.log(messageArr)
     return (
         <div className={` ${Style.order_card} `}>
             <div className={` ${Style.first} `}>

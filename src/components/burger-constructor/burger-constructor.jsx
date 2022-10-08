@@ -1,18 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useCallback, useEffect, useState } from 'react'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { AnimatedPlaceholder } from '../utils/animated-placeholder'
-import {
-    delItem,
-    addBun,
-    addNotBun,
-    resetItems,
-    selectBunsCart,
-    selectNotBunsCart,
-} from '../../store/slices/burger-constructor-slice'
+import { delItem, setItems, selectBunsCart, selectNotBunsCart } from '../../store/slices/burger-constructor-slice'
 import BurgerConstructorItem from './burger-constructor-item'
 import CategoryDropAccept from './burger-constructor-category'
 import Styles from './burger-constructor.module.css'
@@ -22,53 +14,20 @@ function BurgerConstructor() {
 
     const notBunsCart = useSelector(selectNotBunsCart)
     const bunsCart = useSelector(selectBunsCart)
-    const [cards, setCards] = useState([...notBunsCart]) // для сортировки dnd внутри конструктора
-
-    const makeOrderData = useCallback((array, bun) => {}, [])
-
-    useEffect(() => {}, [])
-
-    useEffect(() => {}, [])
 
     const handleClose = (item) => () => {
         dispatch(delItem(item))
     }
 
-    const moveCard = (dragIndex, hoverIndex) => {
-        const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === dragIndex)
-/*         const dragCard = cards[dragIndex]
-        const newCards = [...cards]
-        newCards.splice(dragIndex, 1)
-        newCards.splice(hoverIndex, 0, dragCard)
+    const moveCard = (dragIndex, hoverIndex, key) => {
+        const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === key)
 
-        setCards(newCards) */
-        /*
-        const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === dragUUID)
         if (dragCard) {
             const newCards = [...notBunsCart]
-            newCards.splice(dragUUID, 1)
-            newCards.splice(hoverUUID, 0, dragCard)
+            newCards.splice(dragIndex, 1)
+            newCards.splice(hoverIndex, 0, ...dragCard)
             dispatch(setItems(newCards))
         }
-        
-                 const moveCardHandler = (dragIndex, hoverIndex) => {
-            const dragItem = items[dragIndex];
-
-            if (dragItem) {
-              setItems((prevState) => {
-                const coppiedStateArray = [...prevState];
-
-                // remove item by "hoverIndex" and put "dragItem" instead
-                const prevItem = coppiedStateArray.splice(hoverIndex, 1, dragItem);
-
-                // remove item by "dragIndex" and put "prevItem" instead
-                coppiedStateArray.splice(dragIndex, 1, prevItem[0]);
-
-                return coppiedStateArray;
-              });
-            }
-          };
-           */
     }
     const htmlTopConstructorElement = bunsCart._id ? (
         <ConstructorElement
@@ -81,9 +40,7 @@ function BurgerConstructor() {
     ) : (
         <div className={`${Styles.top}`}>
             <ConstructorElement type="top" text="" />
-            <p className="text text_type_main-small" style={{ transform: `translate(${150}px, ${-45}px)` }}>
-                🍔поместите сюда булочку🍔
-            </p>
+            <p className={`${Styles.topbunempty} text text_type_main-small `}>🍔поместите сюда булочку🍔</p>
         </div>
     )
 
@@ -106,10 +63,15 @@ function BurgerConstructor() {
 
     const htmlMiddleConstructorElement =
         bunsCart._id && notBunsCart.length > 0 ? (
-            /* TODO:  useDrag  перетаскивание внутри конструктора */
             <ul className={`${Styles.list} custom-scroll `}>
                 {notBunsCart.map((item, index) => (
-                    <BurgerConstructorItem key={item.uuid} index={index} value={item} moveCard={moveCard} >
+                    <BurgerConstructorItem
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={index}
+                        uuid={item.uuid}
+                        index={index} // приходится дубль из-за Warning: li: 'key' is not a prop.
+                        moveCard={moveCard}
+                    >
                         <DragIcon type="primary" />
                         <ConstructorElement
                             text={item.name}

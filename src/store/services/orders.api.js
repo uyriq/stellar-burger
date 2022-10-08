@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
+// этот слайс еще не использую, пользуюсь старым api src\services\api.js
 import { commonApi } from './common.api'
 
 export const ordersApi = commonApi.injectEndpoints({

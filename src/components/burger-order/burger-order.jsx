@@ -51,12 +51,10 @@ function BurgerOrder() {
                     setOrderNumber(`  ошибка  - ${err}`).then(setMessage('извините, ошибка'))
                 })
                 // eslint-disable-next-line no-console
-                .finally(console.log('data api - ok!'))
+                .finally(console.log('data api ops finished!'))
         }
         return () => {}
     }, [totalPrice, orderData, message])
-
-    //    console.log(`номер заказа -- ${JSON.stringify(orderNumber)}`)
 
     return (
         <div className={`${Styles.currency}  `}>

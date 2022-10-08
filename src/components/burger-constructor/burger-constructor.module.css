@@ -31,6 +31,11 @@
     text-align: left;
 }
 
+.topbunempty {
+    /* 🍔поместите сюда булочку🍔 */
+    transform: translate(150px, -45px);
+}
+
 .bottom div {
     transform: translate(-22%, 100%);
     width: 200%;

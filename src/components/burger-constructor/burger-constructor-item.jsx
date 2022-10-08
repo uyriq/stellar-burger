@@ -5,7 +5,8 @@ import { useRef, useEffect } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import Styles from './burger-constructor.module.css'
 
-function BurgerConstructorItem({ children, key, index, value, moveCard }) {
+function BurgerConstructorItem(props) {
+    const { uuid, index, moveCard, children } = props
     const ref = useRef()
     const [, drop] = useDrop({
         accept: 'card',
@@ -13,9 +14,9 @@ function BurgerConstructorItem({ children, key, index, value, moveCard }) {
             if (!ref.current) {
                 return
             }
-
-            const dragIndex = item.uuid
-            const hoverIndex = key
+            const dragKey = item.uuid
+            const dragIndex = item.index
+            const hoverIndex = index
 
             if (dragIndex === hoverIndex) {
                 return
@@ -43,22 +44,23 @@ function BurgerConstructorItem({ children, key, index, value, moveCard }) {
                 return
             }
 
-            moveCard(dragIndex, hoverIndex)
+            moveCard(dragIndex, hoverIndex, dragKey)
 
-            item.uuid = hoverIndex
+            // eslint-disable-next-line no-param-reassign
+            item.index = hoverIndex
         },
     })
 
     const [{ isDragging }, drag] = useDrag({
         type: 'card',
-        item: { key, index, ...value },
+        item: { uuid, index },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
     })
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
-    // нужна проверка на булку, чтобы булку не перемещать if (item.type !== 'bun') drag(drop(ref));
+
     useEffect(() => {
         if (ref.current) {
             ref.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
@@ -72,11 +74,11 @@ function BurgerConstructorItem({ children, key, index, value, moveCard }) {
     )
 }
 
-//  для вставки ингредиента не вниз а сверху списка  переупорядочить список 
+//  для вставки ингредиента не вниз а сверху списка  переупорядочить список
 // setItems( (x) => [...x, makeItem()].sort(sortItems) )
-function sortItems(a, b) {
+/* function sortItems(a, b) {
     return a.key.localeCompare(b.key)
-}
+} */
 
 BurgerConstructorItem.propTypes = {
     children: PropTypes.objectOf(
@@ -97,7 +99,7 @@ BurgerConstructorItem.propTypes = {
         })
     ).isRequired,
     index: PropTypes.number,
-    key: PropTypes.string,
+    uuid: PropTypes.string,
     moveCard: PropTypes.func,
 }
 

@@ -1,19 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/jsx-filename-extension */
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import ClipLoader from 'react-spinners/ClipLoader'
-import { setData, selectDataFetched } from '../../store/slices/fetched-data-slice'
-import {
-    resetShowCard,
-    setShowCard,
-    selectShowCard,
-    selectDetailsCard,
-} from '../../store/slices/ingredient-details-slice'
-import { resetShowOrder, selectDetailsOrder } from '../../store/slices/order-details-slice'
+import { setShowCard, selectShowCard, selectDetailsCard } from '../../store/slices/ingredient-details-slice'
 import { selectBunsCart } from '../../store/slices/burger-constructor-slice'
 import AppHeader from '../app-header/app-header'
 import { apiIngredients } from '../../services/use-api'
@@ -31,25 +23,15 @@ const App = memo(() => {
     const dispatch = useDispatch()
     const isShowCard = useSelector(selectShowCard)
     const detailsCard = useSelector(selectDetailsCard)
-    const detailsOrder = useSelector(selectDetailsOrder)
-    const fetchedData = useSelector(selectDataFetched)
     const bunsCart = useSelector(selectBunsCart)
-
-    console.dir(`isShowCard -  ${isShowCard} detailsCard - ${detailsCard._id} detailsOrder - ${detailsOrder}`)
-
     const { width } = useWindowDimensions()
     const isSmall = Boolean(width < 1280)
-    const smallStyle = isSmall ? { tansform: `scale(${+(width / 1280).toFixed(2)})` } : null
-    console.log(`scale${+(width / 1280).toFixed(2)}`, isSmall)
+    const smallDevicesStyle = isSmall ? { tansform: `scale(${+(width / 1280).toFixed(2)})` } : null
     // init
     const { ingredients: data, isLoading: loading, isError: error } = apiIngredients()
-    console.log(data.data, loading, error)
-    // const data = useSelector((state) => state.api.queries['fetchIngredients(undefined)'].data.data)
-    useEffect(() => {
-        dispatch(setData(data.data))
-    }, [loading])
+
     return (
-        <div className={Styles.page} style={smallStyle}>
+        <div className={Styles.page} style={smallDevicesStyle}>
             {error && (
                 <p className={`${Styles.page} text_color_error `}>Что-то пошло не так, не получены данные, {error}</p>
             )}
@@ -73,7 +55,7 @@ const App = memo(() => {
                             <h2 className="text text_type_main-large">Соберите бургер</h2>
                             {(!!isShowCard.payload || !!isShowCard) && (
                                 <div>
-                                    {/*  показываем и закрываем карту через (setShowCard())  */}
+                                    {/*  показываем и закрываем карту ингредиента через (setShowCard())  */}
                                     <Modal title="Детали ингредиента" onClose={() => dispatch(setShowCard(false))}>
                                         <Card {...detailsCard.payload} />
                                     </Modal>

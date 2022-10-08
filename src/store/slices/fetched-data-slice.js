@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+// этот слайс не использую, использую только src\store\services\ingredients.api.js
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -43,6 +44,7 @@ export const fetchedDataSlice = createSlice({
 export const { resetData, setData, setActiveIngredientByUuid } = fetchedDataSlice.actions
 export const selectDataSucces = (state) => state.fetchedData.success
 export const selectDataFetched = (state) => state.fetchedData?.data
-export const selectActiveIngredient = (state) => state.fetchedData?.activeIngredient
-
+/*
+export const selectActiveIngredient = (state) => state.fetchedData?.activeIngredient // это нерабочий способ определения активного ингредиента
+ */
 export default fetchedDataSlice.reducer
