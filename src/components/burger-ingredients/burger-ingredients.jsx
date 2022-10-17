@@ -112,51 +112,45 @@ function BurgerIngredients() {
     function Buns({ pageRefs }) {
         const bunsforrender = useMemo(() => IngredientsList(buns), [])
         return (
-            <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 'b')}>
-                <section
-                    className={`${Styles.buns}  `}
-                    ref={(el) => (pageRefs.current = { ...pageRefs.current, buns: el })}
-                >
-                    <h2 className="text text_type_main-medium mb-6" id="bun">
-                        Булки
-                    </h2>
-                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{bunsforrender}</ul>
-                </section>
-            </InView>
+            <section
+                className={`${Styles.buns}  `}
+                ref={(el) => (pageRefs.current = { ...pageRefs.current, buns: el })}
+            >
+                <h2 className="text text_type_main-medium mb-6" id="bun">
+                    Булки
+                </h2>
+                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{bunsforrender}</ul>
+            </section>
         )
     }
 
     function Sauces({ pageRefs }) {
         const saucesforrender = useMemo(() => IngredientsList(sauces), [])
         return (
-            <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 's')}>
-                <section
-                    className={`${Styles.sauces}  `}
-                    ref={(el) => (pageRefs.current = { ...pageRefs.current, sauces: el })}
-                >
-                    <h2 className="text text_type_main-medium mb-6" id="sauce">
-                        Соусы
-                    </h2>
-                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{saucesforrender}</ul>
-                </section>
-            </InView>
+            <section
+                className={`${Styles.sauces}  `}
+                ref={(el) => (pageRefs.current = { ...pageRefs.current, sauces: el })}
+            >
+                <h2 className="text text_type_main-medium mb-6" id="sauce">
+                    Соусы
+                </h2>
+                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{saucesforrender}</ul>
+            </section>
         )
     }
 
     function Main({ pageRefs }) {
         const mainsforrender = useMemo(() => IngredientsList(main), [])
         return (
-            <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 'm')}>
-                <section
-                    className={`${Styles.main}  `}
-                    ref={(el) => (pageRefs.current = { ...pageRefs.current, main: el })}
-                >
-                    <h2 className="text text_type_main-medium mb-6" id="main">
-                        Начинки
-                    </h2>
-                    <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{mainsforrender}</ul>
-                </section>
-            </InView>
+            <section
+                className={`${Styles.main}  `}
+                ref={(el) => (pageRefs.current = { ...pageRefs.current, main: el })}
+            >
+                <h2 className="text text_type_main-medium mb-6" id="main">
+                    Начинки
+                </h2>
+                <ul className={`${Styles['ingredients-item']} pl-4 pr-4`}>{mainsforrender}</ul>
+            </section>
         )
     }
     const { b, s, m } = useMemo(() => {
@@ -196,9 +190,15 @@ function BurgerIngredients() {
                 </Tab>
             </div>
             <div className={`${Styles.ingredients} custom-scroll`}>
-                <Buns pageRefs={pageRefs} />
-                <Sauces pageRefs={pageRefs} />
-                <Main pageRefs={pageRefs} />
+                <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 'b')}>
+                    <Buns pageRefs={pageRefs} />
+                </InView>
+                <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 's')}>
+                    <Sauces pageRefs={pageRefs} />
+                </InView>
+                <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 'm')}>
+                    <Main pageRefs={pageRefs} />
+                </InView>
             </div>
         </section>
     )
