@@ -1,4 +1,4 @@
-import { BURGER_API_URL, HEADERS } from '../components/utils/constants'
+import { BURGER_API_URL, HEADERS } from '../utils/constants'
 
 const checkReponse = (res) => (res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
 

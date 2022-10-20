@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
-import { BURGER_API_URL } from '../../components/utils/constants'
+import { BURGER_API_URL } from '../../utils/constants'
 
 export const commonApi = createApi({
     reducerPath: 'api',

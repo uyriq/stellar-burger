@@ -14,7 +14,7 @@ import Card from '../modal/card'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerOrder from '../burger-order/burger-order'
-import useWindowDimensions from '../utils/use-windowdimensions'
+import useWindowDimensions from '../../utils/use-windowdimensions'
 import Styles from './app.module.css'
 
 // написать примечание

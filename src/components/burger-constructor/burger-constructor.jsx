@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector, useDispatch } from 'react-redux'
-import { AnimatedPlaceholder } from '../utils/animated-placeholder'
+import { AnimatedPlaceholder } from '../animated-placeholder/animated-placeholder'
 import { delItem, setItems, selectBunsCart, selectNotBunsCart } from '../../store/slices/burger-constructor-slice'
 import BurgerConstructorItem from './burger-constructor-item'
 import CategoryDropAccept from './burger-constructor-category'

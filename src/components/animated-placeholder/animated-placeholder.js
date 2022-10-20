@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 import Styles from './animated-placeholder.module.css'
 
 export function AnimatedPlaceholder({ children }) {
-    const randomDelay = (0.1 + 0.8 * Math.random()).toFixed(2)
-    const randomDuration = (0.1 + 0.2 * Math.random()).toFixed(2)
+    const randomDelay = (0.1 + 0.6 * Math.random()).toFixed(2)
+    const randomDuration = (0.1 + 0.3 * Math.random()).toFixed(2)
 
     return (
         <motion.div
