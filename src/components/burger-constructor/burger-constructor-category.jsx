@@ -56,7 +56,7 @@ function CategoryDropAccept({ children, category: currentLayoutCategory }) {
 
 CategoryDropAccept.propTypes = {
     category: PropTypes.string.isRequired, // имя секции в бургер-конструкторе [bun,sauces,main]
-    children: PropTypes.element.isRequired, // набор отмапленных ingredients => li-элементов
+    children: PropTypes.node.isRequired, // набор отмапленных ingredients => li-элементов
 }
 
 export default CategoryDropAccept

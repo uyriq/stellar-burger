@@ -26,8 +26,8 @@
 }
 
 .top div {
-    transform: translateY(5%);
-    width: 200%;
+    transform: translate(-1%, 5%);
+    width: 229.5%;
     text-align: left;
 }
 
@@ -76,7 +76,7 @@
     overflow-x: hidden;
 }
 
-.list-item {
+.list__item {
     flex-grow: 0;
     flex-shrink: 0;
     display: flex;
@@ -85,16 +85,16 @@
     justify-content: center;
 }
 
-.list-item span {
+.list__item span {
     margin-left: -1.5%;
     margin-right: 2%;
 }
 
-.list-item:last-child {
+.list__item:last-child {
     margin-bottom: 0.5%;
 }
 
-.list-item:first-child {
+.list__item:first-child {
     margin-top: 0.5%;
 }
 

@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/require-default-props */
-import PropTypes from 'prop-types'
 import { useRef, useEffect } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
+import PropTypes from 'prop-types'
+// похоже, что здесь не нужен проптайпс ингредиента, потому что приходит чилдрен элемент реакта.
+// import { ingredientPropType } from '../../utils/prop-types'
 import Styles from './burger-constructor.module.css'
 
 function BurgerConstructorItem(props) {
@@ -68,7 +70,7 @@ function BurgerConstructorItem(props) {
     }, [])
 
     return (
-        <li ref={ref} className={`${Styles['list-item']} `} style={{ ...Styles, opacity }}>
+        <li ref={ref} className={`${Styles.list__item} `} style={{ ...Styles, opacity }}>
             {children}
         </li>
     )
@@ -81,23 +83,7 @@ function BurgerConstructorItem(props) {
 } */
 
 BurgerConstructorItem.propTypes = {
-    children: PropTypes.objectOf(
-        PropTypes.shape({
-            uuid: PropTypes.string,
-            _id: PropTypes.string,
-            name: PropTypes.string,
-            type: PropTypes.oneOf(['mains', 'sauces', 'buns']),
-            proteins: PropTypes.number,
-            fat: PropTypes.number,
-            carbohydrates: PropTypes.number,
-            calories: PropTypes.number,
-            price: PropTypes.number,
-            image: PropTypes.string,
-            image_mobile: PropTypes.string,
-            image_large: PropTypes.string,
-            __v: PropTypes.number,
-        })
-    ).isRequired,
+    children: PropTypes.node.isRequired,
     index: PropTypes.number,
     uuid: PropTypes.string,
     moveCard: PropTypes.func,

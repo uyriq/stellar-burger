@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useDrag } from 'react-dnd'
-
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { PropTypes } from 'prop-types'
+import { ingredientPropType } from '../../utils/prop-types'
 import Styles from './burger-ingredients-item.module.css'
 
 function BurgerIngredientsItem(props) {
@@ -44,14 +44,7 @@ function BurgerIngredientsItem(props) {
 }
 
 BurgerIngredientsItem.propTypes = {
-    ingredient: PropTypes.shape({
-        image: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        _id: PropTypes.string,
-        type: PropTypes.string,
-    }).isRequired,
-
+    ingredient: ingredientPropType.isRequired,
     onClick: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     counter: PropTypes.func.isRequired,
