@@ -93,15 +93,11 @@ function BurgerConstructor() {
 
     return (
         <section className={`${Styles.constructor} `}>
-            <div>
-                <CategoryDropAccept category="bun">{htmlTopConstructorElement}</CategoryDropAccept>
-            </div>
-            <div>
-                <CategoryDropAccept category="notbun">{htmlMiddleConstructorElement}</CategoryDropAccept>
-            </div>
-            <div>
-                <CategoryDropAccept category="bun">{htmlBottomConstructorElement}</CategoryDropAccept>
-            </div>
+            <CategoryDropAccept category="bun">{htmlTopConstructorElement}</CategoryDropAccept>
+
+            <CategoryDropAccept category="notbun">{htmlMiddleConstructorElement}</CategoryDropAccept>
+
+            <CategoryDropAccept category="bun">{htmlBottomConstructorElement}</CategoryDropAccept>
         </section>
     )
 }

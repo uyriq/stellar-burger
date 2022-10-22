@@ -20,11 +20,6 @@ function OrderConfirm({ numero: Number, message }) {
     )
 }
 
-const OrderPropType = {
-    numero: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-}
-
-OrderConfirm.propTypes = { OrderPropType }.isRequired
+OrderConfirm.propTypes = { numero: PropTypes.string.isRequired, message: PropTypes.string.isRequired }
 
 export default OrderConfirm

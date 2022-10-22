@@ -63,16 +63,19 @@ function BurgerOrder() {
                     {totalPrice}
                     <CurrencyIcon />
                 </span>
-                <Button
-                    type="primary"
-                    size="large"
-                    onClick={() => {
-                        dispatch(setShowOrder())
-                        setMessage('Приступили к работе ...')
-                    }}
-                >
-                    Оформить заказ
-                </Button>
+                {totalPrice && (
+                    <Button
+                        htmlType="button"
+                        type="primary"
+                        size="large"
+                        onClick={() => {
+                            dispatch(setShowOrder())
+                            setMessage('Приступили к работе ...')
+                        }}
+                    >
+                        Оформить заказ
+                    </Button>
+                )}
                 {isShowOrder && (
                     <Modal title="&nbsp;" onClose={() => dispatch(setShowOrder())}>
                         <OrderConfirm numero={orderNumber?.order.number} message={message} />
