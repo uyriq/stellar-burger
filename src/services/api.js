@@ -12,13 +12,6 @@ export const getIngredients = async () =>
         .then(checkReponse)
         .then(checkSuccess)
         .then((data) => data.data)
-/*
-         .then((data) => {
-      if (data?.success) return data.data;
-      return Promise.reject(data);
-    }
-    );
-    */
 
 export const getOrderNumber = async (ingredients) =>
     // eslint-disable-next-line no-return-await

@@ -13,7 +13,6 @@ function BurgerOrder() {
     const bunsCart = useSelector(selectBunsCart)
     const isShowOrder = useSelector(selectShowOrder)
     const [orderNumber, setOrderNumber] = useState(null)
-
     const [message, setMessage] = useState('')
     const dispatch = useDispatch()
 
@@ -33,7 +32,6 @@ function BurgerOrder() {
         () => notBunsCart.reduce((sum, { price }) => sum + price, 0) + bunsCart.price * 2,
         [bunsCart, notBunsCart]
     )
-    // notBunsCart.reduce((a, b) => ({ price: (Number(a.price) ) + Number(b.price) }), 0) * 1 + bunsCart.price * 2
 
     useEffect(() => {
         if (isShowOrder || isShowOrder.payload) {
@@ -68,6 +66,7 @@ function BurgerOrder() {
                         htmlType="button"
                         type="primary"
                         size="large"
+                        disabled={isShowOrder}
                         onClick={() => {
                             dispatch(setShowOrder())
                             setMessage('Приступили к работе ...')

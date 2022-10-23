@@ -67,7 +67,7 @@ function BurgerConstructor() {
                 {notBunsCart.map((item, index) => (
                     <BurgerConstructorItem
                         // eslint-disable-next-line react/no-array-index-key
-                        key={index}
+                        key={item.uuid}
                         uuid={item.uuid}
                         index={index} // приходится дубль из-за Warning: li: 'key' is not a prop.
                         moveCard={moveCard}
