@@ -10,7 +10,6 @@ import ModalOverlay from './modal-overlay'
 import Styles from './modal.module.css'
 
 const Modal = (props) => {
-
     const portal = document.getElementById('root_modal_overlay')
 
     const closeOnEscapeKeyDown = (e) => {
@@ -58,6 +57,6 @@ const ModalPropTypes = {
     title: PropTypes.string,
 }
 
-Modal.propTypes = { ModalPropTypes }.isRequired
+Modal.propTypes = { ...ModalPropTypes }.isRequired
 
 export default Modal

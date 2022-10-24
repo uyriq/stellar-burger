@@ -75,9 +75,9 @@ function BurgerOrder() {
                         Оформить заказ
                     </Button>
                 )}
-                {isShowOrder && (
+                {isShowOrder && Boolean(orderNumber) && (
                     <Modal title="&nbsp;" onClose={() => dispatch(setShowOrder())}>
-                        <OrderConfirm numero={orderNumber?.order.number} message={message} />
+                        <OrderConfirm numero={orderNumber.order.number} message={message} />
                     </Modal>
                 )}
             </div>

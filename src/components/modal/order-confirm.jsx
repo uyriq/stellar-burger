@@ -2,12 +2,12 @@ import PropTypes from 'prop-types'
 import Style from './order-confirm.module.css'
 import { ReactComponent as DoneLogo } from '../../images/done.svg'
 
-function OrderConfirm({ numero: Number, message }) {
+function OrderConfirm({ numero, message }) {
     const messageArr = message.split(/\r?\n/)
     return (
         <div className={` ${Style.order_card} `}>
             <div className={` ${Style.first} `}>
-                <p className=" text text_type_digits-large ">{Number}</p>
+                <p className=" text text_type_digits-large ">{numero}</p>
             </div>
             <div className={` ${Style.n2} text text_type_main-default  `}>{messageArr[0]}</div>
             <div className={` ${Style.n3}   `}>
@@ -20,6 +20,6 @@ function OrderConfirm({ numero: Number, message }) {
     )
 }
 
-OrderConfirm.propTypes = { numero: PropTypes.string.isRequired, message: PropTypes.string.isRequired }
+OrderConfirm.propTypes = { numero: PropTypes.number.isRequired, message: PropTypes.string.isRequired }
 
 export default OrderConfirm
