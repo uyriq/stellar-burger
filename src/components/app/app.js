@@ -1,139 +1,86 @@
-import React, { useState, useReducer, useEffect, useCallback } from 'react'
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/jsx-no-constructed-context-values */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-filename-extension */
+import { memo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import ClipLoader from 'react-spinners/ClipLoader'
+import { setShowCard, selectShowCard, selectDetailsCard } from '../../store/slices/ingredient-details-slice'
+import { selectBunsCart } from '../../store/slices/burger-constructor-slice'
 import AppHeader from '../app-header/app-header'
+import { apiIngredients } from '../../services/use-api'
 import Modal from '../modal/modal'
 import Card from '../modal/card'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerOrder from '../burger-order/burger-order'
-import { getIngredients } from '../../services/api'
-import useWindowDimensions from '../utils/use-windowdimensions'
-import { TotalPriceContext, OrderContext, DataContext } from '../../services/appContext'
+import useWindowDimensions from '../../utils/use-windowdimensions'
 import Styles from './app.module.css'
 
-// TODO исправить ошибки Eslint
+// написать примечание
 
-const dataReducer = (state, { type, payload }) => {
-    switch (type) {
-        case 'DELETE':
-            return {
-                ...state,
-                data: state.data.filter((item) => item._id !== payload._id),
-            }
-        case 'DATAFETCH':
-            return {
-                ...state,
-                data: payload,
-            }
-        default:
-            throw new Error(`Wrong type of action: ${type}`)
-    }
-}
-
-function App() {
-    const [isLoading, setIsLoading] = useState(true)
-    const [show, setShow] = useState(false)
-    const [details, setDetails] = useState()
-    const [isError, setIsError] = useState(null)
-    const [data, setData] = useState(null)
-    const [totalPrice, setTotalPrice] = useState(0)
-    const [orderData, setOrderData] = useState([])
+const App = memo(() => {
+    const dispatch = useDispatch()
+    const isShowCard = useSelector(selectShowCard)
+    const detailsCard = useSelector(selectDetailsCard)
+    const bunsCart = useSelector(selectBunsCart)
     const { width } = useWindowDimensions()
-    const [dataState, dataDispatch] = useReducer(dataReducer, { data: [] }, undefined)
-
+    const isSmall = Boolean(width < 1280)
+    const smallDevicesStyle = isSmall ? { tansform: `scale(${+(width / 1280).toFixed(2)})` } : null
     // init
-    useEffect(() => {
-        getIngredients()
-            .then((data) => {
-                setData(data)
-            })
-            .catch((err) => {
-                setIsError(`  ошибка  - ${err}`)
-            })
-            .finally(() => {
-                console.log('data fetch finished')
-            })
-    }, [])
-
-    useEffect(() => {
-        const dispatchData = () => {
-            if (undefined !== data && data !== null && !dataState?.data.length) {
-                dataDispatch({ type: 'DATAFETCH', payload: data })
-                setIsLoading(false)
-            }
-        }
-
-        dispatchData()
-    }, [data])
+    const { ingredients: data, isLoading: loading, isError: error } = apiIngredients()
 
     return (
-        <div className={Styles.page}>
-            {isError && (
-                <p className={`${Styles.page} text_color_error `}>
-                    Что-то пошло не так, не получены данные, {isError}{' '}
-                </p>
+        <div className={Styles.page} style={smallDevicesStyle}>
+            {error && (
+                <p className={`${Styles.page} text_color_error `}>Что-то пошло не так, не получены данные, {error}</p>
             )}
-            {isLoading && (
+            {loading && (
                 <span className={`${Styles.spinner} `}>
-                    <ClipLoader color="#ffff" loading={isLoading} size={550} />
+                    <ClipLoader color="#ffff" loading={loading} size={550} />
                 </span>
             )}
 
-            {Boolean(dataState?.data.length) && (
+            {Boolean(data.data?.length) && (
                 <div className={`${Styles.container} `}>
-                    <DataContext.Provider
-                        value={{
-                            dataState,
-                            dataDispatch,
-                            data,
-                            setData,
-                            details,
-                            setDetails,
-                            show,
-                            setShow,
+                    <AppHeader />
+                    <main
+                        className={`${Styles.main} ${Styles.columns}`}
+                        style={{
+                            left: 0,
+                            transform: `translateX(${(32 - width / 128) * (width > 1279)}px)`,
                         }}
                     >
-                        <AppHeader />
-
-                        <main
-                            className={`${Styles.main} ${Styles.columns}`}
-                            style={{
-                                left: 0,
-                                transform: `translateX(${(32 - width / 128) * (width > 1279)}px)`,
-                            }}
-                        >
+                        <section className={`${Styles.column} ${Styles.columns}`}>
+                            <h2 className="text text_type_main-large">Соберите бургер</h2>
+                            {(!!isShowCard.payload || !!isShowCard) && (
+                                <div>
+                                    {/*  показываем и закрываем карту ингредиента через (setShowCard())  */}
+                                    <Modal title="Детали ингредиента" onClose={() => dispatch(setShowCard(false))}>
+                                        <Card {...detailsCard.payload} />
+                                    </Modal>
+                                </div>
+                            )}
+                            <div className={`${Styles.article} ${Styles.first__article}`}>
+                                <BurgerIngredients />
+                            </div>
+                        </section>
+                        <div>
                             <section className={`${Styles.column} ${Styles.columns}`}>
-                                <h2 className="text text_type_main-large">Соберите бургер</h2>
-                                {show && (
-                                    <div>
-                                        <Modal title="Детали ингредиента" onClose={() => setShow(false)}>
-                                            <Card {...details} />
-                                        </Modal>
+                                <div className={`${Styles.article} ${Styles.first__article}`}>
+                                    <BurgerConstructor />
+                                </div>
+                                {Boolean(bunsCart._id.length !== 0 && bunsCart._id !== '') && (
+                                    <div className={`${Styles.middle} ${Styles.article}`}>
+                                        <BurgerOrder />
                                     </div>
                                 )}
-                                <div className={`${Styles.article} ${Styles.first__article}`}>
-                                    <BurgerIngredients />
-                                </div>
                             </section>
-                            <div>
-                                <TotalPriceContext.Provider value={{ totalPrice, setTotalPrice }}>
-                                    <OrderContext.Provider value={{ orderData, setOrderData }}>
-                                        <section className={`${Styles.column} ${Styles.columns}`}>
-                                            <div className={`${Styles.article} ${Styles.first__article}`}>
-                                                <BurgerConstructor />
-                                            </div>
-                                            <div className={`${Styles.middle}  ${Styles.article}  `}>
-                                                <BurgerOrder />
-                                            </div>
-                                        </section>
-                                    </OrderContext.Provider>
-                                </TotalPriceContext.Provider>
-                            </div>
-                        </main>
-                    </DataContext.Provider>
+                        </div>
+                    </main>
                 </div>
             )}
         </div>
     )
-}
+})
 export default App

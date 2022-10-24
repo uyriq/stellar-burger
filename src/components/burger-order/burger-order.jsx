@@ -1,25 +1,40 @@
-import React, { useContext, useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useState, useEffect, useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { selectBunsCart, selectNotBunsCart } from '../../store/slices/burger-constructor-slice'
+import { setShowOrder, selectShowOrder } from '../../store/slices/order-details-slice'
 import Modal from '../modal/modal'
 import OrderConfirm from '../modal/order-confirm'
 import { getOrderNumber } from '../../services/api'
-import { TotalPriceContext, OrderContext } from '../../services/appContext'
 import Styles from '../burger-ingredients/burger-ingredients.module.css'
 
-/* BurgerOrder.defaultProps xaрдкод пока нет ответа от апи  */
-
 function BurgerOrder() {
-    const { totalPrice } = useContext(TotalPriceContext)
-    const { orderData } = useContext(OrderContext)
+    const notBunsCart = useSelector(selectNotBunsCart)
+    const bunsCart = useSelector(selectBunsCart)
+    const isShowOrder = useSelector(selectShowOrder)
     const [orderNumber, setOrderNumber] = useState(null)
-    const [showorder, setShowOrder] = useState(false)
     const [message, setMessage] = useState('')
+    const dispatch = useDispatch()
+
+    // eslint-disable-next-line no-underscore-dangle
+    const orderData = useMemo(
+        () => ({
+            ingredients: []
+                // eslint-disable-next-line no-underscore-dangle
+                .concat(bunsCart._id)
+                .concat(notBunsCart.map(({ _id }) => _id))
+                // eslint-disable-next-line no-underscore-dangle
+                .concat(bunsCart._id),
+        }),
+        [bunsCart, notBunsCart]
+    )
+    const totalPrice = useMemo(
+        () => notBunsCart.reduce((sum, { price }) => sum + price, 0) + bunsCart.price * 2,
+        [bunsCart, notBunsCart]
+    )
 
     useEffect(() => {
-        // console.log('Привет, ORDER! Я примонтировался')
-        if (showorder) {
-            //  console.log(`- ${JSON.stringify(orderData)} - , \n ${totalPrice}`)
+        if (isShowOrder || isShowOrder.payload) {
             getOrderNumber(orderData)
                 .then((data) => {
                     setOrderNumber(data)
@@ -33,12 +48,11 @@ function BurgerOrder() {
                 .catch((err) => {
                     setOrderNumber(`  ошибка  - ${err}`).then(setMessage('извините, ошибка'))
                 })
-                .finally(console.log('data api - ok!'))
+                // eslint-disable-next-line no-console
+                .finally(console.log('data api ops finished!'))
         }
         return () => {}
     }, [totalPrice, orderData, message])
-
-    //    console.log(`номер заказа -- ${JSON.stringify(orderNumber)}`)
 
     return (
         <div className={`${Styles.currency}  `}>
@@ -47,19 +61,23 @@ function BurgerOrder() {
                     {totalPrice}
                     <CurrencyIcon />
                 </span>
-                <Button
-                    type="primary"
-                    size="large"
-                    onClick={() => {
-                        setShowOrder(true)
-                        setMessage('Приступили к работе ...')
-                    }}
-                >
-                    Оформить заказ
-                </Button>
-                {showorder && (
-                    <Modal title="&nbsp;" onClose={() => setShowOrder(false)}>
-                        <OrderConfirm numero={orderNumber?.order.number} message={message} />
+                {totalPrice && (
+                    <Button
+                        htmlType="button"
+                        type="primary"
+                        size="large"
+                        disabled={isShowOrder}
+                        onClick={() => {
+                            dispatch(setShowOrder())
+                            setMessage('Приступили к работе ...')
+                        }}
+                    >
+                        Оформить заказ
+                    </Button>
+                )}
+                {isShowOrder && Boolean(orderNumber?.order.number) && (
+                    <Modal title="&nbsp;" onClose={() => dispatch(setShowOrder())}>
+                        <OrderConfirm numero={orderNumber.order.number} message={message} />
                     </Modal>
                 )}
             </div>
@@ -67,11 +85,4 @@ function BurgerOrder() {
     )
 }
 
-/* const OrderPropType = PropTypes.shape({
-    totalPrice: PropTypes.number,
-    numero: PropTypes.string,
-    message: PropTypes.array
-});
-
-BurgerOrder.propTypes = { OrderPropType } */
 export default BurgerOrder

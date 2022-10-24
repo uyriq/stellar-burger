@@ -1,20 +1,27 @@
 {
     "name": "stellar-burger",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "private": true,
     "main": "src/index.tsx",
     "dependencies": {
-        "@types/node": "^18.7.5",
-        "@types/react": "^18.0.17",
+        "@reduxjs/toolkit": "^1.8.6",
+        "@types/node": "^18.11.4",
+        "@types/react": "^18.0.21",
         "@types/react-dom": "^18.0.6",
-        "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
-        "dedupe": "^3.0.3",
+        "@ya.praktikum/react-developer-burger-ui-components": "^1.13.5",
+        "dedupe": "^4.0.1",
+        "framer-motion": "^7.6.1",
         "prop-types": "^15.8.1",
         "react": "^18.2.0",
+        "react-dnd": "^16.0.1",
+        "react-dnd-html5-backend": "^16.0.1",
+        "react-dnd-touch-backend": "^16.0.1",
         "react-dom": "^18.2.0",
+        "react-intersection-observer": "^9.4.0",
+        "react-redux": "^8.0.4",
         "react-scripts": "5.0.1",
-        "react-spinners": "^0.13.4",
-        "typescript": "^4.7.4"
+        "react-spinners": "^0.13.6",
+        "uuid": "^9.0.0"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -22,7 +29,9 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "commit": "git-cz",
-        "lint": "eslint --fix --ext .js,.jsx ."
+        "lint": "eslint --fix --ext .js,.jsx .",
+        "lint2": "eslint . --ext .js --ext .jsx",
+        "format": "prettier --write ./**/*.{js,jsx,ts,tsx}"
     },
     "config": {
         "commitizen": {
@@ -60,14 +69,14 @@
     "keywords": [],
     "description": "",
     "devDependencies": {
-        "@babel/eslint-parser": "^7.18.9",
+        "@babel/eslint-parser": "^7.19.1",
         "commitizen": "^4.2.5",
         "cz-conventional-changelog": "^3.3.0",
-        "eslint": "^8.7.0",
+        "eslint": "^8.26.0",
         "eslint-config-airbnb": "^19.0.4",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-react": "^7.30.1",
-        "prettier": "^2.5.1"
+        "eslint-plugin-react": "^7.31.10",
+        "prettier": "^2.7.1"
     }
 }

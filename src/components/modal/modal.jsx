@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
-import ReactDom from 'react-dom'
-import PropTypes from 'prop-types'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useEffect } from 'react'
+
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types'
+import ReactDom from 'react-dom'
 import ModalOverlay from './modal-overlay'
 
 import Styles from './modal.module.css'
@@ -54,6 +57,6 @@ const ModalPropTypes = {
     title: PropTypes.string,
 }
 
-Modal.propTypes = { ModalPropTypes }.isRequired
+Modal.propTypes = { ...ModalPropTypes }.isRequired
 
 export default Modal

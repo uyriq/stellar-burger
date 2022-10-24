@@ -1,111 +1,105 @@
-import React, { useContext, useCallback, useEffect, useState } from 'react'
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-
-import createBunIterator from '../utils/buns-generator'
-import { TotalPriceContext, OrderContext, DataContext } from '../../services/appContext'
+import { useSelector, useDispatch } from 'react-redux'
+import { AnimatedPlaceholder } from '../animated-placeholder/animated-placeholder'
+import { delItem, setItems, selectBunsCart, selectNotBunsCart } from '../../store/slices/burger-constructor-slice'
+import BurgerConstructorItem from './burger-constructor-item'
+import CategoryDropAccept from './burger-constructor-category'
 import Styles from './burger-constructor.module.css'
 
-let Buns = createBunIterator()
-const initialState = Buns.next()
-let OneBun
-
 function BurgerConstructor() {
-    const { setOrderData, orderData } = useContext(OrderContext)
-    const { setTotalPrice, totalPrice } = useContext(TotalPriceContext)
-    const { dataState, dataDispatch } = useContext(DataContext)
-    const notbunsIngredients = dataState.data.filter((item) => item.type !== 'bun')
+    const dispatch = useDispatch()
 
-    const bunsIngredients = dataState.data.filter((item) => item.type === 'bun')
-
-    const [bunState, setBunState] = useState(initialState)
-    function resetBunSwitch() {
-        Buns = createBunIterator(bunsIngredients)
-        setBunState(initialState)
-    }
-
-    const switchBun = () => {
-        Buns.next()
-        if (bunState.value === undefined) {
-            // похоже сюда  не попадает проход кода never
-            resetBunSwitch()
-        }
-        if (bunState.value) setBunState(Buns.next())
-
-        // console.dir(bunState)
-        // console.log('click!')
-    }
-    //  console.dir(bunState.value)
-    if (bunState.value === undefined) resetBunSwitch()
-    if (bunState.value) OneBun = bunState.value
-    // console.dir(`булка - ${JSON.stringify(onebun)}`);
-
-    const makeOrderData = useCallback((array, bun) => {
-        const newarr = array.filter((item) => !bunsIngredients.includes(item))
-        newarr.unshift(bun)
-        newarr.push(bun)
-        const zdata = newarr.map((item) => item._id)
-        const result = newarr.reduce((acc, orderdata) => acc + orderdata.price, 0)
-        // console.log('\x1b[33m  OK \x1b[0m')
-        // console.log(`цена \n ${result}`)
-        return [{ ingredients: zdata }, result]
-    }, [])
-
-    useEffect(() => {
-        resetBunSwitch()
-        // console.log('init bun #0')
-    }, [])
-
-    useEffect(() => {
-        //  console.log('Привет! Я примонтировался')
-        const [zdata, cost] = makeOrderData(notbunsIngredients, OneBun)
-        setTotalPrice(cost)
-        setOrderData(zdata)
-        // console.log(`- ${zdata.ingredients} - , \n ${cost}`)
-    }, [bunState, dataState])
+    const notBunsCart = useSelector(selectNotBunsCart)
+    const bunsCart = useSelector(selectBunsCart)
 
     const handleClose = (item) => () => {
-        // console.log(`will handle close on - ${item._id}`)
-        dataDispatch({ type: 'DELETE', payload: item })
+        dispatch(delItem(item))
     }
 
-    return (
-        <section className={`${Styles.constructor} `}>
-            <div onClick={switchBun}>
-                <ConstructorElement
-                    type="top"
-                    isLocked
-                    text={`${OneBun.name} (верх)`}
-                    price={OneBun.price}
-                    thumbnail={OneBun.image}
-                />
-            </div>
-            <ul className={`${Styles.list} custom-scroll `}>
-                {dataState.data
-                    .filter((item) => item.type !== 'bun')
-                    .map((item) => (
-                        <li key={item._id} className={`${Styles['list-item']} `}>
-                            <DragIcon type="primary" />
-                            <ConstructorElement
-                                text={item.name}
-                                thumbnail={item.image}
-                                price={item.price}
-                                isLocked={false}
-                                handleClose={handleClose(item)}
-                            />
-                        </li>
-                    ))}
-            </ul>
+    const moveCard = (dragIndex, hoverIndex, key) => {
+        const dragCard = notBunsCart.filter((ingredient) => ingredient.uuid === key)
+
+        if (dragCard) {
+            const newCards = [...notBunsCart]
+            newCards.splice(dragIndex, 1)
+            newCards.splice(hoverIndex, 0, ...dragCard)
+            dispatch(setItems(newCards))
+        }
+    }
+    const htmlTopConstructorElement = bunsCart._id ? (
+        <ConstructorElement
+            type="top"
+            isLocked
+            text={`${bunsCart.name} (верх)`}
+            price={bunsCart.price}
+            thumbnail={bunsCart.image}
+        />
+    ) : (
+        <div className={`${Styles.top}`}>
+            <ConstructorElement type="top" text="" />
+            <p className={`${Styles.topbunempty} text text_type_main-small `}>🍔поместите сюда булочку🍔</p>
+        </div>
+    )
+
+    const htmlBottomConstructorElement = bunsCart._id ? (
+        <div>
             <ConstructorElement
                 type="bottom"
                 isLocked
-                text={`${OneBun.name} (низ)`}
-                price={OneBun.price}
-                thumbnail={OneBun.image}
+                text={`${bunsCart.name} (низ)`}
+                price={bunsCart.price}
+                thumbnail={bunsCart.image}
             />
+        </div>
+    ) : (
+        <div className={`${Styles.bottom}`}>
+            <ConstructorElement type="bottom" />
+            <AnimatedPlaceholder>🍔🍔🍔поместите сюда булочку🍔🍔🍔</AnimatedPlaceholder>
+        </div>
+    )
+
+    const htmlMiddleConstructorElement =
+        bunsCart._id && notBunsCart.length > 0 ? (
+            <ul className={`${Styles.list} custom-scroll `}>
+                {notBunsCart.map((item, index) => (
+                    <BurgerConstructorItem
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={item.uuid}
+                        uuid={item.uuid}
+                        index={index} // приходится дубль из-за Warning: li: 'key' is not a prop.
+                        moveCard={moveCard}
+                    >
+                        <DragIcon type="primary" />
+                        <ConstructorElement
+                            text={item.name}
+                            thumbnail={item.image}
+                            price={item.price}
+                            isLocked={false}
+                            handleClose={handleClose(item)}
+                        />
+                    </BurgerConstructorItem>
+                ))}
+            </ul>
+        ) : (
+            /* Заглушка, если элементов нет */
+            <div className={bunsCart._id ? `${Styles.middlewithbun}` : `${Styles.middle}`}>
+                <ConstructorElement type="" isLocked={false} />
+                <AnimatedPlaceholder>🍔 поместите сюда начинки и соусы 🍔</AnimatedPlaceholder>
+            </div>
+        )
+
+    return (
+        <section className={`${Styles.constructor} `}>
+            <CategoryDropAccept category="bun">{htmlTopConstructorElement}</CategoryDropAccept>
+
+            <CategoryDropAccept category="notbun">{htmlMiddleConstructorElement}</CategoryDropAccept>
+
+            <CategoryDropAccept category="bun">{htmlBottomConstructorElement}</CategoryDropAccept>
         </section>
     )
 }
-
-/* BurgerConstructor.propTypes = { ingredientPropType }.isRequired */
 
 export default BurgerConstructor

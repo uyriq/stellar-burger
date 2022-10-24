@@ -1,0 +1,26 @@
+
+{
+  // react-proptypes-generate npm version
+  // This is the VS Code's extension that automatically generates PropTypes code
+  // for React components, like ReactPropTypes in the Jetbrains's Platform.
+  // Also a command line tool, you don’t have to be limited to use in vscode.
+  // If you want fully automatic PropTypes generation, You can also use with lint-staged
+  // in your project.
+  "autoImport": "ES6",
+  "codeStyle": "default",
+  "noMergeOld": false,
+  "mergeOldIfExist": true,
+  "noShape": false,
+  "tabWidth": 4,
+  "quote": "single",
+  "trailingComma": true,
+  "semicolon": false,
+  "arrayLike": true,
+  "isRequired": true,
+  "include": [
+    "src/**/*"  // support glob
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

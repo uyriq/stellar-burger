@@ -1,49 +1,111 @@
-import React, { useMemo, useRef, useContext, useEffect } from 'react'
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
+import { useMemo, useRef, useState, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { InView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import { setShowCard, setDetailsCard, selectShowCard } from '../../store/slices/ingredient-details-slice'
+import { selectBunsCart, selectNotBunsCart } from '../../store/slices/burger-constructor-slice'
+import { ingredientsApi } from '../../store/services/ingredients.api'
 import BurgerIngredientsItem from './burger-ingredients-item'
-import { DataContext } from '../../services/appContext'
 import Styles from './burger-ingredients.module.css'
 
 function BurgerIngredients() {
+    const dispatch = useDispatch()
     const pageRefs = useRef({})
-    const { data, setData, details, setDetails, show, setShow } = useContext(DataContext)
-    const [choice, setChoice] = React.useState('buns')
+    const { ...data } = ingredientsApi.useFetchIngredientsQuery()
+    const isShowCard = useSelector(selectShowCard)
+    const notBunsCart = useSelector(selectNotBunsCart)
+    const bunsCart = useSelector(selectBunsCart)
 
-    const buns = data.filter((item) => item.type === 'bun')
-    const sauces = data.filter((item) => item.type === 'sauce')
-    const main = data.filter((item) => item.type === 'main')
+    const [choice, setChoice] = useState({ b: true, s: false, m: false })
 
-    useEffect(() => {
-        setShow(false)
-    }, [])
+    const buns = data.currentData.data.filter((item) => item.type === 'bun')
+    const sauces = data.currentData.data.filter((item) => item.type === 'sauce')
+    const main = data.currentData.data.filter((item) => item.type === 'main')
+
+    // Use `useCallback` so we don't recreate the function on each render
+
+    const onChange = useCallback(
+        // 🤷‍♂️ после добавления функции для InView  консоль браузера (F12) отказывается работать правильно.
+        (inView, type) => {
+            // type: b - булки, s - соусы, m - начинки
+            switch (type) {
+                case 'b': {
+                    if (inView) {
+                        setChoice((conditions) => ({
+                            ...conditions,
+                            b: true,
+                        }))
+                    }
+                    if (!inView) setChoice({ ...choice, b: false })
+                    break
+                }
+                case 's': {
+                    if (inView) {
+                        setChoice((conditions) => ({
+                            ...conditions,
+                            s: true,
+                        }))
+                    }
+                    if (!inView) setChoice({ ...choice, s: false })
+                    break
+                }
+                case 'm': {
+                    if (inView) {
+                        setChoice((conditions) => ({
+                            ...conditions,
+                            m: true,
+                        }))
+                    }
+                    if (!inView) setChoice({ ...choice, m: false })
+                    break
+                }
+                default:
+                    // eslint-disable-next-line no-console
+                    console.warn(`Sorry, we are out of ${type}.`)
+            }
+        },
+        [choice]
+    ) // чем правильно ограничить этот useCallback?
+
+    function countIngredients(item) {
+        // булка по условию только 1
+        if (item.type === 'bun') {
+            // eslint-disable-next-line no-underscore-dangle
+            const bunCount = bunsCart._id.length !== 0 && bunsCart._id !== '' && bunsCart._id === item._id ? 1 : 0
+            return bunCount
+        }
+        if (item.type === 'sauce' || item.type === 'main')
+            // eslint-disable-next-line no-underscore-dangle
+            return notBunsCart.filter((el) => el._id === item._id).length
+        return 888
+    }
+
+    const ingredientClick = (details) => {
+        if (isShowCard || isShowCard.payload) {
+            return
+        }
+        dispatch(setDetailsCard(details))
+        dispatch(setShowCard(true))
+    }
 
     const IngredientsList = (array) =>
         array.map((item) => (
-            // issue #27
             <BurgerIngredientsItem
+                // eslint-disable-next-line no-underscore-dangle
                 key={item._id}
                 ingredient={item}
                 onClick={() => ingredientClick(item)}
-                onClose={() => setShow(false)}
+                onClose={() => dispatch(setShowCard(false))}
+                counter={() => countIngredients(item)}
             />
         ))
 
-    // issue #27
-
-    const ingredientClick = (details) => {
-        // console.log('ingredientClick')
-        if (show) {
-            return
-        }
-        setShow(true)
-        // console.log(details)
-        setDetails(details)
-    }
-
     function scrollIntoView(type) {
-        // решение  https://stackoverflow.com/questions/64188338/scrolling-components-into-view-with-react-with-useref
-        // также два действия на OnСlick без промежуточной функции по https://stackoverflow.com/questions/26069238/call-multiple-functions-onclick-reactjs
-
         pageRefs.current[type].scrollIntoView({ behavior: 'smooth' })
     }
 
@@ -91,15 +153,18 @@ function BurgerIngredients() {
             </section>
         )
     }
+    const { b, s, m } = useMemo(() => {
+        const { b, s, m } = choice
+        return { b, s, m }
+    }, [choice]) // есть ли польза в этом useMemo?
 
     return (
         <section className="">
             <div className={`${Styles.tabs} mb-10`}>
                 <Tab
                     value="buns"
-                    active={choice === 'buns'}
+                    active={b}
                     onClick={() => {
-                        setChoice('buns')
                         scrollIntoView('buns')
                     }}
                 >
@@ -107,9 +172,8 @@ function BurgerIngredients() {
                 </Tab>
                 <Tab
                     value="sauces"
-                    active={choice === 'sauces'}
+                    active={!b && s}
                     onClick={() => {
-                        setChoice('sauces')
                         scrollIntoView('sauces')
                     }}
                 >
@@ -117,9 +181,8 @@ function BurgerIngredients() {
                 </Tab>
                 <Tab
                     value="main"
-                    active={choice === 'main'}
+                    active={!b && !s && m}
                     onClick={() => {
-                        setChoice('main')
                         scrollIntoView('main')
                     }}
                 >
@@ -127,14 +190,18 @@ function BurgerIngredients() {
                 </Tab>
             </div>
             <div className={`${Styles.ingredients} custom-scroll`}>
-                <Buns pageRefs={pageRefs} />
-                <Sauces pageRefs={pageRefs} />
-                <Main pageRefs={pageRefs} />
+                <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 'b')}>
+                    <Buns pageRefs={pageRefs} />
+                </InView>
+                <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 's')}>
+                    <Sauces pageRefs={pageRefs} />
+                </InView>
+                <InView as="div" initialInView={false} onChange={(inView) => onChange(inView, 'm')}>
+                    <Main pageRefs={pageRefs} />
+                </InView>
             </div>
         </section>
     )
 }
-
-// BurgerIngredients.propTypes =  {ingredientPropType}
 
 export default BurgerIngredients

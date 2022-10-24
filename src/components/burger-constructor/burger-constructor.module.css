@@ -10,17 +10,62 @@
     flex: 1;
 }
 
+/* конструктор показывает, что готов принять ингреденты  */
+.top span {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+.bottom span {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+.middle span,
+.middlewithbun span {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
 
+.top div {
+    transform: translate(-1%, 5%);
+    width: 229.5%;
+    text-align: left;
+}
 
-.constructor>.list>* {
+.topbunempty {
+    /* 🍔поместите сюда булочку🍔 */
+    transform: translate(150px, -45px);
+}
+
+.bottom div {
+    transform: translate(-23.6%, 100%);
+    width: 200%;
+}
+.middle div {
+    width: 200%;
+    transform: translate(-45%, 115%);
+    text-indent: -20%;
+}
+
+.middlewithbun div {
+    width: 200%;
+    transform: translate(-22%, 15%);
+    text-indent: -20%;
+}
+
+.middlewithbun h4 {
+    transform: translate(0px, -35px) !important;
+    text-indent: 0%;
+}
+
+.constructor > .list > * {
     flex: 0 auto;
 }
 
-.constructor  span {
-    margin-right: 0 ;
+.constructor span {
+    margin-right: 0;
 }
 
-.list {   
+.list {
     margin-right: 0;
     width: 100%;
     flex: 1 1 auto;
@@ -30,8 +75,8 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
- 
-.list-item {
+
+.list__item {
     flex-grow: 0;
     flex-shrink: 0;
     display: flex;
@@ -40,16 +85,16 @@
     justify-content: center;
 }
 
-.list-item span {
-    margin-left:-1.5% ;
+.list__item span {
+    margin-left: -1.5%;
     margin-right: 2%;
 }
 
-.list-item:last-child {
+.list__item:last-child {
     margin-bottom: 0.5%;
 }
 
-.list-item:first-child {
+.list__item:first-child {
     margin-top: 0.5%;
 }
 
