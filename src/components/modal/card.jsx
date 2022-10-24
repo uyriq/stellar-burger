@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-// убрал import { PropTypes } from 'prop-types'
 import { ingredientPropType } from '../../utils/prop-types'
 import Style from './card.module.css'
 // import { ingredientPropType } from '../utils/prop-types'
@@ -28,8 +27,12 @@ function Card(props) {
     )
 }
 
-const { _id, type, __v, ...ingredProps } = ingredientPropType // убрал ненужное из списка свойств
+// const { _id, type, __v, ...ingredProps } = ingredientPropType // убрал ненужное из списка свойств
 
-Card.propTypes = { ...ingredProps }.isRequired
+// Card.propTypes = { ...ingredProps }.isRequired
+
+Card.propTypes = {
+    ...ingredientPropType,
+}.isRequired
 
 export default Card
