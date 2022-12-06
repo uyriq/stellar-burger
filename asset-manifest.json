@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.86b921ee.css",
-    "main.js": "/static/js/main.cdcc3353.js",
-    "static/media/JetBrainsMono-Bold.woff": "/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
-    "static/media/JetBrainsMono-Regular.woff": "/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
-    "static/media/JetBrainsMono-Bold.woff2": "/static/media/JetBrainsMono-Bold.c232d532ea5a5189a278.woff2",
-    "static/media/JetBrainsMono-Regular.woff2": "/static/media/JetBrainsMono-Regular.b60380891bcf2eb241ca.woff2",
-    "static/media/iceland.woff": "/static/media/iceland.77ad7fc2baffd9305538.woff",
-    "static/media/iceland.woff2": "/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
-    "static/media/done.svg": "/static/media/done.f9727ad469447c95d74bf2e95b5fcc8c.svg",
-    "index.html": "/index.html",
-    "main.86b921ee.css.map": "/static/css/main.86b921ee.css.map",
-    "main.cdcc3353.js.map": "/static/js/main.cdcc3353.js.map"
+    "main.css": "/stellar-burger/static/css/main.9c97d40b.css",
+    "main.js": "/stellar-burger/static/js/main.8862caeb.js",
+    "static/media/JetBrainsMono-Bold.woff": "/stellar-burger/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
+    "static/media/JetBrainsMono-Regular.woff": "/stellar-burger/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
+    "static/media/JetBrainsMono-Bold.woff2": "/stellar-burger/static/media/JetBrainsMono-Bold.c232d532ea5a5189a278.woff2",
+    "static/media/JetBrainsMono-Regular.woff2": "/stellar-burger/static/media/JetBrainsMono-Regular.b60380891bcf2eb241ca.woff2",
+    "static/media/iceland.woff": "/stellar-burger/static/media/iceland.77ad7fc2baffd9305538.woff",
+    "static/media/iceland.woff2": "/stellar-burger/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
+    "static/media/done.svg": "/stellar-burger/static/media/done.f9727ad469447c95d74bf2e95b5fcc8c.svg",
+    "index.html": "/stellar-burger/index.html",
+    "main.9c97d40b.css.map": "/stellar-burger/static/css/main.9c97d40b.css.map",
+    "main.8862caeb.js.map": "/stellar-burger/static/js/main.8862caeb.js.map"
   },
   "entrypoints": [
-    "static/css/main.86b921ee.css",
-    "static/js/main.cdcc3353.js"
+    "static/css/main.9c97d40b.css",
+    "static/js/main.8862caeb.js"
   ]
 }
