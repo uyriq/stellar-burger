@@ -1,0 +1,61 @@
+{
+    "description": "stellar burgers",
+    "shortcuts": [
+        {
+            "name": "Stellar burgers",
+            "short_name": "stellar burgers",
+            "description": "Jump direction into ",
+            "url": "https://uyriq.github.io/stellar-burger",
+            "icons": [
+                {
+                    "src": "icon_192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "screen1.png",
+            "sizes": "2880x1800",
+            "type": "image/png",
+            "description": "PWABuilder Home Screen"
+        },
+        {
+            "src": "screen2.png",
+            "sizes": "2880/1800",
+            "type": "image/png",
+            "description": "PWABuilder Report Card"
+        },
+        {
+            "src": "screen3.png",
+            "sizes": "2880x1800",
+            "type": "image/png",
+            "description": "Manifest information on the Report Card"
+        }
+    ],
+    "orientation": "any",
+    "short_name": "React App",
+    "name": "Create React App Sample",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "type": "image/x-icon",
+            "sizes": "64x64 32x32 24x24 16x16"
+        },
+        {
+            "src": "logo192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "logo512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "https://uyriq.github.io/stellar-burger",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+}
