@@ -37,7 +37,7 @@ const App = memo(() => {
             )}
             {loading && (
                 <span className={`${Styles.spinner} `}>
-                    <ClipLoader color="#ffff" loading={loading} size={550} />
+                    <ClipLoader color="#ddfd" loading={loading} size={550} />
                 </span>
             )}
 
