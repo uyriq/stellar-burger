@@ -5,7 +5,7 @@
             "name": "Stellar burgers",
             "short_name": "stellar burgers",
             "description": "Jump direction into ",
-            "url": "/",
+            "url": "https://uyriq.github.io/stellar-burger",
             "icons": [
                 {
                     "src": "icon_192.png",
@@ -54,7 +54,7 @@
             "sizes": "512x512"
         }
     ],
-    "start_url": ".",
+    "start_url": "https://uyriq.github.io/stellar-burger",
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
