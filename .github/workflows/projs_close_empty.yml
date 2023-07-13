@@ -8,7 +8,15 @@ jobs:
     close_empty:
         runs-on: ubuntu-latest
         env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         steps:
-            - run: |
+            - name: Get project list
+              run: |
+                  projects=$(gh project list --owner @me --format=json)
+                  if [[ -z "$projects" ]]; then
+                    echo "No projects found"
+                    exit 0
+                  fi
+            - name: Close empty projects
+              run: |
                   gh project list --owner @me --format=json | jq '.projects[] | select(.items.totalCount == 0) | .number' | xargs -n1 gh project close --owner @me
