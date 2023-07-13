@@ -19,4 +19,4 @@ jobs:
                   fi
             - name: Close empty projects
               run: |
-                  gh project list --owner @me --format=json | jq '.projects[] | select(.items.totalCount == 0) | .number' | xargs -n1 gh project close --owner @me
+                  gh project list --owner @me --format=json | jq '.projects[] | select(.items.totalCount == 0) | .number' | xargs -n1 -I % gh project close % --owner @me
