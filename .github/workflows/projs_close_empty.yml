@@ -1,0 +1,14 @@
+# https://github.blog/2023-07-11-github-cli-project-command-is-now-generally-available/
+on:
+workflow_dispatch:
+
+jobs:
+close_empty:
+runs-on: ubuntu-latest
+env:
+GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+steps:
+- run: |
+gh project list --owner @me --format=json \
+| jq '.projects[] | select(.items.totalCount == 0) | .number' \
+| xargs -n1 gh project close --owner @me
