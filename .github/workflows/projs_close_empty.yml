@@ -1,4 +1,5 @@
 # https://github.blog/2023-07-11-github-cli-project-command-is-now-generally-available/
+name: projs_cleanup
 on:
 workflow_dispatch:
 
